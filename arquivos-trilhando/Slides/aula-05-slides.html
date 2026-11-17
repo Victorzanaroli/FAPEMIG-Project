@@ -90,6 +90,7 @@
         <div class="top-controls">
             <a href="../../index.html" class="control-btn">🏠 Classroom</a>
             <button class="control-btn" data-open-homework="aula05" style="border-color:rgba(0,229,255,.45);color:#00e5ff">📝 Tarefa de Casa</button>
+            <button type="button" class="control-btn slide-ai-toggle-btn" id="slideAiChatToggleBtn" title="Abrir/Fechar Chat IA ao lado do slide (Atalho: I)"><span class="slide-ai-online-dot"></span> 🤖 Chat IA</button>
             <button class="control-btn" id="fullscreenToggle">⛶ Tela Cheia (F)</button>
         </div>
     </header>
@@ -784,8 +785,9 @@ ft.<span class="fn">app</span>(target=main)
         </div>
     </div>
 
-    <script src="slides-engine.js"></script>
     <script src="classroom-engine.js"></script>
+    <script src="beecrowd-arena.js"></script>
+    <script src="slides-engine.js"></script>
     <script>
     (function() {
         var missionModal = document.getElementById('missionModal');

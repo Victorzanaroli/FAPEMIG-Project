@@ -1728,6 +1728,554 @@ body {
     }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAINEL LATERAL DO CHAT GEMINI IA INTEGRADO NOS SLIDES (SPLIT-VIEW AUTOMÁTICO)
+   Permite usar a IA durante a aula com formatação automática do slide ao lado
+═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --ai-sidebar-width: clamp(350px, 31vw, 430px);
+}
+
+/* Transições suaves para o palco de slides e barras quando a aba lateral abre/fecha */
+.presentation-stage,
+.top-bar,
+.bottom-nav,
+.speaker-notes-panel,
+.slide {
+    transition:
+        width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        right 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        bottom 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        padding 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Botão do Chat IA na barra superior dos slides */
+.control-btn.slide-ai-toggle-btn {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.28) 0%, rgba(0, 229, 255, 0.22) 100%);
+    border: 1.5px solid rgba(0, 229, 255, 0.55);
+    color: #f8fafc;
+    font-weight: 800;
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.22);
+    position: relative;
+}
+.control-btn.slide-ai-toggle-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #00adb5 100%);
+    color: #ffffff;
+    border-color: var(--cefet-cyan);
+    box-shadow: 0 0 22px rgba(0, 229, 255, 0.5);
+    transform: translateY(-1px);
+}
+.control-btn.slide-ai-toggle-btn.active {
+    background: linear-gradient(135deg, #2563eb 0%, #00adb5 100%);
+    color: #ffffff;
+    border-color: var(--cefet-cyan);
+    box-shadow: 0 0 22px rgba(0, 229, 255, 0.55);
+}
+.slide-ai-online-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Aba flutuante discreta na borda direita para puxar o Chat IA rapidamente */
+.slide-ai-edge-tab {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(11, 19, 41, 0.98) 100%);
+    border: 1.5px solid rgba(0, 229, 255, 0.45);
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+    padding: 12px 9px;
+    color: var(--cefet-cyan);
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    box-shadow: -6px 0 24px rgba(0, 0, 0, 0.65), 0 0 15px rgba(0, 229, 255, 0.15);
+    backdrop-filter: blur(14px);
+    transition: all 0.25s ease;
+    font-family: inherit;
+    user-select: none;
+}
+.slide-ai-edge-tab:hover {
+    padding-right: 14px;
+    background: linear-gradient(180deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    border-color: var(--cefet-cyan);
+    box-shadow: -8px 0 28px rgba(0, 229, 255, 0.38);
+}
+.slide-ai-edge-tab span.edge-vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+}
+body.ai-chat-open .slide-ai-edge-tab {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(100%);
+}
+
+/* Container da Aba Lateral do Chat IA */
+.slide-ai-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--ai-sidebar-width);
+    height: 100vh;
+    background: #0B0E14;
+    border-left: 1.5px solid rgba(56, 189, 248, 0.35);
+    box-shadow: -18px 0 50px rgba(0, 0, 0, 0.78), 0 0 30px rgba(0, 229, 255, 0.12);
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(102%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), width 0.32s cubic-bezier(0.16, 1, 0.3, 1), height 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: text;
+    color-scheme: dark;
+}
+body.ai-chat-open .slide-ai-sidebar {
+    transform: translateX(0);
+}
+
+/* Modo Expandido opcional do painel lateral */
+body.ai-chat-open.ai-chat-wide {
+    --ai-sidebar-width: clamp(440px, 42vw, 600px);
+}
+
+/* Cabeçalho da Aba Lateral do Chat */
+.slide-ai-header {
+    padding: 12px 14px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(11, 14, 20, 0.98) 100%);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.slide-ai-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+}
+.slide-ai-brand-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+.slide-ai-brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.slide-ai-brand-text h4 {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.slide-ai-brand-text span {
+    font-size: 0.69rem;
+    color: #10b981;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.slide-ai-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+.slide-ai-icon-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    height: 29px;
+    padding: 0 9px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.18s ease;
+    font-family: inherit;
+}
+.slide-ai-icon-btn:hover {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: #38bdf8;
+    color: #ffffff;
+}
+.slide-ai-icon-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.22);
+    border-color: #ef4444;
+    color: #fca5a5;
+}
+.slide-ai-icon-btn.close-btn {
+    width: 29px;
+    padding: 0;
+    font-size: 0.88rem;
+}
+.slide-ai-icon-btn.close-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+/* Barra de Atalhos Rápidos + Explicar Slide Atual */
+.slide-ai-quickbar {
+    padding: 9px 12px;
+    background: rgba(15, 23, 42, 0.65);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex-shrink: 0;
+}
+.slide-ai-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    padding: 5px 9px;
+    border-radius: 8px;
+    font-size: 0.71rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.slide-ai-chip:hover {
+    border-color: var(--cefet-cyan);
+    color: #ffffff;
+    background: rgba(0, 229, 255, 0.12);
+}
+.slide-ai-chip.explain-slide-chip {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.28) 0%, rgba(139, 92, 246, 0.28) 100%);
+    border-color: rgba(56, 189, 248, 0.55);
+    color: #38bdf8;
+    width: 100%;
+    justify-content: center;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+}
+.slide-ai-chip.explain-slide-chip:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    color: #ffffff;
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+/* Área de Mensagens do Chat dentro do Slide */
+.slide-ai-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 12px 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #0B0E14;
+}
+
+.slide-ai-sidebar .st-chat-msg-user {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    color: #F8FAFC !important;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.slide-ai-sidebar .st-chat-msg-assistant {
+    background-color: #111827 !important;
+    border: 1.5px solid #312E81 !important;
+    border-radius: 12px !important;
+    padding: 11px 13px !important;
+    color: #F3F4F6 !important;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+.slide-ai-sidebar .st-replica-codeblock {
+    background-color: #0D1117 !important;
+    border: 1px solid #30363D !important;
+    border-radius: 8px !important;
+    margin: 8px 0;
+    overflow: hidden;
+}
+.slide-ai-sidebar .st-replica-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid #30363D;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+}
+.slide-ai-sidebar .st-copy-code-btn {
+    background: rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.69rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+.slide-ai-sidebar .st-copy-code-btn:hover {
+    background: #38bdf8;
+    color: #0b1329;
+}
+.slide-ai-sidebar .st-replica-codeblock pre {
+    padding: 10px 12px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: #e2e8f0;
+    line-height: 1.48;
+    margin: 0;
+}
+
+/* Rodapé de Digitação do Chat na Aba Lateral */
+.slide-ai-footer {
+    padding: 10px 12px 12px;
+    background: #0E131D;
+    border-top: 1px solid rgba(56, 189, 248, 0.18);
+    flex-shrink: 0;
+}
+.slide-ai-input-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #161B26 !important;
+    border: 1.5px solid #2D3748 !important;
+    border-radius: 22px !important;
+    padding: 5px 8px 5px 14px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.slide-ai-input-pill:focus-within {
+    border-color: #38BDF8 !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+}
+.slide-ai-input-pill textarea {
+    flex: 1;
+    background-color: transparent !important;
+    color: #F8FAFC !important;
+    -webkit-text-fill-color: #F8FAFC !important;
+    caret-color: #38BDF8 !important;
+    border: none !important;
+    outline: none !important;
+    resize: none !important;
+    font-size: 0.85rem !important;
+    font-family: inherit;
+    line-height: 1.38;
+    max-height: 95px;
+    padding: 4px 0;
+}
+.slide-ai-input-pill textarea::placeholder {
+    color: #94A3B8 !important;
+    -webkit-text-fill-color: #94A3B8 !important;
+    opacity: 1 !important;
+}
+.slide-ai-send-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50% !important;
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 0.92rem;
+    transition: all 0.2s ease;
+}
+.slide-ai-send-btn:hover:not(:disabled) {
+    background-color: #1D4ED8 !important;
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.65) !important;
+}
+.slide-ai-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FORMATAÇÃO AUTOMÁTICA DO SLIDE QUANDO O CHAT IA ESTÁ ABERTO (DESKTOP)
+───────────────────────────────────────────────────────────────────────── */
+@media (min-width: 861px) {
+    body.ai-chat-open .presentation-stage {
+        width: calc(100vw - var(--ai-sidebar-width)) !important;
+        padding: 48px 16px 50px !important;
+    }
+
+    body.ai-chat-open .top-bar {
+        left: 16px !important;
+        right: calc(var(--ai-sidebar-width) + 16px) !important;
+    }
+
+    body.ai-chat-open .bottom-nav {
+        left: 16px !important;
+        right: calc(var(--ai-sidebar-width) + 16px) !important;
+    }
+
+    body.ai-chat-open .speaker-notes-panel {
+        left: calc((100vw - var(--ai-sidebar-width)) / 2) !important;
+        width: min(760px, calc(100vw - var(--ai-sidebar-width) - 36px)) !important;
+    }
+
+    body.ai-chat-open .slide {
+        padding: 20px 24px !important;
+    }
+
+    body.ai-chat-open .slide-title {
+        font-size: clamp(1.35rem, 2.1vw, 1.85rem) !important;
+    }
+
+    body.ai-chat-open .slide-subtitle {
+        font-size: 0.92rem !important;
+    }
+
+    body.ai-chat-open .content-box {
+        padding: 13px 16px !important;
+    }
+
+    body.ai-chat-open .content-box h4 {
+        font-size: 0.98rem !important;
+    }
+
+    body.ai-chat-open .content-box p,
+    body.ai-chat-open .content-box ul,
+    body.ai-chat-open .content-box ol {
+        font-size: 0.88rem !important;
+    }
+
+    body.ai-chat-open .prompt-code {
+        font-size: 0.82rem !important;
+        padding: 10px 13px !important;
+    }
+}
+
+/* Em telas intermediárias (notebooks menores) com o Chat aberto, grades de 3 ou 4 colunas viram 2 colunas automaticamente para tudo caber sem espremer */
+@media (min-width: 861px) and (max-width: 1340px) {
+    body.ai-chat-open .grid-4,
+    body.ai-chat-open .pillar-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    body.ai-chat-open .brand-badge {
+        max-width: 44vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+@media (min-width: 861px) and (max-width: 1120px) {
+    body.ai-chat-open .grid-3,
+    body.ai-chat-open .mission-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FORMATAÇÃO AUTOMÁTICA DIVIDIDA (TOP/BOTTOM SPLIT) EM TELAS MENORES / MOBILE
+   Mantém o slide visível na metade superior e o Chat IA na metade inferior!
+───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+    .slide-ai-sidebar {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100vw !important;
+        height: 46vh;
+        border-left: none;
+        border-top: 2px solid rgba(56, 189, 248, 0.5);
+        border-radius: 18px 18px 0 0;
+        transform: translateY(104%);
+    }
+
+    body.ai-chat-open .slide-ai-sidebar {
+        transform: translateY(0);
+    }
+
+    body.ai-chat-open.ai-chat-wide .slide-ai-sidebar {
+        height: 68vh;
+    }
+
+    body.ai-chat-open .presentation-stage {
+        height: 54vh !important;
+        padding: 46px 8px 46px !important;
+    }
+
+    body.ai-chat-open.ai-chat-wide .presentation-stage {
+        height: 32vh !important;
+    }
+
+    body.ai-chat-open .slide {
+        max-height: calc(54vh - 92px) !important;
+        padding: 12px 12px !important;
+    }
+
+    body.ai-chat-open.ai-chat-wide .slide {
+        max-height: calc(32vh - 86px) !important;
+    }
+
+    body.ai-chat-open .bottom-nav {
+        bottom: calc(46vh + 6px) !important;
+    }
+
+    body.ai-chat-open.ai-chat-wide .bottom-nav {
+        bottom: calc(68vh + 6px) !important;
+    }
+}
+
+
 
 
 
