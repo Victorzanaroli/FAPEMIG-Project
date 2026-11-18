@@ -522,14 +522,104 @@
         }
 
         .login-gate-card {
-            background: rgba(11, 19, 41, 0.94);
-            border: 1.5px solid var(--border-glow);
+            background: rgba(11, 19, 41, 0.96);
+            border: 1.5px solid rgba(56, 189, 248, 0.32);
             border-radius: 24px;
             width: 100%;
-            max-width: 500px;
-            padding: 32px 30px;
-            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.14);
+            max-width: 460px;
+            padding: 32px 30px 26px;
+            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 229, 255, 0.12);
             backdrop-filter: blur(18px);
+        }
+        .login-gate-card .tr-auth-tabs {
+            background: rgba(4, 9, 22, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 13px;
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .login-gate-card .tr-auth-tab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 10px;
+            border-radius: 9px;
+            font-size: 0.81rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: #94a3b8;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.18s ease;
+        }
+        .login-gate-card .tr-auth-tab:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .login-gate-card .tr-auth-tab.active {
+            background: linear-gradient(135deg, #2563eb 0%, #00adb5 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 229, 255, 0.22);
+        }
+        .login-gate-card .tr-field-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+        .login-gate-card .tr-input {
+            padding: 11px 14px;
+            font-size: 0.92rem;
+            border-radius: 11px;
+            border: 1.5px solid rgba(148, 163, 184, 0.24);
+            background: rgba(9, 14, 28, 0.85);
+            color: #f8fafc;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+        .login-gate-card .tr-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
+            outline: none;
+        }
+        .gate-alert-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 11px 13px;
+            border-radius: 11px;
+            background: rgba(239, 68, 68, 0.11);
+            border: 1px solid rgba(239, 68, 68, 0.42);
+            color: #fecaca;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+        .gate-status-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.77rem;
+            font-weight: 600;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+        .gate-footer-note {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.76rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            text-align: center;
         }
 
         .delete-student-btn {
@@ -1095,36 +1185,165 @@
                 flex-direction: column;
             }
         }
-        .bee-io-sample-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 10px;
-            overflow: hidden;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
+        .bee-statement-box {
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid rgba(56, 189, 248, 0.26);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            font-size: 0.93rem;
+            line-height: 1.68;
+            color: #f1f5f9;
         }
-        .bee-io-sample-table th {
-            background: rgba(255, 255, 255, 0.07);
-            color: #94a3b8;
+        .bee-statement-box p {
+            margin: 0 0 10px 0;
+        }
+        .bee-statement-box p:last-child {
+            margin-bottom: 0;
+        }
+        .bee-stmt-bullet {
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid #38bdf8;
             padding: 8px 12px;
-            text-align: left;
-            font-size: 0.74rem;
+            border-radius: 0 9px 9px 0;
+            margin: 6px 0;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: #e2e8f0;
+        }
+        .bee-stmt-bullet.sub-bullet {
+            margin-left: 16px;
+            border-left-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.06);
+            padding: 6px 11px;
+            font-size: 0.87rem;
+        }
+        .bee-inline-code {
+            background: rgba(56, 189, 248, 0.14);
+            border: 1px solid rgba(56, 189, 248, 0.32);
+            color: #7dd3fc;
+            padding: 1px 7px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.86em;
+            font-weight: 600;
+        }
+        .bee-io-spec-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .bee-io-spec-card {
+            background: rgba(9, 13, 22, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--cefet-cyan);
+            border-radius: 12px;
+            padding: 12px 15px;
+        }
+        .bee-io-spec-card.output-spec {
+            border-left-color: #10b981;
+        }
+        .bee-io-spec-title {
+            font-size: 0.76rem;
+            font-weight: 800;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
         }
-        .bee-io-sample-table td {
+        .bee-examples-section {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 15px 16px;
+        }
+        .bee-example-card {
+            background: rgba(9, 13, 22, 0.88);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 13px;
+            padding: 12px 14px;
+            margin-top: 10px;
+            transition: border-color 0.2s ease;
+        }
+        .bee-example-card:hover {
+            border-color: rgba(56, 189, 248, 0.45);
+        }
+        .bee-example-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .bee-example-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 10px;
+            align-items: stretch;
+        }
+        .bee-example-box {
+            border-radius: 10px;
             padding: 10px 12px;
-            background: rgba(0, 0, 0, 0.38);
-            color: #f8fafc;
-            vertical-align: top;
-            white-space: pre-wrap;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .bee-io-sample-table td:first-child {
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        .bee-example-box.in-box {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .bee-example-box.out-box {
+            background: rgba(6, 78, 59, 0.22);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .bee-example-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 0 2px;
+        }
+        .bee-line-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 3px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+        .bee-line-row:last-child {
+            border-bottom: none;
+        }
+        .bee-line-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.69rem;
+            font-weight: 700;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 1px 6px;
+            border-radius: 5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        @media (max-width: 640px) {
+            .bee-example-flow {
+                grid-template-columns: 1fr;
+            }
+            .bee-example-arrow {
+                transform: rotate(90deg);
+                padding: 2px 0;
+            }
         }
         .bee-code-textarea {
             width: 100%;
@@ -1238,39 +1457,48 @@
 <body>
 
     <!-- =======================================================================
-         TELA DE LOGIN MINIMALISTA E INTUITIVA (NIELSEN HEURISTICS)
+         TELA DE LOGIN COM ÍCONES SVG, TIPOGRAFIA REFINADA E SEGURANÇA SHA-256
     ======================================================================= -->
     <div id="loginGateScreen" class="login-gate-wrapper">
-        <div class="login-gate-card" style="max-width:440px;padding:28px 26px;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div class="login-gate-card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
                 <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="CEFET-MG" class="nav-logo">
                 <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG" class="nav-logo circle">
                 <div class="nav-brand-title">
-                    <span>Trilhando o Caminho do Código</span>
-                    <small>CEFET-MG &amp; FAPEMIG</small>
+                    <span style="font-size:1rem;letter-spacing:-0.01em;">Trilhando o Caminho do Código</span>
+                    <small style="margin-top:2px;">CEFET-MG &amp; FAPEMIG</small>
                 </div>
             </div>
 
-            <div class="tr-auth-tabs" style="margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-                <button type="button" class="tr-auth-tab active" data-gate-mode="login">🔑 Entrar</button>
-                <button type="button" class="tr-auth-tab" data-gate-mode="register">✨ Criar Conta</button>
-                <button type="button" class="tr-auth-tab" data-gate-mode="admin">🛡️ Professor</button>
+            <div class="tr-auth-tabs">
+                <button type="button" class="tr-auth-tab active" data-gate-mode="login">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <span>Entrar</span>
+                </button>
+                <button type="button" class="tr-auth-tab" data-gate-mode="register">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    <span>Criar Conta</span>
+                </button>
+                <button type="button" class="tr-auth-tab" data-gate-mode="admin">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Professor</span>
+                </button>
             </div>
 
-            <h2 style="font-size:1.25rem;color:#fff;margin-bottom:4px;" id="gateTitleText">Bem-vindo(a) de volta</h2>
-            <p style="font-size:0.83rem;color:var(--text-secondary);margin-bottom:14px;line-height:1.4;" id="gateSubtitleText">
-                Digite seu nome completo e senha para acessar.
+            <h2 style="font-size:1.32rem;font-weight:800;color:#fff;margin-bottom:5px;letter-spacing:-0.015em;" id="gateTitleText">Entrar na Minha Conta</h2>
+            <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.5;" id="gateSubtitleText">
+                Digite seu nome completo e senha para continuar seus estudos.
             </p>
 
             <!-- Acesso rápido com 1 clique (Apenas Nome) -->
             <div id="gateRecentUsersContainer"></div>
 
-            <form id="loginGateForm" style="display:flex;flex-direction:column;gap:12px;" onsubmit="return false;">
+            <form id="loginGateForm" style="display:flex;flex-direction:column;gap:14px;" onsubmit="return false;">
                 <div>
                     <label class="tr-field-label" id="gateNameLabel" for="gateFullName">Nome Completo</label>
                     <input type="text" id="gateFullName" class="tr-input" placeholder="Ex: Lucas Almeida Santos" autocomplete="username" list="gateRecentUsersList">
                     <datalist id="gateRecentUsersList"></datalist>
-                    <div id="gateUsernameAvailability" style="font-size:0.75rem;margin-top:4px;"></div>
+                    <div id="gateUsernameAvailability"></div>
                 </div>
                 <div>
                     <label class="tr-field-label" id="gatePassLabel" for="gatePassword">Senha</label>
@@ -1278,16 +1506,18 @@
                 </div>
                 <div id="gatePassConfirmWrap" style="display:none;">
                     <label class="tr-field-label" for="gatePasswordConfirm">Confirmar Senha</label>
-                    <input type="password" id="gatePasswordConfirm" class="tr-input" placeholder="Repita a senha" autocomplete="new-password">
+                    <input type="password" id="gatePasswordConfirm" class="tr-input" placeholder="Repita a senha escolhida" autocomplete="new-password">
                 </div>
                 <div id="gateErrorBox"></div>
-                <button type="submit" id="gateSubmitBtn" class="tr-btn-primary" style="width:100%;padding:12px;font-size:0.92rem;margin-top:2px;justify-content:center;">
-                    Entrar no Portal →
+                <button type="submit" id="gateSubmitBtn" class="tr-btn-primary" style="width:100%;padding:12px 16px;font-size:0.93rem;font-weight:700;margin-top:2px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;">
+                    <span id="gateSubmitBtnLabel">Entrar no Portal</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
             </form>
 
-            <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.07);font-size:0.74rem;color:#64748b;text-align:center;">
-                🔒 Acesso sem e-mail • Seu progresso fica salvo automaticamente
+            <div class="gate-footer-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;flex-shrink:0;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Acesso sem e-mail • Senhas protegidas por criptografia SHA-256</span>
             </div>
         </div>
     </div>
@@ -1401,15 +1631,21 @@
     <div class="tr-hw-modal-overlay" id="portalAuthModal">
         <div class="auth-modal-card">
             <button type="button" class="tr-modal-close-btn" id="closePortalAuthBtn" style="position:absolute;top:18px;right:18px;">✕</button>
-            <span class="tr-badge-cyan">🔐 ACESSO AO TRILHANDO CLASSROOM</span>
+            <span class="tr-badge-cyan">ACESSO AO TRILHANDO CLASSROOM</span>
             <h3 style="font-size:1.35rem;color:#fff;margin-top:8px;margin-bottom:4px;">Identificação Rápida</h3>
             <p style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:16px;">
-                Estudantes usam apenas <strong>Nome Completo e Senha</strong> (sem precisar de e-mail!).
+                Estudantes usam apenas <strong>Nome Completo e Senha</strong> (sem precisar de e-mail).
             </p>
 
             <div class="tr-auth-tabs" style="margin-bottom:16px;">
-                <button type="button" class="tr-auth-tab active" data-pauth-mode="register">✨ Sou Aluno (Criar Conta)</button>
-                <button type="button" class="tr-auth-tab" data-pauth-mode="login">🔑 Já tenho Conta / ADM</button>
+                <button type="button" class="tr-auth-tab active" data-pauth-mode="register" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    <span>Sou Aluno (Criar Conta)</span>
+                </button>
+                <button type="button" class="tr-auth-tab" data-pauth-mode="login" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <span>Já tenho Conta / ADM</span>
+                </button>
             </div>
 
             <div style="display:flex;flex-direction:column;gap:12px;">
@@ -1422,13 +1658,15 @@
                     <input type="password" id="pAuthPassword" class="tr-input" placeholder="Crie ou digite sua senha">
                 </div>
                 <div id="pAuthErrorBox"></div>
-                <button type="button" id="pAuthSubmitBtn" class="tr-btn-primary" style="width:100%;padding:12px;margin-top:4px;">
-                    🚀 Entrar no Classroom
+                <button type="button" id="pAuthSubmitBtn" class="tr-btn-primary" style="width:100%;padding:12px;margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+                    <span id="pAuthSubmitBtnLabel">Entrar no Classroom</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
             </div>
 
-            <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.76rem;color:#64748b;line-height:1.5;">
-                🛡️ <strong>Acesso de Administrador (Tutores):</strong> Clique em <em>"Já tenho Conta / ADM"</em> e entre com o usuário oficial da equipe (<code>Trilhando o Caminho do Código</code>) e a senha de administrador.
+            <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.76rem;color:#64748b;line-height:1.5;display:flex;align-items:flex-start;gap:8px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;flex-shrink:0;margin-top:2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div><strong>Acesso de Administrador (Tutores):</strong> Selecione <em>"Já tenho Conta / ADM"</em> e entre com o usuário oficial da equipe e a senha de administrador.</div>
             </div>
         </div>
     </div>
@@ -2268,13 +2506,90 @@
                 `;
             }).join('');
 
-            // Sample Input / Output rows for active problem
-            var sampleRowsHtml = activeProb.testCases.slice(0, 2).map(function(tc) {
+            function formatInlineChallengeMd(escapedLine) {
+                return escapedLine
+                    .replace(/`([^`]+)`/g, '<code class="bee-inline-code">$1</code>')
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#fff;">$1</strong>')
+                    .replace(/\*([^*]+)\*/g, '<em style="color:#cbd5e1;">$1</em>');
+            }
+
+            function formatChallengeRichText(rawText) {
+                var lines = String(rawText || '').split('\n');
+                var htmlParts = [];
+                lines.forEach(function(rawLine) {
+                    if (!rawLine.trim()) return;
+                    var isSubBullet = /^\s{2,}[•\-]\s+/.test(rawLine);
+                    var isBullet = /^\s*[•\-]\s+/.test(rawLine);
+                    var cleanText = rawLine.replace(/^\s*[•\-]\s+/, '').trim();
+                    var formatted = formatInlineChallengeMd(escapeHtml(cleanText));
+                    if (isSubBullet) {
+                        htmlParts.push('<div class="bee-stmt-bullet sub-bullet">↳ ' + formatted + '</div>');
+                    } else if (isBullet) {
+                        htmlParts.push('<div class="bee-stmt-bullet">• ' + formatted + '</div>');
+                    } else {
+                        htmlParts.push('<p>' + formatted + '</p>');
+                    }
+                });
+                return htmlParts.join('');
+            }
+
+            function formatTerminalLinesHtml(rawStr, mode) {
+                var text = String(rawStr || '');
+                if (mode === 'input' && !text) {
+                    return '<div style="color:#94a3b8;font-size:0.8rem;font-style:italic;padding:4px 0;">🚫 Sem entrada (não use <code class="bee-inline-code">input()</code>)</div>';
+                }
+                var lines = text.split('\n');
+                var single = lines.length === 1;
+                return lines.map(function(line, idx) {
+                    var tagLabel = '';
+                    if (mode === 'input') {
+                        tagLabel = single ? '1º input()' : (idx + 1) + 'ª linha';
+                        return '<div class="bee-line-row">' +
+                            '<span class="bee-line-tag">' + tagLabel + '</span>' +
+                            '<strong style="color:#f8fafc;word-break:break-word;">' + escapeHtml(line) + '</strong>' +
+                        '</div>';
+                    } else {
+                        tagLabel = single ? 'Tela' : (idx + 1) + 'ª linha';
+                        return '<div class="bee-line-row">' +
+                            '<span class="bee-line-tag" style="color:#6ee7b7;background:rgba(16,185,129,0.15);">' + tagLabel + '</span>' +
+                            '<strong style="color:#6ee7b7;word-break:break-word;">' + escapeHtml(line) + '</strong>' +
+                        '</div>';
+                    }
+                }).join('');
+            }
+
+            // Visual Example Cards (substitui a antiga tabela confusa por cartões passo a passo)
+            var sampleCardsHtml = activeProb.testCases.slice(0, 2).map(function(tc, idx) {
                 return `
-                    <tr>
-                        <td>${tc.input ? escapeHtml(tc.input) : '<em style="color:#64748b;">(Sem entrada)</em>'}</td>
-                        <td>${escapeHtml(tc.expected)}</td>
-                    </tr>
+                    <div class="bee-example-card">
+                        <div class="bee-example-card-header">
+                            <span style="font-size:0.78rem;font-weight:800;color:#38bdf8;display:inline-flex;align-items:center;gap:6px;">
+                                🧪 Exemplo Prático ${idx + 1}
+                            </span>
+                            <button type="button" class="tr-btn-ghost" data-bee-sample-idx="${idx}" style="font-size:0.72rem;padding:4px 10px;border-color:rgba(56,189,248,0.4);color:#7dd3fc;">
+                                ▶️ Testar com este exemplo
+                            </button>
+                        </div>
+                        <div class="bee-example-flow">
+                            <div class="bee-example-box in-box">
+                                <div style="font-size:0.7rem;font-weight:800;color:#7dd3fc;text-transform:uppercase;margin-bottom:6px;letter-spacing:0.03em;">
+                                    ⌨️ 1. Se a Entrada for:
+                                </div>
+                                <div>
+                                    ${formatTerminalLinesHtml(tc.input, 'input')}
+                                </div>
+                            </div>
+                            <div class="bee-example-arrow" title="Transforma-se na saída ao lado">➔</div>
+                            <div class="bee-example-box out-box">
+                                <div style="font-size:0.7rem;font-weight:800;color:#6ee7b7;text-transform:uppercase;margin-bottom:6px;letter-spacing:0.03em;">
+                                    🖥️ 2. Seu print() deve mostrar:
+                                </div>
+                                <div>
+                                    ${formatTerminalLinesHtml(tc.expected, 'output')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `;
             }).join('');
 
@@ -2445,11 +2760,11 @@
                     </div>
 
                     <div class="bee-split-ide" id="beeIdeWorkspace">
-                        <!-- COLUNA ESQUERDA: ENUNCIADO -->
-                        <div class="panel-box" style="margin-bottom:0;padding:20px;border-color:rgba(0,229,255,0.35);">
-                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+                        <!-- COLUNA ESQUERDA: ENUNCIADO CLARO E EXEMPLOS EM CARTÕES VISUAIS -->
+                        <div class="panel-box" style="margin-bottom:0;padding:22px;border-color:rgba(0,229,255,0.35);">
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
                                 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-                                    <span class="tr-badge-cyan">PROBLEMA #${activeProb.number}</span>
+                                    <span class="tr-badge-cyan">DESAFIO #${activeProb.number}</span>
                                     <span style="font-size:0.78rem;font-weight:800;color:#fbbf24;">+${activeProb.xp} XP</span>
                                     <span style="font-size:0.76rem;color:#94a3b8;">• ${escapeHtml(activeProb.difficulty)}</span>
                                 </div>
@@ -2459,33 +2774,49 @@
                                 }
                             </div>
 
-                            <h3 style="font-size:1.25rem;color:#fff;margin-bottom:8px;">${escapeHtml(activeProb.title)}</h3>
-                            <p style="font-size:0.88rem;color:#e2e8f0;line-height:1.6;margin-bottom:14px;">
-                                ${escapeHtml(activeProb.description)}
-                            </p>
+                            <h3 style="font-size:1.3rem;color:#fff;margin-bottom:12px;line-height:1.3;">${escapeHtml(activeProb.title)}</h3>
 
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-                                <div style="background:rgba(0,0,0,0.28);border-left:3px solid var(--cefet-cyan);padding:9px 12px;border-radius:8px;">
-                                    <div style="font-size:0.72rem;font-weight:800;color:var(--cefet-cyan);text-transform:uppercase;margin-bottom:2px;">📥 Entrada</div>
-                                    <div style="font-size:0.8rem;color:#cbd5e1;line-height:1.45;">${escapeHtml(activeProb.inputSpec)}</div>
+                            <!-- BLOCO 1: ENUNCIADO FORMATADO PASSO A PASSO -->
+                            <div class="bee-statement-box">
+                                <div style="font-size:0.74rem;font-weight:800;color:#38bdf8;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                                    <span>📖 O que você precisa fazer:</span>
                                 </div>
-                                <div style="background:rgba(0,0,0,0.28);border-left:3px solid #10b981;padding:9px 12px;border-radius:8px;">
-                                    <div style="font-size:0.72rem;font-weight:800;color:#10b981;text-transform:uppercase;margin-bottom:2px;">📤 Saída</div>
-                                    <div style="font-size:0.8rem;color:#cbd5e1;line-height:1.45;white-space:pre-line;">${escapeHtml(activeProb.outputSpec)}</div>
+                                ${formatChallengeRichText(activeProb.description)}
+                            </div>
+
+                            <!-- BLOCO 2: ENTRADA E SAÍDA EM CARTÕES LARGOS E LEGÍVEIS -->
+                            <div class="bee-io-spec-stack">
+                                <div class="bee-io-spec-card">
+                                    <div class="bee-io-spec-title" style="color:var(--cefet-cyan);">
+                                        <span>📥 1. Como funciona a Entrada (o que ler com input)</span>
+                                        <span style="font-size:0.68rem;color:#94a3b8;font-weight:600;text-transform:none;">Use input() vazio: sem pergunta dentro!</span>
+                                    </div>
+                                    <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.55;">
+                                        ${formatChallengeRichText(activeProb.inputSpec)}
+                                    </div>
+                                </div>
+                                <div class="bee-io-spec-card output-spec">
+                                    <div class="bee-io-spec-title" style="color:#10b981;">
+                                        <span>📤 2. Como deve ser a Saída (o que mostrar no print)</span>
+                                        <span style="font-size:0.68rem;color:#6ee7b7;font-weight:600;text-transform:none;">Respeite maiúsculas e espaços</span>
+                                    </div>
+                                    <div style="font-size:0.86rem;color:#e2e8f0;line-height:1.55;">
+                                        ${formatChallengeRichText(activeProb.outputSpec)}
+                                    </div>
                                 </div>
                             </div>
 
-                            <table class="bee-io-sample-table">
-                                <thead>
-                                    <tr>
-                                        <th>Exemplo de Entrada</th>
-                                        <th>Exemplo de Saída</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${sampleRowsHtml}
-                                </tbody>
-                            </table>
+                            <!-- BLOCO 3: EXEMPLOS VISUAIS PASSO A PASSO (SEM TABELA CONFUSA) -->
+                            <div class="bee-examples-section">
+                                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                                    <strong style="font-size:0.88rem;color:#fff;">🧪 Exemplos de Funcionamento na Prática</strong>
+                                    <span style="font-size:0.73rem;color:#94a3b8;">Cada cartão abaixo é um teste separado</span>
+                                </div>
+                                <p style="font-size:0.79rem;color:#cbd5e1;margin-top:3px;line-height:1.45;">
+                                    Veja o que é digitado na <strong>Entrada</strong> e o que o seu programa deve responder na <strong>Saída</strong>:
+                                </p>
+                                ${sampleCardsHtml}
+                            </div>
                         </div>
 
                         <!-- COLUNA DIREITA: EDITOR DE CÓDIGO PYTHON 3 -->
@@ -2700,6 +3031,27 @@
                     beeViewMode = 'solve';
                     renderDesafiosView();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            container.querySelectorAll('[data-bee-sample-idx]').forEach(function(btn) {
+                btn.addEventListener('click', async function(e) {
+                    e.stopPropagation();
+                    var idx = Number(btn.getAttribute('data-bee-sample-idx')) || 0;
+                    var tc = activeProb.testCases && activeProb.testCases[idx];
+                    if (!tc) return;
+                    beeDraftStdinMap[activeProb.id] = tc.input || '';
+                    var code = beeDraftCodeMap[activeProb.id] || '';
+                    beeIsRunning = true;
+                    renderDesafiosView();
+                    var execResult = await window.TrilhandoBeecrowd.runPythonCodeAsync(code, tc.input || '');
+                    beeIsRunning = false;
+                    beeLastJudgeResult = {
+                        challengeId: activeProb.id,
+                        mode: 'test',
+                        execResult: execResult
+                    };
+                    renderDesafiosView();
                 });
             });
 
@@ -3428,19 +3780,14 @@
                     `;
                 }).join('');
 
-                var isPassShown = Boolean(revealedPasswordsMap[st.id]);
-
                 return `
                     <tr>
                         <td>
                             <strong style="color:#fff;font-size:0.88rem;">${escapeHtml(st.fullName)}</strong>
-                            <div style="font-size:0.72rem;color:#64748b;display:flex;align-items:center;gap:6px;margin-top:2px;">
-                                <span>Senha: <code>${isPassShown ? escapeHtml(st.password) : '••••'}</code></span>
-                                <button type="button" data-toggle-pass="${st.id}" style="background:none;border:none;color:#38bdf8;cursor:pointer;font-size:0.7rem;font-weight:700;">
-                                    ${isPassShown ? '🙈' : '👁️'}
-                                </button>
-                                <button type="button" data-reset-pass="${st.id}" data-reset-name="${escapeHtml(st.fullName)}" style="background:none;border:none;color:#fbbf24;cursor:pointer;font-size:0.7rem;font-weight:700;">
-                                    🔑 Redefinir
+                            <div style="font-size:0.72rem;color:#64748b;display:flex;align-items:center;gap:8px;margin-top:3px;">
+                                <span style="color:#94a3b8;">Senha protegida (SHA-256)</span>
+                                <button type="button" data-reset-pass="${st.id}" data-reset-name="${escapeHtml(st.fullName)}" style="background:none;border:none;color:#fbbf24;cursor:pointer;font-size:0.72rem;font-weight:700;">
+                                    Redefinir senha
                                 </button>
                             </div>
                         </td>
@@ -4121,21 +4468,26 @@
             modal.classList.add('active');
         }
 
+        var SVG_ALERT_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:#f87171;margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+        var SVG_CHECK_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+        var SVG_INFO_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
+        var SVG_USER_CHIP_ICON = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
         function updateAuthModalUI() {
             document.querySelectorAll('[data-pauth-mode]').forEach(function(btn) {
                 btn.classList.toggle('active', btn.getAttribute('data-pauth-mode') === portalAuthMode);
             });
             var nameLabel = document.getElementById('pAuthNameLabel');
-            var submitBtn = document.getElementById('pAuthSubmitBtn');
+            var submitBtnLabel = document.getElementById('pAuthSubmitBtnLabel');
             var errBox = document.getElementById('pAuthErrorBox');
             if (errBox) errBox.innerHTML = '';
 
             if (portalAuthMode === 'register') {
                 nameLabel.textContent = 'Nome Completo:';
-                submitBtn.textContent = '✨ Criar Conta';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Criar Conta';
             } else {
                 nameLabel.textContent = 'Nome Completo (ou Usuário ADM):';
-                submitBtn.textContent = '🔑 Entrar';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar';
             }
         }
 
@@ -4167,20 +4519,19 @@
 
             var chipsHtml = recents.map(function(u) {
                 var n = typeof u === 'string' ? u : u.fullName;
-                var r = typeof u === 'object' && u.role ? u.role : 'student';
                 return `
-                    <button type="button" class="recent-user-chip" data-fill-name="${escapeHtml(n)}" style="display:inline-flex;align-items:center;gap:5px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.22);border-radius:100px;padding:4px 10px;font-size:0.76rem;color:#e2e8f0;cursor:pointer;">
-                        <span>${r === 'admin' ? '🛡️' : '🎓'}</span>
+                    <button type="button" class="recent-user-chip" data-fill-name="${escapeHtml(n)}" style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.22);border-radius:100px;padding:5px 11px;font-size:0.77rem;color:#e2e8f0;cursor:pointer;transition:all 0.15s ease;">
+                        ${SVG_USER_CHIP_ICON}
                         <span>${escapeHtml(n)}</span>
-                        <span class="remove-chip-btn" data-remove-name="${escapeHtml(n)}" style="opacity:0.6;font-size:0.9rem;padding-left:3px;cursor:pointer;" title="Remover">×</span>
+                        <span class="remove-chip-btn" data-remove-name="${escapeHtml(n)}" style="opacity:0.6;font-size:0.95rem;padding-left:3px;cursor:pointer;" title="Remover">×</span>
                     </button>
                 `;
             }).join('');
 
             container.innerHTML = `
-                <div style="margin-bottom:12px;text-align:left;">
-                    <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;margin-bottom:5px;">
-                        👤 Acesso rápido neste computador:
+                <div style="margin-bottom:14px;text-align:left;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:10px 12px;">
+                    <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;margin-bottom:6px;letter-spacing:0.03em;text-transform:uppercase;">
+                        Acesso rápido neste computador
                     </div>
                     <div style="display:flex;flex-wrap:wrap;gap:6px;">
                         ${chipsHtml}
@@ -4229,16 +4580,13 @@
             }
             availEl.style.display = 'block';
             if (typed.length < 3 || typed.split(/\s+/).length < 2) {
-                availEl.style.color = '#fbbf24';
-                availEl.innerHTML = '💡 Digite seu <strong>Nome e Sobrenome</strong>.';
+                availEl.innerHTML = `<div class="gate-status-hint" style="color:#fbbf24;">${SVG_INFO_ICON}<span>Informe seu <strong>Nome e Sobrenome</strong> completos.</span></div>`;
                 return;
             }
             if (window.TrilhandoClassroom && window.TrilhandoClassroom.isUsernameTaken && window.TrilhandoClassroom.isUsernameTaken(typed)) {
-                availEl.style.color = '#f87171';
-                availEl.innerHTML = '🔒 Nome já cadastrado. Use a aba "🔑 Entrar" ou adicione outro sobrenome.';
+                availEl.innerHTML = `<div class="gate-status-hint" style="color:#f87171;">${SVG_ALERT_ICON}<span>Nome já cadastrado. Use a aba <strong>Entrar</strong> ou adicione outro sobrenome.</span></div>`;
             } else {
-                availEl.style.color = '#10b981';
-                availEl.innerHTML = '✅ Nome disponível!';
+                availEl.innerHTML = `<div class="gate-status-hint" style="color:#10b981;">${SVG_CHECK_ICON}<span>Nome disponível para cadastro.</span></div>`;
             }
         }
 
@@ -4254,7 +4602,7 @@
             var passInp = document.getElementById('gatePassword');
             var passConfirmWrap = document.getElementById('gatePassConfirmWrap');
             var passConfirmInp = document.getElementById('gatePasswordConfirm');
-            var submitBtn = document.getElementById('gateSubmitBtn');
+            var submitBtnLabel = document.getElementById('gateSubmitBtnLabel');
             var errBox = document.getElementById('gateErrorBox');
             if (errBox) errBox.innerHTML = '';
 
@@ -4269,28 +4617,28 @@
 
             if (gateMode === 'admin') {
                 if (titleText) titleText.textContent = 'Acesso do Professor';
-                if (subtitleText) subtitleText.innerHTML = 'Entre com o usuário da equipe e a senha de administrador.';
-                if (nameLabel) nameLabel.textContent = 'Usuário ADM';
+                if (subtitleText) subtitleText.innerHTML = 'Entre com a identificação da coordenação e a senha de administrador.';
+                if (nameLabel) nameLabel.textContent = 'Identificação ADM';
                 if (passLabel) passLabel.textContent = 'Senha';
                 if (nameInp) nameInp.placeholder = 'Trilhando o Caminho do Código';
                 if (passInp) passInp.placeholder = 'Senha de administrador';
-                if (submitBtn) submitBtn.textContent = '🛡️ Entrar no Painel';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Painel';
             } else if (gateMode === 'register') {
                 if (titleText) titleText.textContent = 'Criar Conta de Aluno(a)';
-                if (subtitleText) subtitleText.innerHTML = 'Cadastre seu nome e crie uma senha para salvar seu progresso.';
+                if (subtitleText) subtitleText.innerHTML = 'Cadastre seu nome completo e crie uma senha para salvar seu progresso.';
                 if (nameLabel) nameLabel.textContent = 'Nome e Sobrenome';
                 if (passLabel) passLabel.textContent = 'Crie uma Senha (mín. 4 caracteres)';
                 if (nameInp) nameInp.placeholder = 'Ex: Lucas Almeida Santos';
-                if (passInp) passInp.placeholder = 'Mínimo 4 caracteres';
-                if (submitBtn) submitBtn.textContent = '✨ Criar Conta e Entrar';
+                if (passInp) passInp.placeholder = 'Mínimo de 4 caracteres';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Criar Conta e Entrar';
             } else {
                 if (titleText) titleText.textContent = 'Entrar na Minha Conta';
                 if (subtitleText) subtitleText.innerHTML = 'Digite seu nome completo e senha para continuar seus estudos.';
                 if (nameLabel) nameLabel.textContent = 'Nome Completo';
                 if (passLabel) passLabel.textContent = 'Senha';
                 if (nameInp) nameInp.placeholder = 'Ex: Lucas Almeida Santos';
-                if (passInp) passInp.placeholder = 'Sua senha';
-                if (submitBtn) submitBtn.textContent = '🔑 Entrar no Portal';
+                if (passInp) passInp.placeholder = 'Digite sua senha';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Portal';
             }
 
             updateGateUsernameAvailabilityUI();
@@ -4372,11 +4720,10 @@
                 var confirmEl = document.getElementById('gatePasswordConfirm');
                 var confirmPassword = confirmEl ? (confirmEl.value || '').trim() : password;
                 var submitBtn = document.getElementById('gateSubmitBtn');
-                var origLabel = submitBtn ? submitBtn.textContent : '';
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = '⏳ Verificando na nuvem...';
-                }
+                var submitBtnLabel = document.getElementById('gateSubmitBtnLabel');
+                var origLabel = submitBtnLabel ? submitBtnLabel.textContent : '';
+                if (submitBtn) submitBtn.disabled = true;
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Verificando na nuvem...';
 
                 try {
                     if (window.TrilhandoClassroom && window.TrilhandoClassroom.pullFromCloudAsync) {
@@ -4399,7 +4746,7 @@
 
                     var errBox = document.getElementById('gateErrorBox');
                     if (!res.ok) {
-                        if (errBox) errBox.innerHTML = `<div class="tr-auth-alert">⚠️ ${escapeHtml(res.error)}</div>`;
+                        if (errBox) errBox.innerHTML = `<div class="gate-alert-banner">${SVG_ALERT_ICON}<span>${escapeHtml(res.error)}</span></div>`;
                     } else {
                         if (errBox) errBox.innerHTML = '';
                         var passEl = document.getElementById('gatePassword');
@@ -4415,12 +4762,10 @@
                 } catch (loginErr) {
                     console.error('Login error:', loginErr);
                     var errBox = document.getElementById('gateErrorBox');
-                    if (errBox) errBox.innerHTML = `<div class="tr-auth-alert">⚠️ Erro ao processar login: ${escapeHtml(loginErr.message || 'Tente novamente')}</div>`;
+                    if (errBox) errBox.innerHTML = `<div class="gate-alert-banner">${SVG_ALERT_ICON}<span>Erro ao processar login: ${escapeHtml(loginErr.message || 'Tente novamente')}</span></div>`;
                 } finally {
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = origLabel;
-                    }
+                    if (submitBtn) submitBtn.disabled = false;
+                    if (submitBtnLabel) submitBtnLabel.textContent = origLabel;
                 }
             }
 
@@ -4459,11 +4804,11 @@
             async function handlePortalAuthSubmit() {
                 var fullName = (document.getElementById('pAuthFullName').value || '').trim();
                 var password = (document.getElementById('pAuthPassword').value || '').trim();
-                var origLabel = pAuthSubmit ? pAuthSubmit.textContent : '';
-                if (pAuthSubmit) {
-                    pAuthSubmit.disabled = true;
-                    pAuthSubmit.textContent = '⏳ Verificando...';
-                }
+                var pAuthLabel = document.getElementById('pAuthSubmitBtnLabel');
+                var origLabel = pAuthLabel ? pAuthLabel.textContent : '';
+                if (pAuthSubmit) pAuthSubmit.disabled = true;
+                if (pAuthLabel) pAuthLabel.textContent = 'Verificando...';
+
                 try {
                     if (window.TrilhandoClassroom && window.TrilhandoClassroom.pullFromCloudAsync) {
                         await Promise.race([
@@ -4482,7 +4827,7 @@
                     });
                     var errBox = document.getElementById('pAuthErrorBox');
                     if (!res.ok) {
-                        errBox.innerHTML = `<div class="tr-auth-alert">⚠️ ${escapeHtml(res.error)}</div>`;
+                        errBox.innerHTML = `<div class="gate-alert-banner">${SVG_ALERT_ICON}<span>${escapeHtml(res.error)}</span></div>`;
                     } else {
                         authModal.classList.remove('active');
                         if (res.user.role === 'admin') {
@@ -4494,12 +4839,10 @@
                     }
                 } catch (err) {
                     var errBox = document.getElementById('pAuthErrorBox');
-                    if (errBox) errBox.innerHTML = `<div class="tr-auth-alert">⚠️ ${escapeHtml(err.message)}</div>`;
+                    if (errBox) errBox.innerHTML = `<div class="gate-alert-banner">${SVG_ALERT_ICON}<span>${escapeHtml(err.message)}</span></div>`;
                 } finally {
-                    if (pAuthSubmit) {
-                        pAuthSubmit.disabled = false;
-                        pAuthSubmit.textContent = origLabel;
-                    }
+                    if (pAuthSubmit) pAuthSubmit.disabled = false;
+                    if (pAuthLabel) pAuthLabel.textContent = origLabel;
                 }
             }
 

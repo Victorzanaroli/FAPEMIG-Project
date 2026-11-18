@@ -41,14 +41,74 @@
         { key: 'aula07', shortLabel: 'A7', label: 'Aula 07', date: '09/12', topic: 'Feira Final de Soluções, T1 & Certificados' }
     ];
 
-    // Default Admin Accounts (Victor + 2 Discentes do Projeto)
-    // Único Login de Administrador compartilhado pela equipe (Victor, Rafael e Kaique)
+    // =========================================================================
+    // CRIPTOGRAFIA SHA-256 PARA SENHAS E VERIFICAÇÃO DE SESSÃO (ZERO TEXTO PURO)
+    // =========================================================================
+    const AUTH_SALT_PREFIX = 'trilhando_cefet_2026_v2::';
+    const ADMIN_PASS_HASH = '5c1ffbc86ce67efa868d6e7bea7d2ccb32ce295a44ffc8fd161c6353c41d218c';
+    const ADMIN_SESSION_VERIFIER_HASH = '6da05e8cb54079a2a7cec2b332bc99c4c6070cec7aa5eddee521bb10bc6fc308';
+
+    function sha256Hex(asciiInput) {
+        const utf8 = unescape(encodeURIComponent(String(asciiInput || '')));
+        const K = [
+            0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+            0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+            0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+            0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+            0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+            0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+            0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+            0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+        ];
+        const H = [
+            0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+            0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+        ];
+        const l = utf8.length * 8;
+        const words = [];
+        for (let i = 0; i < utf8.length; i++) {
+            words[i >> 2] |= (utf8.charCodeAt(i) & 0xff) << (24 - (i % 4) * 8);
+        }
+        words[l >> 5] |= 0x80 << (24 - (l % 32));
+        words[(((l + 64) >>> 9) << 4) + 15] = l;
+
+        const W = new Array(64);
+        const rotr = (n, x) => (x >>> n) | (x << (32 - n));
+
+        for (let i = 0; i < words.length; i += 16) {
+            let a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+            for (let t = 0; t < 64; t++) {
+                if (t < 16) {
+                    W[t] = words[i + t] | 0;
+                } else {
+                    const g0 = rotr(7, W[t - 15]) ^ rotr(18, W[t - 15]) ^ (W[t - 15] >>> 3);
+                    const g1 = rotr(17, W[t - 2]) ^ rotr(19, W[t - 2]) ^ (W[t - 2] >>> 10);
+                    W[t] = (W[t - 16] + g0 + W[t - 7] + g1) | 0;
+                }
+                const s1 = rotr(6, e) ^ rotr(11, e) ^ rotr(25, e);
+                const ch = (e & f) ^ (~e & g);
+                const temp1 = (h + s1 + ch + K[t] + W[t]) | 0;
+                const s0 = rotr(2, a) ^ rotr(13, a) ^ rotr(22, a);
+                const maj = (a & b) ^ (a & c) ^ (b & c);
+                const temp2 = (s0 + maj) | 0;
+                h = g; g = f; f = e;
+                e = (d + temp1) | 0;
+                d = c; c = b; b = a;
+                a = (temp1 + temp2) | 0;
+            }
+            H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0;
+            H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+        }
+        return H.map(v => (v >>> 0).toString(16).padStart(8, '0')).join('');
+    }
+
+    // Único Login de Administrador compartilhado pela equipe (sem senha em texto puro no código!)
     const DEFAULT_ADMINS = [
         {
             id: 'adm_trilhando_unico',
             fullName: 'Trilhando o Caminho do Código',
             username: 'trilhando-adm',
-            password: 'Trilhando#2026',
+            passwordHash: 'sha256$' + ADMIN_PASS_HASH,
             role: 'admin',
             title: 'Coordenação & Tutores ADM'
         }
@@ -1919,8 +1979,52 @@
         return unique;
     }
 
+    function hashStudentPassword(rawPass, normKey) {
+        const clean = String(rawPass || '').trim();
+        const key = String(normKey || 'stu').trim();
+        return 'sha256$' + sha256Hex(AUTH_SALT_PREFIX + 'stu::' + key + '::' + clean);
+    }
+
+    function verifyStudentPassword(userObj, candidatePass) {
+        if (!userObj) return false;
+        const clean = String(candidatePass || '').trim();
+        const normKey = normalizeUsernameKey(userObj.fullName);
+        const expectedHash = hashStudentPassword(clean, normKey);
+        if (userObj.passwordHash) {
+            return userObj.passwordHash === expectedHash;
+        }
+        // Compatibilidade de migração caso exista registro legado ainda não migrado
+        if (typeof userObj.password === 'string' && userObj.password.length > 0) {
+            return userObj.password === clean;
+        }
+        return false;
+    }
+
+    function sanitizeStudentRecord(u) {
+        if (!u || typeof u !== 'object') return u;
+        const copy = Object.assign({}, u);
+        if (copy.role !== 'admin') {
+            copy.role = 'student';
+            const normKey = normalizeUsernameKey(copy.fullName);
+            if (!copy.passwordHash && typeof copy.password === 'string' && copy.password.length > 0) {
+                copy.passwordHash = hashStudentPassword(copy.password, normKey);
+            }
+        }
+        delete copy.password;
+        delete copy.sessionToken;
+        return copy;
+    }
+
+    function isVerifiedAdminSession(u) {
+        if (!u || u.role !== 'admin' || typeof u.sessionToken !== 'string' || !u.sessionToken) {
+            return false;
+        }
+        return sha256Hex('trilhando_adm_verify_2026::' + u.sessionToken) === ADMIN_SESSION_VERIFIER_HASH;
+    }
+
     function getUsers() {
         let users = [];
+        let needsSaveMigration = false;
         try {
             const raw = localStorage.getItem(STORAGE_KEY_USERS);
             if (raw) users = JSON.parse(raw);
@@ -1938,9 +2042,11 @@
             !(typeof u.role === 'string' && u.role.startsWith('system_')) &&
             !deletedIds.has(u.id)
         );
-        // Garante unicidade estrita de nomes de usuários (mantendo a conta mais antiga caso haja duplicata legada)
+        // Garante unicidade estrita de nomes e migra senhas antigas para SHA-256 (removendo texto puro)
         const uniqueByName = new Map();
-        filteredStudents.forEach(u => {
+        filteredStudents.forEach(rawU => {
+            if (typeof rawU.password !== 'undefined') needsSaveMigration = true;
+            const u = sanitizeStudentRecord(rawU);
             const key = normalizeUsernameKey(u.fullName) || u.id;
             const existing = uniqueByName.get(key);
             if (!existing) {
@@ -1955,7 +2061,13 @@
                 uniqueByName.set(key, keeper);
             }
         });
-        users = Array.from(uniqueByName.values());
+        const cleanStudents = Array.from(uniqueByName.values());
+        if (needsSaveMigration) {
+            try {
+                localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(cleanStudents));
+            } catch (e) {}
+        }
+        users = cleanStudents.slice();
         DEFAULT_ADMINS.forEach(adm => {
             users.unshift(Object.assign({}, adm, { createdAt: '2026-09-16T15:00:00Z' }));
         });
@@ -1963,7 +2075,10 @@
     }
 
     function saveUsers(users) {
-        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+        const sanitized = (users || [])
+            .filter(u => u && u.role !== 'admin')
+            .map(u => sanitizeStudentRecord(u));
+        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(sanitized));
         syncToCloudAsync();
     }
 
@@ -2293,7 +2408,7 @@
         return { ok: true, deletedUser: target };
     }
 
-    // Cadastro rápido de aluno pelo ADM (caso queira adicionar manualmente)
+    // Cadastro rápido de aluno pelo ADM (armazena apenas hash SHA-256)
     function registerStudentByAdmin(fullName, password) {
         const cleanName = String(fullName || '').trim().replace(/\s+/g, ' ');
         const cleanPass = String(password || '1234').trim() || '1234';
@@ -2306,10 +2421,11 @@
         }
         const users = getUsers();
         const now = new Date().toISOString();
+        const normKey = normalizeUsernameKey(cleanName);
         const newStudent = {
             id: 'stu_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
             fullName: cleanName,
-            password: cleanPass,
+            passwordHash: hashStudentPassword(cleanPass, normKey),
             role: 'student',
             attendance: {},
             challengesProgress: {},
@@ -2329,7 +2445,9 @@
         const users = getUsers();
         const idx = users.findIndex(u => u.id === userId && u.role === 'student');
         if (idx < 0) return { ok: false, error: 'Aluno não encontrado.' };
-        users[idx].password = cleanPass;
+        const normKey = normalizeUsernameKey(users[idx].fullName);
+        users[idx].passwordHash = hashStudentPassword(cleanPass, normKey);
+        delete users[idx].password;
         users[idx].updatedAt = new Date().toISOString();
         saveUsers(users);
         return { ok: true, user: users[idx] };
@@ -2405,16 +2523,9 @@
         return merged;
     }
 
-    const BUILTIN_GEMINI_KEY = (function () {
-        try {
-            return atob('QVEuQWI4Uk42S0diaEJkalpqNXJXQjZDZGFCSmZ5MWxNMEhjVVpHTkF5d1g3c1FWRjBORkE=');
-        } catch (e) {
-            return '';
-        }
-    })();
-
+    // Sem chaves de API expostas no código-fonte público
     const DEFAULT_CHATBOT_CFG = {
-        geminiApiKey: BUILTIN_GEMINI_KEY,
+        geminiApiKey: '',
         streamlitUrl: '',
         mode: 'native',
         formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe9ksgUqxMqSY8OUtDwmjwY187PPVguHBu7wHcUnOQA1eQTIg/formResponse',
@@ -2430,11 +2541,7 @@
             if (raw) {
                 const parsed = JSON.parse(raw);
                 if (parsed && typeof parsed === 'object') {
-                    const merged = Object.assign({}, DEFAULT_CHATBOT_CFG, parsed);
-                    if (!merged.geminiApiKey || !String(merged.geminiApiKey).trim()) {
-                        merged.geminiApiKey = BUILTIN_GEMINI_KEY;
-                    }
-                    return merged;
+                    return Object.assign({}, DEFAULT_CHATBOT_CFG, parsed);
                 }
             }
         } catch (e) {}
@@ -2459,14 +2566,23 @@
             const raw = sessionStorage.getItem(STORAGE_KEY_SESSION) || localStorage.getItem(STORAGE_KEY_SESSION);
             if (raw) {
                 const u = JSON.parse(raw);
-                if (u && u.role !== 'admin') {
-                    const deletedIds = new Set(getDeletedUserIds());
-                    if (deletedIds.has(u.id)) {
+                if (!u || typeof u !== 'object') return null;
+                // Impede escalação de privilégio pelo DevTools (role='admin' exige token criptográfico válido)
+                if (u.role === 'admin') {
+                    if (!isVerifiedAdminSession(u)) {
                         sessionStorage.removeItem(STORAGE_KEY_SESSION);
                         localStorage.removeItem(STORAGE_KEY_SESSION);
                         return null;
                     }
+                    return u;
                 }
+                const deletedIds = new Set(getDeletedUserIds());
+                if (deletedIds.has(u.id)) {
+                    sessionStorage.removeItem(STORAGE_KEY_SESSION);
+                    localStorage.removeItem(STORAGE_KEY_SESSION);
+                    return null;
+                }
+                delete u.password;
                 return u;
             }
         } catch (e) {}
@@ -2480,11 +2596,18 @@
                 localStorage.removeItem(STORAGE_KEY_SESSION);
             } catch (e) {}
         } else {
+            const sessionPayload = Object.assign({}, user);
+            delete sessionPayload.password;
             try {
-                sessionStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
-                localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
+                sessionStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(sessionPayload));
+                // Sessões de administrador ficam restritas ao sessionStorage da aba e exigem sessionToken
+                if (sessionPayload.role === 'admin') {
+                    localStorage.removeItem(STORAGE_KEY_SESSION);
+                } else {
+                    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(sessionPayload));
+                }
             } catch (e) {}
-            addRecentUser(user);
+            addRecentUser(sessionPayload);
         }
         window.dispatchEvent(new CustomEvent('trilhando:authchange', { detail: { user } }));
     }
@@ -2493,7 +2616,10 @@
         const cfg = getCloudConfig();
         if (!cfg.enabled || !cfg.supabaseUrl || !cfg.supabaseKey) return false;
         try {
-            const usersPayload = getUsers().slice();
+            // Envia apenas registros de estudantes higienizados (sem senhas em texto puro e sem contas admin)
+            const usersPayload = getUsers()
+                .filter(u => u && u.role !== 'admin')
+                .map(u => sanitizeStudentRecord(u));
             const deletedIds = getDeletedUserIds();
             if (deletedIds.length > 0) {
                 usersPayload.push({
@@ -2512,14 +2638,14 @@
                 quizzesUpdatedAt: localStorage.getItem(STORAGE_KEY_UNLOCKED_QUIZZES_TS) || '1970-01-01T00:00:00.000Z',
                 updatedAt: new Date().toISOString()
             });
-            const chatCfg = getChatbotConfig();
+            // Nunca envia chaves de API para o banco compartilhado
+            const chatCfg = Object.assign({}, getChatbotConfig(), { geminiApiKey: '' });
             usersPayload.push({
                 id: '__chatbot_cloud_cfg__',
                 role: 'system_chatbot_config',
                 chatbotConfig: chatCfg,
                 updatedAt: chatCfg.updatedAt || new Date().toISOString()
             });
-            // IMPORTANTE: a tabela public.trilhando_sync no Supabase possui apenas (id, users_json, submissions_json, updated_at)
             const payload = {
                 id: 'main_state',
                 users_json: usersPayload,
@@ -2653,19 +2779,20 @@
         });
         const deletedIds = new Set(currentDeleted);
         const map = new Map();
-        const isSystemRecord = (u) => !u || u.role === 'system_tombstones' || u.role === 'system_quiz_config' || u.role === 'system_permissions_config' || u.role === 'system_chatbot_config' || (typeof u.role === 'string' && u.role.startsWith('system_'));
+        // Ignora registros de sistema e qualquer registro remoto que tente simular role='admin'
+        const isSystemRecord = (u) => !u || u.role === 'admin' || u.role === 'system_tombstones' || u.role === 'system_quiz_config' || u.role === 'system_permissions_config' || u.role === 'system_chatbot_config' || (typeof u.role === 'string' && u.role.startsWith('system_'));
         localUsers.forEach(u => {
             if (!isSystemRecord(u) && !deletedIds.has(u.id)) {
-                map.set(u.id, Object.assign({}, u));
+                map.set(u.id, sanitizeStudentRecord(u));
             }
         });
-        remoteUsers.forEach(rem => {
-            if (isSystemRecord(rem) || deletedIds.has(rem.id)) return;
+        remoteUsers.forEach(rawRem => {
+            if (isSystemRecord(rawRem) || deletedIds.has(rawRem.id)) return;
+            const rem = sanitizeStudentRecord(rawRem);
             const loc = map.get(rem.id);
             if (!loc) {
                 map.set(rem.id, Object.assign({}, rem));
             } else {
-                // Merge per-lesson attendance by updatedAt timestamp so concurrent ADM attendance clicks merge cleanly
                 const mergedAtt = Object.assign({}, loc.attendance || {});
                 if (rem.attendance && typeof rem.attendance === 'object') {
                     Object.keys(rem.attendance).forEach(lKey => {
@@ -2676,7 +2803,6 @@
                         }
                     });
                 }
-                // Merge per-challenge Beecrowd progress
                 const mergedCh = Object.assign({}, loc.challengesProgress || {});
                 if (rem.challengesProgress && typeof rem.challengesProgress === 'object') {
                     Object.keys(rem.challengesProgress).forEach(cId => {
@@ -2690,17 +2816,12 @@
                     });
                 }
                 const newer = (rem.updatedAt && (!loc.updatedAt || rem.updatedAt >= loc.updatedAt)) ? rem : loc;
-                map.set(rem.id, Object.assign({}, newer, { attendance: mergedAtt, challengesProgress: mergedCh }));
+                map.set(rem.id, sanitizeStudentRecord(Object.assign({}, newer, { attendance: mergedAtt, challengesProgress: mergedCh })));
             }
         });
-        // Deduplica contas de estudantes com o mesmo nome normalizado (mantém a mais antiga para impedir que um 2º cadastro roube o nome)
         const dedupedByName = new Map();
-        const adminsList = [];
         Array.from(map.values()).forEach(u => {
-            if (u.role === 'admin') {
-                adminsList.push(u);
-                return;
-            }
+            if (!u || u.role === 'admin') return;
             const nameKey = normalizeUsernameKey(u.fullName) || u.id;
             const prev = dedupedByName.get(nameKey);
             if (!prev) {
@@ -2715,7 +2836,7 @@
                 dedupedByName.set(nameKey, keeper);
             }
         });
-        return adminsList.concat(Array.from(dedupedByName.values()));
+        return Array.from(dedupedByName.values());
     }
 
     function mergeById(localArr, remoteArr, key) {
@@ -2735,7 +2856,7 @@
     }
 
     // =========================================================================
-    // AUTHENTICATION API (SEPARADO EM "ENTRAR NA CONTA" VS "CRIAR CONTA")
+    // AUTHENTICATION API (COM HASHING SHA-256 E PROTEÇÃO DE SESSÃO)
     // =========================================================================
 
     function loginOrRegister({ fullName, password, confirmPassword, mode }) {
@@ -2746,10 +2867,10 @@
         const normKey = normalizeUsernameKey(cleanName);
 
         if (!cleanName || cleanName.length < 3) {
-            return { ok: false, error: 'Por favor, digite seu Nome Completo.' };
+            return { ok: false, error: 'Por favor, informe seu Nome Completo.' };
         }
         if (!cleanPass || cleanPass.length < 3) {
-            return { ok: false, error: 'A senha precisa ter pelo menos 3 caracteres.' };
+            return { ok: false, error: 'A senha deve conter pelo menos 3 caracteres.' };
         }
 
         // Proteção contra tentativas repetidas de adivinhar senha (força bruta)
@@ -2758,7 +2879,7 @@
             const waitSec = Math.ceil((attemptEntry.lockedUntil - Date.now()) / 1000);
             return {
                 ok: false,
-                error: `🔒 Muitas tentativas incorretas para este usuário! Aguarde ${waitSec}s antes de tentar novamente.`
+                error: `Muitas tentativas incorretas para este usuário. Aguarde ${waitSec}s antes de tentar novamente.`
             };
         }
 
@@ -2788,7 +2909,7 @@
             'trilhandoadm', 'trilhandoocaminhodocodigo'
         ].includes(normKey);
 
-        // 1. MODO PROFESSOR / ADM (ou login geral com credencial de equipe)
+        // 1. MODO PROFESSOR / ADM (verificação por hash SHA-256 + geração de token de sessão assinado)
         if (mode === 'admin' || (mode === 'login' && isAdmAlias)) {
             const adm = users.find(u =>
                 u.role === 'admin' && (
@@ -2801,40 +2922,45 @@
             if (!adm) {
                 return { ok: false, error: 'Usuário de Administrador inválido. Use "Trilhando o Caminho do Código", "admin" ou "trilhando-adm".' };
             }
-            if (adm.password !== cleanPass) {
+            const candidateAdmHash = sha256Hex(AUTH_SALT_PREFIX + 'adm::' + cleanPass);
+            if (candidateAdmHash !== ADMIN_PASS_HASH) {
                 registerFailedAttempt();
-                return { ok: false, error: 'Senha de Administrador incorreta!' };
+                return { ok: false, error: 'Credenciais de Administrador incorretas.' };
             }
             clearFailedAttempts();
-            setCurrentUser(adm);
-            return { ok: true, user: adm, isNew: false, message: 'Login de Administrador realizado!' };
+            const admSession = Object.assign({}, adm, {
+                sessionToken: sha256Hex('trilhando_adm_session_token_2026::' + cleanPass)
+            });
+            setCurrentUser(admSession);
+            return { ok: true, user: admSession, isNew: false, message: 'Login de Administrador realizado!' };
         }
 
-        // 2. MODO ENTRAR NA CONTA (NÃO CRIA CONTA SE ERRAR O NOME OU A SENHA!)
+        // 2. MODO ENTRAR NA CONTA (verificação via hash SHA-256)
         if (mode === 'login') {
-            if (!existing) {
+            if (!existing || existing.role === 'admin') {
                 return {
                     ok: false,
-                    error: 'Usuário não encontrado! Verifique se digitou seu Nome Completo corretamente ou clique na aba "✨ Criar Conta" se for seu 1º acesso.'
+                    error: 'Conta não encontrada. Confira seu Nome Completo ou selecione a aba "Criar Conta" se for seu primeiro acesso.'
                 };
             }
-            if (existing.password !== cleanPass) {
+            if (!verifyStudentPassword(existing, cleanPass)) {
                 registerFailedAttempt();
                 return {
                     ok: false,
-                    error: 'Senha incorreta! Este nome de usuário é protegido por senha. Verifique sua senha e tente novamente.'
+                    error: 'Senha incorreta. Confira os dados digitados e tente novamente.'
                 };
             }
             clearFailedAttempts();
-            setCurrentUser(existing);
-            return { ok: true, user: existing, isNew: false, message: 'Login realizado com sucesso!' };
+            const cleanExisting = sanitizeStudentRecord(existing);
+            setCurrentUser(cleanExisting);
+            return { ok: true, user: cleanExisting, isNew: false, message: 'Login realizado com sucesso!' };
         }
 
-        // 3. MODO CRIAR CONTA (BARRA NOMES DE USUÁRIOS IGUAIS COM SEGURANÇA REFORÇADA)
+        // 3. MODO CRIAR CONTA (armazena apenas passwordHash SHA-256)
         if (existing || isUsernameTaken(cleanName)) {
             return {
                 ok: false,
-                error: '🚫 Nome de usuário já cadastrado! O sistema bloqueia nomes iguais para proteger o seu ranking e suas atividades. Se a conta é sua, clique em "🔑 Entrar na Conta". Se você tem o mesmo nome de um colega, adicione mais um sobrenome!'
+                error: 'Este nome já está cadastrado na turma. Se a conta for sua, use a aba "Entrar". Se tiver o mesmo nome de um colega, acrescente mais um sobrenome.'
             };
         }
 
@@ -2842,28 +2968,28 @@
         if (nameParts.length < 2) {
             return {
                 ok: false,
-                error: 'Digite seu Nome e Sobrenome completos (ex: Lucas Almeida Santos) para criar um identificador único e seguro!'
+                error: 'Informe seu Nome e Sobrenome completos (ex: Lucas Almeida Santos) para identificar sua conta.'
             };
         }
 
         if (cleanPass.length < 4) {
             return {
                 ok: false,
-                error: 'Para sua segurança nos desafios e no ranking, crie uma senha com pelo menos 4 caracteres!'
+                error: 'Crie uma senha com pelo menos 4 caracteres.'
             };
         }
 
         if (normalizeUsernameKey(cleanPass) === normKey || normalizeUsernameKey(cleanPass) === normalizeUsernameKey(nameParts[0])) {
             return {
                 ok: false,
-                error: 'Por segurança, sua senha não pode ser igual ao seu próprio nome! Escolha outra senha.'
+                error: 'Por segurança, sua senha não pode ser igual ao seu nome.'
             };
         }
 
         if (cleanConfirm !== null && cleanConfirm !== cleanPass) {
             return {
                 ok: false,
-                error: 'As duas senhas digitadas não conferem! Digite a mesma senha no campo de confirmação.'
+                error: 'As senhas digitadas não conferem. Repita a mesma senha no campo de confirmação.'
             };
         }
 
@@ -2871,7 +2997,7 @@
         const newUser = {
             id: 'stu_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
             fullName: cleanName,
-            password: cleanPass,
+            passwordHash: hashStudentPassword(cleanPass, normKey),
             role: 'student',
             attendance: {},
             challengesProgress: {},
@@ -2885,7 +3011,7 @@
             ok: true,
             user: newUser,
             isNew: true,
-            message: 'Conta segura criada com sucesso! Seu nome único já está protegido e salvo no ranking!'
+            message: 'Conta criada com sucesso!'
         };
     }
 
@@ -3822,10 +3948,9 @@
             if (gateMode === 'login' && recentUsers.length > 0) {
                 const chips = recentUsers.map(u => {
                     const name = typeof u === 'string' ? u : u.fullName;
-                    const role = typeof u === 'object' && u.role ? u.role : 'student';
                     return `
-                        <button type="button" class="tr-slide-chip" data-tr-fill-user="${escapeHtml(name)}" style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);border-radius:100px;padding:4px 10px;font-size:0.78rem;color:#e2e8f0;cursor:pointer;">
-                            <span>${role === 'admin' ? '🛡️' : '🎓'}</span>
+                        <button type="button" class="tr-slide-chip" data-tr-fill-user="${escapeHtml(name)}" style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.25);border-radius:100px;padding:5px 11px;font-size:0.78rem;color:#e2e8f0;cursor:pointer;">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             <span>${escapeHtml(name)}</span>
                             <span class="tr-chip-remove" data-tr-remove-user="${escapeHtml(name)}" style="opacity:0.6;font-size:0.9rem;padding-left:4px;cursor:pointer;" title="Remover da lista">×</span>
                         </button>
@@ -3839,12 +3964,12 @@
                 dataListHtml = `<datalist id="trSlideRecentList">${opts}</datalist>`;
 
                 recentUsersHtml = `
-                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 12px;margin-bottom:12px;text-align:left;">
+                    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 12px;margin-bottom:14px;text-align:left;">
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                            <span style="font-size:0.73rem;font-weight:700;color:#94a3b8;letter-spacing:0.5px;text-transform:uppercase;">
-                                👤 Contas recentes neste computador:
+                            <span style="font-size:0.72rem;font-weight:700;color:#94a3b8;letter-spacing:0.04em;text-transform:uppercase;">
+                                Contas recentes neste computador
                             </span>
-                            <span style="font-size:0.7rem;color:#64748b;">(Clique para preencher o nome)</span>
+                            <span style="font-size:0.7rem;color:#64748b;">Clique para preencher</span>
                         </div>
                         <div style="display:flex;flex-wrap:wrap;gap:6px;">
                             ${chips}
@@ -3853,45 +3978,52 @@
                 `;
             }
 
+            const svgKey = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>`;
+            const svgUserPlus = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>`;
+            const svgShield = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+            const svgArrowRight = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+            const svgAlert = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:#f87171;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+
             gate.innerHTML = `
-                <div class="tr-hw-modal-card" style="max-width:500px;padding:28px;border-radius:22px;">
-                    <span class="tr-badge-cyan">🔐 LOGIN OBRIGATÓRIO • TRILHANDO CLASSROOM</span>
-                    <h2 style="font-size:1.35rem;color:#fff;margin-top:10px;margin-bottom:6px;">
-                        ${isReg ? 'Criar Conta de Aluno(a)' : (isAdm ? 'Acesso do Professor (ADM)' : 'Entrar na Minha Conta')}
+                <div class="tr-hw-modal-card" style="max-width:480px;padding:30px 28px;border-radius:22px;">
+                    <span class="tr-badge-cyan" style="letter-spacing:0.06em;">TRILHANDO CLASSROOM • ACESSO</span>
+                    <h2 style="font-size:1.35rem;font-weight:800;color:#fff;margin-top:10px;margin-bottom:6px;letter-spacing:-0.01em;">
+                        ${isReg ? 'Criar Conta de Aluno(a)' : (isAdm ? 'Acesso do Professor' : 'Entrar na Minha Conta')}
                     </h2>
-                    <p style="font-size:0.84rem;color:#94a3b8;line-height:1.5;margin-bottom:16px;">
+                    <p style="font-size:0.86rem;color:#94a3b8;line-height:1.55;margin-bottom:18px;">
                         ${isReg
-                            ? 'Crie seu acesso com <strong>Nome Completo e Senha</strong> para já ficar salvo na chamada e usar nas próximas aulas!'
-                            : 'Digite seu <strong>Nome Completo e Senha</strong> cadastrados (se errar o nome ou a senha, o acesso é bloqueado).'}
+                            ? 'Cadastre seu <strong>Nome Completo e Senha</strong> para registrar sua presença e acompanhar as aulas.'
+                            : 'Informe seu <strong>Nome Completo e Senha</strong> cadastrados para acessar os slides.'}
                     </p>
 
-                    <div class="tr-auth-tabs" style="margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-                        <button type="button" class="tr-auth-tab ${gateMode === 'login' ? 'active' : ''}" data-gmode="login">🔑 Entrar na Conta</button>
-                        <button type="button" class="tr-auth-tab ${gateMode === 'register' ? 'active' : ''}" data-gmode="register">✨ Criar Conta</button>
-                        <button type="button" class="tr-auth-tab ${gateMode === 'admin' ? 'active' : ''}" data-gmode="admin">🛡️ Professor (ADM)</button>
+                    <div class="tr-auth-tabs" style="margin-bottom:18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+                        <button type="button" class="tr-auth-tab ${gateMode === 'login' ? 'active' : ''}" data-gmode="login" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">${svgKey}<span>Entrar</span></button>
+                        <button type="button" class="tr-auth-tab ${gateMode === 'register' ? 'active' : ''}" data-gmode="register" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">${svgUserPlus}<span>Criar Conta</span></button>
+                        <button type="button" class="tr-auth-tab ${gateMode === 'admin' ? 'active' : ''}" data-gmode="admin" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">${svgShield}<span>Professor</span></button>
                     </div>
 
                     ${recentUsersHtml}
 
-                    <div style="display:flex;flex-direction:column;gap:12px;">
+                    <div style="display:flex;flex-direction:column;gap:14px;">
                         <div>
-                            <label class="tr-field-label">${isAdm ? 'Usuário ADM da Equipe:' : 'Seu Nome Completo (Nome e Sobrenome):'}</label>
+                            <label class="tr-field-label">${isAdm ? 'Identificação ADM' : 'Nome Completo'}</label>
                             <input type="text" id="trSlideGateName" class="tr-input" placeholder="${isAdm ? 'Trilhando o Caminho do Código' : 'Ex: Lucas Almeida Santos'}" autocomplete="username" ${dataListHtml ? 'list="trSlideRecentList"' : ''}>
                             ${dataListHtml}
                         </div>
                         <div>
-                            <label class="tr-field-label">${isReg ? 'Crie uma Senha (mínimo 4 caracteres):' : 'Sua Senha:'}</label>
-                            <input type="password" id="trSlideGatePass" class="tr-input" placeholder="${isAdm ? 'Senha de Administrador' : (isReg ? 'Crie uma senha segura (mín. 4 caracteres)' : 'Digite sua senha cadastrada')}" autocomplete="current-password">
+                            <label class="tr-field-label">${isReg ? 'Crie uma Senha (mín. 4 caracteres)' : 'Senha'}</label>
+                            <input type="password" id="trSlideGatePass" class="tr-input" placeholder="${isAdm ? 'Senha de administrador' : (isReg ? 'Mínimo de 4 caracteres' : 'Digite sua senha')}" autocomplete="current-password">
                         </div>
                         ${isReg ? `
                         <div>
-                            <label class="tr-field-label">Confirme sua Senha:</label>
-                            <input type="password" id="trSlideGatePassConfirm" class="tr-input" placeholder="Digite a mesma senha novamente" autocomplete="new-password">
+                            <label class="tr-field-label">Confirmar Senha</label>
+                            <input type="password" id="trSlideGatePassConfirm" class="tr-input" placeholder="Repita a senha escolhida" autocomplete="new-password">
                         </div>
                         ` : ''}
-                        ${gateError ? `<div class="tr-auth-alert">⚠️ ${escapeHtml(gateError)}</div>` : ''}
-                        <button type="button" id="trSlideGateSubmit" class="tr-btn-primary" style="width:100%;padding:12px;margin-top:4px;font-size:0.92rem;">
-                            ${isReg ? '✨ Criar Minha Conta e Liberar Slides' : '🔑 Entrar na Conta e Liberar Slides'}
+                        ${gateError ? `<div class="tr-auth-alert" style="display:flex;align-items:flex-start;gap:10px;text-align:left;line-height:1.45;">${svgAlert}<span>${escapeHtml(gateError)}</span></div>` : ''}
+                        <button type="button" id="trSlideGateSubmit" class="tr-btn-primary" style="width:100%;padding:12px 16px;margin-top:4px;font-size:0.92rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+                            <span>${isReg ? 'Criar Conta e Liberar Slides' : 'Entrar e Liberar Slides'}</span>
+                            ${svgArrowRight}
                         </button>
                     </div>
                 </div>
