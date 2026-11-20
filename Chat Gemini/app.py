@@ -1,4 +1,5 @@
 import os
+import html
 import time
 import threading
 import requests
@@ -83,23 +84,23 @@ st.markdown("""
     }
 
     .cefet-card-box {
-        background: #09203F;
-        border: 1.5px solid #2563EB;
-        box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
+        background: #0B1D2C;
+        border: 1.5px solid #5ED4C8;
+        box-shadow: 0 0 16px rgba(94, 212, 200, 0.35);
         border-radius: 14px;
         padding: 6px 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 140px;
-        min-width: 110px;
+        width: 145px;
+        min-width: 115px;
         height: 75px;
         flex-shrink: 0;
     }
 
     .cefet-card-box img {
         max-height: 55px;
-        max-width: 120px;
+        max-width: 125px;
         object-fit: contain;
     }
 
@@ -140,16 +141,29 @@ st.markdown("""
     }
 
     .fapemig-card-box {
+        background: #0B1D2C;
+        border: 1.5px solid #5ED4C8;
+        box-shadow: 0 0 16px rgba(94, 212, 200, 0.35);
+        border-radius: 14px;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 130px;
+        min-width: 105px;
+        height: 75px;
         flex-shrink: 0;
     }
 
     .fapemig-card-box img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
-        border: 1.5px solid #38BDF8;
+        max-height: 55px;
+        max-width: 110px;
+        width: auto;
+        height: auto;
+        border-radius: 6px;
+        object-fit: contain;
+        box-shadow: none;
+        border: none;
     }
 
     /* Linha Divisoria Neon */
@@ -402,9 +416,17 @@ st.markdown("""
             max-width: 95px !important;
         }
 
+        .fapemig-card-box {
+            width: 110px !important;
+            min-width: 90px !important;
+            height: 58px !important;
+            padding: 4px 10px !important;
+        }
         .fapemig-card-box img {
-            width: 60px !important;
-            height: 60px !important;
+            max-height: 42px !important;
+            max-width: 95px !important;
+            width: auto !important;
+            height: auto !important;
         }
 
         /* Titulo e subtitulo no mobile */
@@ -480,9 +502,9 @@ st.markdown("""
 
 
 # ==============================================================================
-# RENDERIZACAO DO CABECALHO (LOGO CEFET, TITULO E LOGO FAPEMIG)
+# RENDERIZACAO DO CABECALHO (LOGO UFCI-MG, TITULO E LOGO FAPEMIG)
 # ==============================================================================
-cefet_img_html = f'<img src="data:image/jpeg;base64,{cefet_b64}">' if cefet_b64 else '<b style="color:white;">CEFET-MG</b>'
+cefet_img_html = f'<img src="data:image/jpeg;base64,{cefet_b64}">' if cefet_b64 else '<b style="color:white;">UFCI-MG</b>'
 fapemig_img_html = f'<img src="data:image/jpeg;base64,{fapemig_b64}">' if fapemig_b64 else '<b style="color:white;">FAPEMIG</b>'
 
 st.markdown(f"""
@@ -492,7 +514,7 @@ st.markdown(f"""
     </div>
     <div class="title-center-box">
         <h1 class="header-title-text">TRILHANDO O CAMINHO DO CODIGO</h1>
-        <p class="header-subtitle-text">Projeto de Pesquisa e Extensao CEFET-MG &amp; FAPEMIG</p>
+        <p class="header-subtitle-text">Projeto de Pesquisa e Extensao UFCI-MG &amp; FAPEMIG</p>
     </div>
     <div class="fapemig-card-box">
         {fapemig_img_html}
@@ -571,9 +593,10 @@ is_student_identified = bool(student_name)
 if not is_student_identified:
     st.warning("\U0001f512 Por favor, informe seu nome no campo 'Estudante Ativo' acima para liberar o chat.")
 else:
+    safe_student_name = html.escape(student_name)
     st.markdown(f"""
     <div class="success-alert-box">
-        \u2705 Bem-vindo(a), <strong>{student_name}</strong>! Seu chat esta liberado.
+        \u2705 Bem-vindo(a), <strong>{safe_student_name}</strong>! Seu chat esta liberado.
     </div>
     """, unsafe_allow_html=True)
 

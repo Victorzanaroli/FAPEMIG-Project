@@ -1,6 +1,6 @@
 /**
  * TRILHANDO O CAMINHO DO CÓDIGO — Arena de 100 Desafios Python (Estilo Beecrowd) & Chat Gemini IA 24/7 Integrado
- * CEFET-MG & FAPEMIG
+ * UFCI-MG & FAPEMIG
  */
 
 (function () {
@@ -70,7 +70,7 @@
                 "category": "cat1",
                 "difficulty": "Iniciante",
                 "xp": 15,
-                "description": "O Robô CEFET está aprendendo a repetir tudo o que escuta! 🤖\n\n• **Passo 1:** Leia uma palavra ou frase digitada usando `texto = input()`.\n• **Passo 2:** Mostre na tela exatamente a mesma mensagem que foi lida usando `print(texto)`.",
+                "description": "O Robô UFCI-MG está aprendendo a repetir tudo o que escuta! 🤖\n\n• **Passo 1:** Leia uma palavra ou frase digitada usando `texto = input()`.\n• **Passo 2:** Mostre na tela exatamente a mesma mensagem que foi lida usando `print(texto)`.",
                 "inputSpec": "**1 linha** contendo uma palavra ou frase (use `input()` vazio, sem texto dentro dos parênteses).",
                 "outputSpec": "Mostre exatamente o mesmo texto que foi lido na entrada.",
                 "starterCode": "# Desafio #1002 — Eco do Robô\n# Escreva sua solução em Python 3 abaixo:\n\n",
@@ -85,8 +85,8 @@
                                 "expected": "Trilhando o Codigo"
                         },
                         {
-                                "input": "CEFET-MG 2026",
-                                "expected": "CEFET-MG 2026"
+                                "input": "UFCI-MG 2026",
+                                "expected": "UFCI-MG 2026"
                         }
                 ]
         },
@@ -243,8 +243,8 @@
                                 "expected": "Brasil 3 x 1 Franca"
                         },
                         {
-                                "input": "CEFET\n5\nRival\n2",
-                                "expected": "CEFET 5 x 2 Rival"
+                                "input": "UFCI-MG\n5\nRival\n2",
+                                "expected": "UFCI-MG 5 x 2 Rival"
                         },
                         {
                                 "input": "Leoes\n0\nTigres\n0",
@@ -313,15 +313,15 @@
                 "category": "cat1",
                 "difficulty": "Iniciante",
                 "xp": 20,
-                "description": "A secretaria da escola precisa gerar o e-mail de cada estudante automaticamente! 📧\n\n• **Passo 1:** Na **1ª linha**, leia o nome de `usuario` (login).\n• **Passo 2:** Na **2ª linha**, leia o `dominio` da escola (ex: `cefetmg.br`).\n• **Passo 3:** Junte os dois com o símbolo **`@`** no meio (sem espaços).",
+                "description": "A secretaria da escola precisa gerar o e-mail de cada estudante automaticamente! 📧\n\n• **Passo 1:** Na **1ª linha**, leia o nome de `usuario` (login).\n• **Passo 2:** Na **2ª linha**, leia o `dominio` da instituição (ex: `ufcimg.edu.br`).\n• **Passo 3:** Junte os dois com o símbolo **`@`** no meio (sem espaços).",
                 "inputSpec": "**2 linhas** de texto:\n• **1ª linha:** Nome do usuário\n• **2ª linha:** Domínio do e-mail",
                 "outputSpec": "Mostre o e-mail completo:\n`usuario@dominio`",
                 "starterCode": "# Desafio #1031 — Gerador de E-mail Institucional\n# Escreva sua solução em Python 3 abaixo:\n\n",
                 "hint": "📥 **1. Como ler a Entrada:**\n• `usuario = input()`\n• `dominio = input()`\n\n📤 **2. Como mostrar a Saída:**\n• Junte com `@` usando f-string: `print(f\"{usuario}@{dominio}\")`.",
                 "testCases": [
                         {
-                                "input": "aluno.python\ncefetmg.br",
-                                "expected": "aluno.python@cefetmg.br"
+                                "input": "aluno.python\nufcimg.edu.br",
+                                "expected": "aluno.python@ufcimg.edu.br"
                         },
                         {
                                 "input": "maria.silva\nescola.edu.br",
@@ -822,14 +822,14 @@
         {
                 "id": "bee_1012",
                 "number": 1012,
-                "title": "Boletim de Aprovação CEFET",
+                "title": "Boletim de Aprovação UFCI-MG",
                 "category": "cat3",
                 "difficulty": "Médio",
                 "xp": 35,
                 "description": "Leia a nota final (`float`) de um estudante e mostre a situação dele de acordo com a tabela: 🎓\n\n• **Nota `>= 7.0`:** mostre `APROVADO`\n• **Nota `>= 5.0` e `< 7.0`:** mostre `RECUPERACAO` *(sem cedilha e sem til)*\n• **Nota `< 5.0`:** mostre `REPROVADO`",
                 "inputSpec": "**1 linha** com um número decimal (`float`) representando a nota.",
                 "outputSpec": "Mostre `APROVADO`, `RECUPERACAO` ou `REPROVADO`.",
-                "starterCode": "# Desafio #1012 — Boletim de Aprovação CEFET\n# Escreva sua solução em Python 3 abaixo:\n\n",
+                "starterCode": "# Desafio #1012 — Boletim de Aprovação UFCI-MG\n# Escreva sua solução em Python 3 abaixo:\n\n",
                 "hint": "📥 **1. Como ler a Entrada:**\n• `nota = float(input())`\n\n🧠 **2. Como decidir:**\n• `if nota >= 7.0:` ➔ `print(\"APROVADO\")`\n• `elif nota >= 5.0:` ➔ `print(\"RECUPERACAO\")`\n• `else:` ➔ `print(\"REPROVADO\")`",
                 "testCases": [
                         {
@@ -1956,7 +1956,7 @@
                                 "expected": "VOGAIS = 4"
                         },
                         {
-                                "input": "CEFET MG",
+                                "input": "UFCI MG",
                                 "expected": "VOGAIS = 2"
                         },
                         {
@@ -1983,8 +1983,8 @@
                                 "expected": "NOHTYP"
                         },
                         {
-                                "input": "cefet",
-                                "expected": "TEFEC"
+                                "input": "ufcimg",
+                                "expected": "GMICFU"
                         },
                         {
                                 "input": "radar",
@@ -2095,8 +2095,8 @@
                                 "expected": "Pyth*n 3"
                         },
                         {
-                                "input": "CEFET",
-                                "expected": "C*F*T"
+                                "input": "UFCIMG",
+                                "expected": "*FC*MG"
                         }
                 ]
         },
@@ -2222,7 +2222,7 @@
                 "hint": "🧠 **Comparando o tamanho com `len()`:**\n• Separe com `palavras = input().split()`.\n• Comece com `maior = palavras[0]` e percorra `for p in palavras:`.\n• Se `len(p) > len(maior):`, atualize `maior = p`.",
                 "testCases": [
                         {
-                                "input": "Eu estudo programacao no CEFET",
+                                "input": "Eu estudo programacao na UFCI-MG",
                                 "expected": "MAIOR PALAVRA = programacao"
                         },
                         {
@@ -2303,8 +2303,8 @@
                 "hint": "🧠 **Como saber se uma letra é maiúscula:**\n• Percorra `for c in input():` e teste `if c in \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\":` (ou `if c.isupper():`) somando `+1` no contador!",
                 "testCases": [
                         {
-                                "input": "CEFET-MG e FAPEMIG",
-                                "expected": "MAIUSCULAS = 14"
+                                "input": "UFCI-MG e FAPEMIG",
+                                "expected": "MAIUSCULAS = 13"
                         },
                         {
                                 "input": "Python",
@@ -3002,7 +3002,7 @@
     // 5. CHAT GEMINI IA 24/7 (SEMPRE ATIVO NA NUVEM — SEM REBOOT, SEM PRECISAR DO PC!)
     // =========================================================================
 
-    const CHAT_SYSTEM_INSTRUCTION = `Você é o GEMINI-1.5-FLASH, assistente virtual e tutor especialista do projeto "TRILHANDO O CAMINHO DO CÓDIGO" (CEFET-MG & FAPEMIG).
+    const CHAT_SYSTEM_INSTRUCTION = `Você é o GEMINI-1.5-FLASH, assistente virtual e tutor especialista do projeto "TRILHANDO O CAMINHO DO CÓDIGO" (UFCI-MG & FAPEMIG).
 
 SUA MISSÃO E DIRETRIZ DE RESPOSTA INTELIGENTE:
 1. DISTINÇÃO INTELIGENTE DO CONTEXTO:

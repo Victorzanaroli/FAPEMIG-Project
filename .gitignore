@@ -3,5 +3,11 @@
 __pycache__/
 *.pyc
 
+# Variáveis de Ambiente e Segredos
+.env
+**/.env
+.streamlit/secrets.toml
+**/.streamlit/secrets.toml
+
 # Arquivos temporários de teste e geração
 scratch/

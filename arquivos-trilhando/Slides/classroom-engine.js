@@ -1,6 +1,6 @@
 /**
  * TRILHANDO O CAMINHO DO CÓDIGO — Classroom, Quiz (NotebookLM Style) & Homework Engine
- * CEFET-MG & FAPEMIG • Ensino Fundamental II (7º ao 9º ano)
+ * UFCI-MG & FAPEMIG • Ensino Fundamental II (7º ao 9º ano)
  */
 
 (function () {
@@ -1876,7 +1876,7 @@
                 },
                 {
                     id: 'hw7_q5',
-                    question: '5. Qual é a regra de ouro do Uso Ético e Crítico de IA que praticamos no projeto CEFET-MG / FAPEMIG?',
+                    question: '5. Qual é a regra de ouro do Uso Ético e Crítico de IA que praticamos no projeto UFCI-MG / FAPEMIG?',
                     options: [
                         { letter: 'A', text: 'Usar a IA como copiloto e tutora, mas sempre compreender, testar, validar e saber explicar cada linha do nosso código.', isCorrect: true, explanation: 'Excelente! A autoria e o pensamento computacional são sempre seus!' },
                         { letter: 'B', text: 'Copiar código sem ler e sem testar.', isCorrect: false, explanation: 'Todo código precisa ser compreendido e auditado pelo desenvolvedor.' },
@@ -2074,11 +2074,16 @@
         return users;
     }
 
-    function saveUsers(users) {
+    function persistStudentsToLocal(users) {
         const sanitized = (users || [])
             .filter(u => u && u.role !== 'admin')
             .map(u => sanitizeStudentRecord(u));
         localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(sanitized));
+        return sanitized;
+    }
+
+    function saveUsers(users) {
+        persistStudentsToLocal(users);
         syncToCloudAsync();
     }
 
@@ -2319,7 +2324,7 @@
                 u.attendance = att[u.id];
             }
         });
-        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+        persistStudentsToLocal(users);
         syncToCloudAsync();
     }
 
@@ -2340,7 +2345,7 @@
         if (uIdx >= 0) {
             users[uIdx].attendance = att[userId];
             users[uIdx].updatedAt = now;
-            localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+            persistStudentsToLocal(users);
         }
         localStorage.setItem(STORAGE_KEY_ATTENDANCE, JSON.stringify(att));
         syncToCloudAsync();
@@ -2366,7 +2371,7 @@
                 u.updatedAt = now;
             }
         });
-        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+        persistStudentsToLocal(users);
         localStorage.setItem(STORAGE_KEY_ATTENDANCE, JSON.stringify(att));
         syncToCloudAsync();
         return att;
@@ -2389,7 +2394,7 @@
         saveDeletedUserIds(deletedIds);
 
         const remainingUsers = users.filter(u => u.id !== userId);
-        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(remainingUsers));
+        persistStudentsToLocal(remainingUsers);
 
         const att = getAttendance();
         delete att[userId];
@@ -2498,13 +2503,21 @@
         const prev = all[userId][challengeId] || {};
         const now = new Date().toISOString();
 
+        const incomingCode = typeof entryData.code === 'string' ? entryData.code : '';
+        // Se já estava resolvido e a nova submissão não passou (ou está vazia), preserva o código que resolveu o desafio
+        let bestCode = incomingCode || prev.code || '';
+        if (prev.solved && !entryData.solved && prev.code && prev.code.trim()) {
+            bestCode = prev.code;
+        }
+
         const merged = {
             challengeId: challengeId,
             solved: Boolean(prev.solved || entryData.solved),
-            code: typeof entryData.code === 'string' ? entryData.code : (prev.code || ''),
+            code: bestCode,
+            lastAttemptCode: incomingCode || prev.lastAttemptCode || bestCode,
             xp: Number(entryData.xp || prev.xp || 0),
             attempts: (Number(prev.attempts) || 0) + 1,
-            lastVerdict: entryData.lastVerdict || prev.lastVerdict || 'PENDING',
+            lastVerdict: entryData.solved ? 'ACCEPTED' : (prev.solved ? 'ACCEPTED' : (entryData.lastVerdict || prev.lastVerdict || 'PENDING')),
             solvedAt: prev.solvedAt || (entryData.solved ? now : null),
             updatedAt: now
         };
@@ -2516,11 +2529,24 @@
         if (uIdx >= 0) {
             users[uIdx].challengesProgress = all[userId];
             users[uIdx].updatedAt = now;
-            localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+            persistStudentsToLocal(users);
         }
         syncToCloudAsync();
         window.dispatchEvent(new CustomEvent('trilhando:datasync'));
         return merged;
+    }
+
+    function saveAllChallengesProgress(challengesMap) {
+        if (!challengesMap || typeof challengesMap !== 'object') return;
+        localStorage.setItem(STORAGE_KEY_CHALLENGES, JSON.stringify(challengesMap));
+        const users = getUsers();
+        users.forEach(u => {
+            if (u.role === 'student' && challengesMap[u.id]) {
+                u.challengesProgress = Object.assign({}, u.challengesProgress || {}, challengesMap[u.id]);
+            }
+        });
+        persistStudentsToLocal(users);
+        syncToCloudAsync();
     }
 
     // Sem chaves de API expostas no código-fonte público
@@ -2809,9 +2835,15 @@
                         const locCh = mergedCh[cId];
                         const remCh = rem.challengesProgress[cId];
                         if (!locCh || (remCh && remCh.updatedAt && (!locCh.updatedAt || remCh.updatedAt >= locCh.updatedAt))) {
+                            const bestSolvedCode = (remCh && remCh.code && remCh.code.trim())
+                                ? remCh.code
+                                : ((locCh && locCh.code && locCh.code.trim()) ? locCh.code : '');
                             mergedCh[cId] = Object.assign({}, locCh || {}, remCh, {
-                                solved: Boolean((locCh && locCh.solved) || (remCh && remCh.solved))
+                                solved: Boolean((locCh && locCh.solved) || (remCh && remCh.solved)),
+                                code: bestSolvedCode
                             });
+                        } else if (locCh && remCh && remCh.code && (!locCh.code || !locCh.code.trim())) {
+                            locCh.code = remCh.code;
                         }
                     });
                 }
@@ -4168,6 +4200,7 @@
         normalizeName,
         normalizeUsernameKey,
         getAllChallengesProgress,
+        saveAllChallengesProgress,
         getStudentChallenges,
         saveStudentChallengeProgress,
         getChatbotConfig,

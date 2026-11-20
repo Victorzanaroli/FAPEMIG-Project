@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trilhando Classroom &amp; Portal de Aulas — Trilhando o Caminho do Código | CEFET-MG &amp; FAPEMING</title>
+    <title>Trilhando Classroom &amp; Portal de Aulas — Trilhando o Caminho do Código | UFCI-MG &amp; FAPEMIG</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,14 +11,14 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg-primary: #0b1329;
-            --bg-card: rgba(15, 23, 42, 0.78);
-            --border-color: rgba(59, 130, 246, 0.22);
-            --border-glow: rgba(0, 229, 255, 0.45);
+            --bg-primary: #071724;
+            --bg-card: rgba(11, 29, 44, 0.84);
+            --border-color: rgba(91, 181, 172, 0.25);
+            --border-glow: rgba(94, 212, 200, 0.52);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --cefet-cyan: #00E5FF;
-            --cefet-blue: #2563eb;
+            --cefet-cyan: #5ED4C8;
+            --cefet-blue: #0F5E78;
             --cefet-purple: #8b5cf6;
             --cefet-gold: #ffb800;
             --cefet-green: #10b981;
@@ -40,8 +40,8 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.16), transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(0, 229, 255, 0.14), transparent 40%);
+                radial-gradient(circle at 15% 15%, rgba(15, 94, 120, 0.22), transparent 42%),
+                radial-gradient(circle at 85% 85%, rgba(91, 181, 172, 0.16), transparent 42%);
         }
 
         /* Classroom Top Navbar — Fixed/Sticky on Scroll (Nielsen H4 & H8) */
@@ -51,8 +51,8 @@
             z-index: 950;
             width: 100%;
             max-width: 1200px;
-            background: rgba(11, 19, 41, 0.95);
-            border: 1px solid rgba(0, 229, 255, 0.25);
+            background: rgba(8, 24, 38, 0.95);
+            border: 1px solid rgba(94, 212, 200, 0.3);
             border-radius: 16px;
             padding: 10px 18px;
             display: flex;
@@ -71,18 +71,22 @@
             gap: 10px;
         }
         .nav-logo {
-            height: 34px;
+            height: 36px;
             width: auto;
             object-fit: contain;
             flex-shrink: 0;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 229, 255, 0.25);
+            border-radius: 9px;
+            border: 1.5px solid rgba(94, 212, 200, 0.38);
+            background: #0B1D2C;
+            padding: 3px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
         }
         .nav-logo.circle {
-            border-radius: 50%;
-            width: 34px;
-            height: 34px;
-            object-fit: cover;
+            border-radius: 9px;
+            width: auto;
+            height: 36px;
+            object-fit: contain;
+            padding: 3px 7px;
         }
         .nav-brand-title {
             font-weight: 800;
@@ -537,8 +541,8 @@
             border-radius: 13px;
             padding: 5px;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 5px;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
             margin-bottom: 20px;
         }
         .login-gate-card .tr-auth-tab {
@@ -653,6 +657,288 @@
             margin-bottom: 14px;
         }
 
+        /* ===================================================================
+           ESTILOS DA LANDING PAGE (PÁGINA INICIAL DO PROJETO)
+        =================================================================== */
+        .lp-shell {
+            width: 100%;
+            max-width: 1220px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            padding-bottom: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+        .lp-navbar {
+            position: sticky;
+            top: 10px;
+            z-index: 950;
+            width: 100%;
+            background: rgba(11, 19, 41, 0.94);
+            border: 1px solid rgba(0, 229, 255, 0.28);
+            border-radius: 18px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+        }
+        .lp-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .lp-nav-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.18s ease;
+        }
+        .lp-nav-link:hover {
+            color: var(--cefet-cyan);
+        }
+        .lp-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .lp-btn-login {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1.5px solid rgba(0, 229, 255, 0.45);
+            color: #e0f2fe;
+            padding: 9px 18px;
+            border-radius: 11px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .lp-btn-login:hover {
+            background: rgba(0, 229, 255, 0.22);
+            border-color: var(--cefet-cyan);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(0, 229, 255, 0.22);
+        }
+        .lp-btn-register {
+            background: linear-gradient(135deg, #2563eb 0%, #00adb5 100%);
+            border: 1.5px solid rgba(56, 189, 248, 0.45);
+            color: #ffffff;
+            padding: 9px 20px;
+            border-radius: 11px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+        .lp-btn-register:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.38);
+            filter: brightness(1.08);
+        }
+        .lp-hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.95fr;
+            gap: 28px;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(11, 19, 41, 0.88) 100%);
+            border: 1.5px solid rgba(0, 229, 255, 0.28);
+            border-radius: 26px;
+            padding: 40px 38px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 40px rgba(37, 99, 235, 0.14);
+            position: relative;
+            overflow: hidden;
+        }
+        .lp-hero-title {
+            font-size: clamp(2rem, 3.6vw, 2.95rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 14px;
+            background: none;
+            -webkit-text-fill-color: initial;
+        }
+        .lp-hero-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #00e5ff 50%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .lp-hero-desc {
+            font-size: 1.02rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+        .lp-hero-ctas {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+        .lp-hero-ctas .lp-btn-register,
+        .lp-hero-ctas .lp-btn-login {
+            padding: 13px 24px;
+            font-size: 0.95rem;
+            border-radius: 13px;
+        }
+        .lp-trust-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .lp-trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        .lp-showcase-card {
+            background: rgba(9, 13, 22, 0.92);
+            border: 1.5px solid rgba(56, 189, 248, 0.32);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+        }
+        .lp-code-window {
+            background: #060911;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .lp-code-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.74rem;
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .lp-code-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .lp-code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .lp-metrics-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .lp-metric-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .lp-section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 22px;
+        }
+        .lp-section-header h2 {
+            font-size: clamp(1.45rem, 2.5vw, 2rem);
+            font-weight: 800;
+            color: #fff;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+        .lp-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+            gap: 18px;
+        }
+        .lp-feature-card {
+            background: rgba(15, 23, 42, 0.82);
+            border: 1px solid rgba(59, 130, 246, 0.24);
+            border-radius: 20px;
+            padding: 24px 22px;
+            transition: all 0.25s ease;
+        }
+        .lp-feature-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+        }
+        .lp-feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 14px;
+            background: rgba(0, 229, 255, 0.12);
+            border: 1px solid rgba(0, 229, 255, 0.32);
+        }
+        .lp-roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+        }
+        .lp-roadmap-item {
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--cefet-cyan);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .lp-cta-banner {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.22) 0%, rgba(0, 173, 181, 0.18) 100%);
+            border: 1.5px solid rgba(0, 229, 255, 0.38);
+            border-radius: 24px;
+            padding: 32px 28px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        @media (max-width: 920px) {
+            .lp-hero {
+                grid-template-columns: 1fr;
+                padding: 26px 20px;
+            }
+            .lp-nav-links {
+                display: none;
+            }
+        }
+
         /* ─────────────────────────────────────────────────────────────
            RESPONSIVIDADE MOBILE PARA O PORTAL CLASSROOM (CELULARES)
         ───────────────────────────────────────────────────────────── */
@@ -687,10 +973,11 @@
 
             .nav-logo {
                 height: 32px !important;
+                width: auto !important;
             }
             .nav-logo.circle {
-                width: 34px !important;
-                height: 34px !important;
+                width: auto !important;
+                height: 32px !important;
             }
 
             .nav-brand-title {
@@ -888,22 +1175,22 @@
             gap: 12px;
         }
         .st-cefet-card-box {
-            background: #09203F;
-            border: 1.5px solid #2563EB;
-            box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
+            background: #0B1D2C;
+            border: 1.5px solid #5ED4C8;
+            box-shadow: 0 0 16px rgba(94, 212, 200, 0.35);
             border-radius: 14px;
             padding: 6px 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 140px;
-            min-width: 110px;
+            width: 145px;
+            min-width: 115px;
             height: 75px;
             flex-shrink: 0;
         }
         .st-cefet-card-box img {
             max-height: 55px;
-            max-width: 120px;
+            max-width: 125px;
             object-fit: contain;
         }
         .st-title-center-box {
@@ -939,15 +1226,28 @@
             font-weight: 400;
         }
         .st-fapemig-card-box {
+            background: #0B1D2C;
+            border: 1.5px solid #5ED4C8;
+            box-shadow: 0 0 16px rgba(94, 212, 200, 0.35);
+            border-radius: 14px;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 125px;
+            min-width: 105px;
+            height: 75px;
             flex-shrink: 0;
         }
         .st-fapemig-card-box img {
-            width: 78px;
-            height: 78px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
-            border: 1.5px solid #38BDF8;
+            max-height: 55px;
+            max-width: 105px;
+            width: auto;
+            height: auto;
+            border-radius: 6px;
+            object-fit: contain;
+            box-shadow: none;
+            border: none;
         }
         .st-neon-divider {
             height: 2px;
@@ -1457,37 +1757,261 @@
 <body>
 
     <!-- =======================================================================
-         TELA DE LOGIN COM ÍCONES SVG, TIPOGRAFIA REFINADA E SEGURANÇA SHA-256
+         LANDING PAGE INICIAL — TRILHANDO O CAMINHO DO CÓDIGO (UFCI-MG & FAPEMIG)
     ======================================================================= -->
-    <div id="loginGateScreen" class="login-gate-wrapper">
-        <div class="login-gate-card">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="CEFET-MG" class="nav-logo">
+    <div id="landingPageScreen" class="lp-shell">
+        <!-- TOP NAVBAR DA LANDING PAGE -->
+        <header class="lp-navbar">
+            <div class="nav-brand">
+                <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG" class="nav-logo">
                 <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG" class="nav-logo circle">
                 <div class="nav-brand-title">
-                    <span style="font-size:1rem;letter-spacing:-0.01em;">Trilhando o Caminho do Código</span>
-                    <small style="margin-top:2px;">CEFET-MG &amp; FAPEMIG</small>
+                    <span style="font-size:1rem;">Trilhando o Caminho do Código</span>
+                    <small>UFCI-MG &amp; FAPEMIG</small>
                 </div>
             </div>
 
-            <div class="tr-auth-tabs">
-                <button type="button" class="tr-auth-tab active" data-gate-mode="login">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                    <span>Entrar</span>
+            <nav class="lp-nav-links">
+                <a href="#lp-sobre" class="lp-nav-link">Sobre o Projeto</a>
+                <a href="#lp-recursos" class="lp-nav-link">Recursos</a>
+                <a href="#lp-trilha" class="lp-nav-link">Trilha de Aulas</a>
+            </nav>
+
+            <div class="lp-nav-actions">
+                <button type="button" class="lp-btn-login" data-open-gate="login">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                    <span>Logar</span>
                 </button>
-                <button type="button" class="tr-auth-tab" data-gate-mode="register">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <button type="button" class="lp-btn-register" data-open-gate="register">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
                     <span>Criar Conta</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="lp-hero" id="lp-sobre">
+            <div>
+                <span class="badge" style="margin-bottom:14px;">⚡ PROJETO DE PESQUISA E EXTENSÃO • UFCI-MG &amp; FAPEMIG</span>
+                <h1 class="lp-hero-title">
+                    Do Pensamento Computacional aos Apps com <span class="lp-hero-gradient">Python, Flet &amp; IA</span>
+                </h1>
+                <p class="lp-hero-desc">
+                    Bem-vindo à plataforma oficial do projeto <strong>Trilhando o Caminho do Código</strong>. Acesse aulas interativas, resolva <strong>100 desafios práticos em Python</strong> direto no navegador, acompanhe seu ranking de XP e aprenda com o <strong>Tutor Inteligente Gemini Flash 24/7</strong>.
+                </p>
+
+                <div class="lp-hero-ctas">
+                    <button type="button" class="lp-btn-login" data-open-gate="login">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                        <span>Logar (Aluno ou ADM)</span>
+                    </button>
+                    <button type="button" class="lp-btn-register" data-open-gate="register">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                        <span>Criar Conta de Aluno</span>
+                    </button>
+                </div>
+
+                <div class="lp-trust-strip">
+                    <span class="lp-trust-pill">🔒 Acesso rápido sem e-mail (SHA-256)</span>
+                    <span class="lp-trust-pill">🐍 Interpretador Python 3 no Navegador</span>
+                    <span class="lp-trust-pill">🤖 Copiloto Gemini IA 24/7</span>
+                    <span class="lp-trust-pill">🎓 Certificação 30h UFCI-MG</span>
+                </div>
+            </div>
+
+            <div class="lp-showcase-card">
+                <div class="lp-code-window">
+                    <div class="lp-code-topbar">
+                        <div class="lp-code-dots">
+                            <span style="background:#ef4444;"></span>
+                            <span style="background:#f59e0b;"></span>
+                            <span style="background:#10b981;"></span>
+                        </div>
+                        <span>🐍 trilhando_app.py • Python 3 + Flet</span>
+                    </div>
+                    <pre style="padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;line-height:1.55;color:#e2e8f0;overflow-x:auto;"><code><span style="color:#5ED4C8;">import</span> flet <span style="color:#5ED4C8;">as</span> ft
+
+<span style="color:#a78bfa;">def</span> <span style="color:#34d399;">iniciar_jornada</span>(aluno):
+    patente = <span style="color:#fbbf24;">"Explorador Lógico 🥇"</span>
+    xp = <span style="color:#5ED4C8;">250</span>
+    <span style="color:#a78bfa;">return</span> <span style="color:#6ee7b7;">f"🚀 Bem-vindo, {aluno}! ({patente} • +{xp} XP)"</span>
+
+print(iniciar_jornada(<span style="color:#fde68a;">"Estudante UFCI-MG"</span>))</code></pre>
+                </div>
+
+                <div class="lp-metrics-row">
+                    <div class="lp-metric-box">
+                        <span style="font-size:1.5rem;">📚</span>
+                        <div>
+                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">7 Módulos Práticos</div>
+                            <div style="font-size:0.73rem;color:#94a3b8;">Slides, Quizzes e Tarefas</div>
+                        </div>
+                    </div>
+                    <div class="lp-metric-box">
+                        <span style="font-size:1.5rem;">🐍</span>
+                        <div>
+                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">100 Desafios Python</div>
+                            <div style="font-size:0.73rem;color:#94a3b8;">Juiz Automático &amp; 8 Patentes</div>
+                        </div>
+                    </div>
+                    <div class="lp-metric-box">
+                        <span style="font-size:1.5rem;">🤖</span>
+                        <div>
+                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">Tutor Gemini 24/7</div>
+                            <div style="font-size:0.73rem;color:#94a3b8;">IA Pedagógica Integrada</div>
+                        </div>
+                    </div>
+                    <div class="lp-metric-box">
+                        <span style="font-size:1.5rem;">🏆</span>
+                        <div>
+                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">Feira de Soluções</div>
+                            <div style="font-size:0.73rem;color:#94a3b8;">Apps Reais Conectados aos ODS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE RECURSOS DA PLATAFORMA -->
+        <section id="lp-recursos">
+            <div class="lp-section-header">
+                <span class="badge">✨ ECOSSISTEMA EDUCACIONAL COMPLETO</span>
+                <h2>Tudo o que você precisa para aprender a programar</h2>
+                <p class="subtitle" style="font-size:0.92rem;">
+                    Uma plataforma desenhada para unir prática mão na massa, gamificação e acompanhamento pedagógico em tempo real.
+                </p>
+            </div>
+
+            <div class="lp-features-grid">
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">📊</div>
+                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Slides &amp; Quizzes NotebookLM</h3>
+                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
+                        Aulas visuais com demonstrações interativas de código, simulador de terminal e quizzes com feedback imediato e explicação detalhada de cada alternativa.
+                    </p>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">🐍</div>
+                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Arena com 100 Desafios Python</h3>
+                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
+                        Pratique do nível Iniciante ao Avançado estilo Beecrowd. Escreva e execute Python 3 direto no navegador, acumule XP e suba no ranking da turma.
+                    </p>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">🤖</div>
+                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Tutor Inteligente Gemini Flash</h3>
+                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
+                        Tire dúvidas 24 horas por dia com nossa IA configurada como tutora pedagógica, pronta para explicar conceitos passo a passo ou ajudar nos seus códigos.
+                    </p>
+                </div>
+                <div class="lp-feature-card">
+                    <div class="lp-feature-icon">📱</div>
+                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Apps Visuais com Flet &amp; ODS</h3>
+                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
+                        Evolua dos comandos de terminal para a criação de aplicativos gráficos completos voltados para resolver problemas reais da escola e da comunidade.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO TRILHA DE AULAS -->
+        <section id="lp-trilha">
+            <div class="lp-section-header">
+                <span class="badge">🗺️ CRONOGRAMA &amp; JORNADA</span>
+                <h2>Nossa Trilha de Aprendizado</h2>
+                <p class="subtitle" style="font-size:0.92rem;">
+                    7 encontros estruturados levando você do primeiro <code>print()</code> até a apresentação do seu próprio aplicativo na Feira de Soluções da UFCI-MG.
+                </p>
+            </div>
+
+            <div class="lp-roadmap-grid">
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 01 • 07/10</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Engenharia de Prompt &amp; Primeiros Comandos</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Boas-vindas, uso inteligente de IA e primeiros passos com <code>print()</code> e <code>input()</code>.</div>
+                </div>
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 02 • 04/11</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Variáveis, Tipos e Condicionais (if / else)</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Tipos de dados (<code>str</code>, <code>int</code>, <code>float</code>), operadores lógicos e tomada de decisão.</div>
+                </div>
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 03 • 11/11</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Blindagem (try/except), Laços &amp; Listas</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Prevenção de erros, repetições com <code>while</code> e <code>for</code> e coleções com Listas <code>[]</code>.</div>
+                </div>
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 04 • 18/11</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Funções (def/return) &amp; Dicionários (dict)</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Modularização de código reutilizável e estruturação de dados com <code>{chave: valor}</code>.</div>
+                </div>
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 05 • 25/11</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Interfaces Visuais com Flet</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Criação de janelas, botões, campos de texto, eventos <code>on_click</code> e navegação multi-telas.</div>
+                </div>
+                <div class="lp-roadmap-item">
+                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULAS 06 &amp; 07 • 02/12 e 09/12</div>
+                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Sprint Final, Pitch &amp; Feira de Soluções</div>
+                    <div style="font-size:0.8rem;color:var(--text-secondary);">Integração com <code>GEMINI.md</code>, testes cruzados, apresentação pública e certificação 30h.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAMADA FINAL (CTA) -->
+        <section class="lp-cta-banner">
+            <span class="badge" style="margin-bottom:0;">🚀 COMECE AGORA MESMO</span>
+            <h2 style="font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:800;color:#fff;">Pronto para acessar o Menu do Portal?</h2>
+            <p style="font-size:0.92rem;color:#cbd5e1;max-width:600px;line-height:1.55;">
+                Se você já possui cadastro (Aluno ou Professor ADM), clique em <strong>Logar</strong>. Se é o seu primeiro acesso como estudante, clique em <strong>Criar Conta</strong>.
+            </p>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+                <button type="button" class="lp-btn-login" data-open-gate="login" style="padding:12px 24px;font-size:0.93rem;">
+                    🔐 Logar (Aluno ou ADM)
+                </button>
+                <button type="button" class="lp-btn-register" data-open-gate="register" style="padding:12px 24px;font-size:0.93rem;">
+                    ✨ Criar Conta de Aluno
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- =======================================================================
+         TELA DE LOGIN / CRIAR CONTA (SEPARADA CONFORME A AÇÃO ESCOLHIDA NA LANDING PAGE)
+    ======================================================================= -->
+    <div id="loginGateScreen" class="login-gate-wrapper" style="display:none;">
+        <div class="login-gate-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;">
+                <button type="button" id="gateBackToLandingBtn" class="tr-btn-ghost" style="padding:6px 12px;font-size:0.78rem;display:inline-flex;align-items:center;gap:6px;">
+                    ⬅ Voltar à Página Inicial
+                </button>
+                <span id="gateFlowBadge" class="tr-badge-cyan" style="font-size:0.68rem;padding:3px 10px;">ACESSO AO PORTAL</span>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+                <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG" class="nav-logo">
+                <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG" class="nav-logo circle">
+                <div class="nav-brand-title">
+                    <span style="font-size:1rem;letter-spacing:-0.01em;">Trilhando o Caminho do Código</span>
+                    <small style="margin-top:2px;">UFCI-MG &amp; FAPEMIG</small>
+                </div>
+            </div>
+
+            <!-- OPÇÕES EXIBIDAS APENAS AO CLICAR EM "LOGAR": ALUNO OU ADM (OCULTO EM "CRIAR CONTA") -->
+            <div class="tr-auth-tabs" id="gateLoginRoleTabs">
+                <button type="button" class="tr-auth-tab active" data-gate-mode="login">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span>🎓 Aluno</span>
                 </button>
                 <button type="button" class="tr-auth-tab" data-gate-mode="admin">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>Professor</span>
+                    <span>🛡️ ADM / Professor</span>
                 </button>
             </div>
 
-            <h2 style="font-size:1.32rem;font-weight:800;color:#fff;margin-bottom:5px;letter-spacing:-0.015em;" id="gateTitleText">Entrar na Minha Conta</h2>
+            <h2 style="font-size:1.32rem;font-weight:800;color:#fff;margin-bottom:5px;letter-spacing:-0.015em;" id="gateTitleText">Entrar como Aluno(a)</h2>
             <p style="font-size:0.86rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.5;" id="gateSubtitleText">
-                Digite seu nome completo e senha para continuar seus estudos.
+                Digite seu nome completo e senha para acessar o menu de aulas e desafios.
             </p>
 
             <!-- Acesso rápido com 1 clique (Apenas Nome) -->
@@ -1510,7 +2034,7 @@
                 </div>
                 <div id="gateErrorBox"></div>
                 <button type="submit" id="gateSubmitBtn" class="tr-btn-primary" style="width:100%;padding:12px 16px;font-size:0.93rem;font-weight:700;margin-top:2px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;">
-                    <span id="gateSubmitBtnLabel">Entrar no Portal</span>
+                    <span id="gateSubmitBtnLabel">Entrar no Menu</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
             </form>
@@ -1530,11 +2054,11 @@
     <!-- TOP CLASSROOM BAR -->
     <nav class="classroom-navbar">
         <div class="nav-brand">
-            <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="CEFET-MG" class="nav-logo">
+            <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG" class="nav-logo">
             <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG" class="nav-logo circle">
             <div class="nav-brand-title">
                 <span>Trilhando o Código</span>
-                <small>CEFET-MG &amp; FAPEMIG</small>
+                <small>UFCI-MG &amp; FAPEMIG</small>
             </div>
         </div>
 
@@ -1683,6 +2207,7 @@
         'use strict';
 
         var activeTab = 'aulas';
+        var unauthScreenMode = 'landing'; // 'landing' | 'login' | 'register'
         var portalAuthMode = 'register';
         var adminFilterLesson = 'all';
         var adminFilterStudent = 'all';
@@ -1694,6 +2219,16 @@
         var adminChamadaNotice = '';
         var adminCorrecoesSubTab = 'tarefas'; // 'tarefas' | 'desafios'
         var revealedPasswordsMap = {};
+
+        // Estado do Visualizador de Resoluções de Desafios Python para o ADM
+        var admBeeSubView = 'resolutions'; // 'resolutions' | 'by-student' | 'by-challenge'
+        var admBeeFilterStudent = 'all';
+        var admBeeFilterCategory = 'all';
+        var admBeeFilterChallenge = 'all';
+        var admBeeFilterStatus = 'all'; // 'all' | 'solved' | 'attempt'
+        var admBeeSearchQuery = '';
+        var admBeePage = 1;
+        var admBeePageSize = 15;
 
         // Estado da Arena de Desafios Python (Estilo Beecrowd) — Foco & Paginação (Nielsen H3, H7, H8)
         var beeViewMode = 'catalog'; // 'catalog' | 'solve' | 'leaderboard'
@@ -1785,7 +2320,7 @@
                 number: 7,
                 date: '09/12',
                 title: 'Feira Final de Soluções, Pós-Teste T1 & Certificação 30h',
-                desc: 'Apresentação pública dos aplicativos desenvolvidos no CEFET-MG, avaliação final e entrega de certificados.',
+                desc: 'Apresentação pública dos aplicativos desenvolvidos na UFCI-MG, avaliação final e entrega de certificados.',
                 slideFile: 'aula-07-slides.html',
                 slideCount: 4,
                 hasQuiz: true,
@@ -1832,6 +2367,7 @@
             var adminTabBtn = document.getElementById('adminTabBtn');
             var adminChamadaTabBtn = document.getElementById('adminChamadaTabBtn');
             var adminCorrecoesTabBtn = document.getElementById('adminCorrecoesTabBtn');
+            var desafiosTabBtn = document.getElementById('desafiosTabBtn');
             var tarefasTabBtn = document.getElementById('tarefasTabBtn');
             var notasTabBtn = document.getElementById('notasTabBtn');
             var isAdmUser = Boolean(user && user.role === 'admin');
@@ -1839,6 +2375,7 @@
             if (adminTabBtn) adminTabBtn.style.display = isAdmUser ? 'inline-flex' : 'none';
             if (adminChamadaTabBtn) adminChamadaTabBtn.style.display = isAdmUser ? 'inline-flex' : 'none';
             if (adminCorrecoesTabBtn) adminCorrecoesTabBtn.style.display = isAdmUser ? 'inline-flex' : 'none';
+            if (desafiosTabBtn) desafiosTabBtn.innerHTML = isAdmUser ? '🐍 Resoluções' : '🐍 Desafios';
             // Oculta abas exclusivas de alunos quando logado como Professor para evitar excesso de abas
             if (tarefasTabBtn) tarefasTabBtn.style.display = isAdmUser ? 'none' : 'inline-flex';
             if (notasTabBtn) notasTabBtn.style.display = isAdmUser ? 'none' : 'inline-flex';
@@ -1885,6 +2422,7 @@
                 if (logoutBtn) {
                     logoutBtn.addEventListener('click', function() {
                         window.TrilhandoClassroom.setCurrentUser(null);
+                        unauthScreenMode = 'landing';
                         chatIaMountedUserKey = null;
                         chatIaDraftText = '';
                         if (activeTab === 'admin' || activeTab === 'admin-chamada' || activeTab === 'admin-correcoes') {
@@ -2197,7 +2735,7 @@
                         </div>
                         <div style="display:flex;gap:10px;flex-wrap:wrap;">
                             <button type="button" class="tr-btn-primary" id="rankGoToDesafiosBtn" style="font-size:0.84rem;padding:9px 18px;">
-                                🐍 Resolver Desafios (+XP)
+                                ${(user && user.role === 'admin') ? '🐍 Ver Resoluções dos Alunos' : '🐍 Resolver Desafios (+XP)'}
                             </button>
                         </div>
                     </div>
@@ -2398,6 +2936,717 @@
         }
 
         // =====================================================================
+        // PAINEL DO ADM: VISUALIZADOR DE RESOLUÇÕES DOS USUÁRIOS NOS DESAFIOS PYTHON
+        // =====================================================================
+        function collectAllUsersChallengeResolutions() {
+            var allUsers = window.TrilhandoClassroom.getUsers();
+            var students = allUsers.filter(function(u) { return u.role === 'student'; });
+            var allChallenges = window.TrilhandoBeecrowd ? window.TrilhandoBeecrowd.PYTHON_CHALLENGES : [];
+            var categories = window.TrilhandoBeecrowd ? window.TrilhandoBeecrowd.CHALLENGE_CATEGORIES : [];
+            var allProgress = window.TrilhandoClassroom.getAllChallengesProgress();
+
+            var challengeMap = {};
+            allChallenges.forEach(function(ch) { challengeMap[ch.id] = ch; });
+
+            var catMap = {};
+            categories.forEach(function(c) { catMap[c.key] = c; });
+
+            var resolutions = [];
+            students.forEach(function(st) {
+                var stProg = allProgress[st.id] || st.challengesProgress || {};
+                var stStats = window.TrilhandoBeecrowd ? window.TrilhandoBeecrowd.getUserChallengeStats(st.id) : null;
+                var tier = stStats && stStats.rankInfo ? stStats.rankInfo.currentTier : { badge: '🥉', name: 'Iniciante', bg: 'rgba(148,163,184,0.14)', color: '#94a3b8' };
+
+                Object.keys(stProg).forEach(function(cId) {
+                    var entry = stProg[cId];
+                    var ch = challengeMap[cId];
+                    if (!entry || !ch) return;
+                    var codeText = String(entry.code || entry.lastAttemptCode || '').trim();
+                    if (!entry.solved && !codeText && !entry.attempts) return;
+
+                    resolutions.push({
+                        userId: st.id,
+                        studentName: st.fullName,
+                        rankTier: tier,
+                        studentSolvedCount: stStats ? stStats.solvedCount : 0,
+                        studentTotalXp: stStats ? stStats.totalXp : 0,
+                        challengeId: ch.id,
+                        challengeNumber: ch.number,
+                        challengeTitle: ch.title,
+                        categoryKey: ch.category,
+                        categoryShort: catMap[ch.category] ? catMap[ch.category].short : ch.category,
+                        difficulty: ch.difficulty,
+                        xp: ch.xp,
+                        solved: Boolean(entry.solved),
+                        code: codeText,
+                        attempts: Number(entry.attempts) || 1,
+                        lastVerdict: entry.solved ? 'ACCEPTED' : (entry.lastVerdict || 'WRONG_ANSWER'),
+                        timestamp: entry.solvedAt || entry.updatedAt || st.updatedAt || ''
+                    });
+                });
+            });
+
+            resolutions.sort(function(a, b) {
+                if (a.timestamp && b.timestamp && a.timestamp !== b.timestamp) {
+                    return b.timestamp.localeCompare(a.timestamp);
+                }
+                if (a.challengeNumber !== b.challengeNumber) {
+                    return a.challengeNumber - b.challengeNumber;
+                }
+                return a.studentName.localeCompare(b.studentName, 'pt-BR');
+            });
+
+            return {
+                students: students,
+                allChallenges: allChallenges,
+                categories: categories,
+                resolutions: resolutions
+            };
+        }
+
+        function openAdminChallengeInspectModal(userId, challengeId) {
+            var data = collectAllUsersChallengeResolutions();
+            var student = data.students.find(function(s) { return s.id === userId; });
+            var ch = data.allChallenges.find(function(c) { return c.id === challengeId; });
+            if (!student || !ch) return;
+
+            var stProg = window.TrilhandoClassroom.getStudentChallenges(userId);
+            var entry = stProg[challengeId] || {};
+            var studentCode = String(entry.code || entry.lastAttemptCode || '').trim();
+            var studentResolutions = data.resolutions.filter(function(r) { return r.userId === userId; });
+
+            var modal = document.getElementById('adminInspectModal');
+            var content = document.getElementById('adminInspectModalContent');
+            if (!modal || !content) return;
+
+            var otherChallengesPillsHtml = studentResolutions.length > 1 ? `
+                <div style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 14px;">
+                    <div style="font-size:0.75rem;font-weight:700;color:#94a3b8;margin-bottom:6px;">
+                        🔄 Outras resoluções enviadas por ${escapeHtml(student.fullName)} (${studentResolutions.length}):
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                        ${studentResolutions.map(function(r) {
+                            var isCur = r.challengeId === challengeId;
+                            return `
+                                <button type="button" class="tr-btn-ghost" data-modal-switch-ch="${r.challengeId}" style="font-size:0.74rem;padding:4px 10px;border-color:${isCur ? '#00e5ff' : (r.solved ? 'rgba(16,185,129,0.45)' : 'rgba(239,68,68,0.4)')};background:${isCur ? 'rgba(0,229,255,0.18)' : 'rgba(0,0,0,0.25)'};color:${isCur ? '#fff' : (r.solved ? '#6ee7b7' : '#fca5a5')};">
+                                    ${r.solved ? '✅' : '❌'} #${r.challengeNumber}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            var sampleCasesHtml = (ch.testCases || []).map(function(tc, idx) {
+                return `
+                    <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:0.76rem;">
+                        <div style="color:#38bdf8;font-weight:700;margin-bottom:4px;">Caso de Teste #${idx + 1}</div>
+                        <div style="color:#94a3b8;">Entrada: <strong style="color:#f8fafc;">${escapeHtml(tc.input || '(vazio)')}</strong></div>
+                        <div style="color:#94a3b8;margin-top:2px;">Saída Esperada: <strong style="color:#6ee7b7;">${escapeHtml(tc.expected)}</strong></div>
+                    </div>
+                `;
+            }).join('');
+
+            content.innerHTML = `
+                <div class="tr-hw-modal-top">
+                    <div>
+                        <span class="tr-badge-cyan">🛡️ RESOLUÇÃO DO USUÁRIO • DESAFIO #${ch.number}</span>
+                        <h2 style="margin-top:4px;">${escapeHtml(student.fullName)}</h2>
+                        <p style="font-size:0.84rem;color:#cbd5e1;">
+                            Desafio: <strong>#${ch.number} — ${escapeHtml(ch.title)}</strong> (+${ch.xp} XP • ${escapeHtml(ch.difficulty)})
+                            • ${entry.solved ? '<span style="color:#10b981;font-weight:800;">✅ Resolvido (ACCEPTED)</span>' : '<span style="color:#f87171;font-weight:800;">❌ Em tentativa (' + escapeHtml(entry.lastVerdict || 'ERRO') + ')</span>'}
+                            • ${Number(entry.attempts) || 1} tentativa(s) • ${formatDate(entry.solvedAt || entry.updatedAt)}
+                        </p>
+                    </div>
+                    <button type="button" class="tr-modal-close-btn" id="closeAdminChInspectBtn">✕</button>
+                </div>
+
+                <div class="tr-hw-modal-body">
+                    ${otherChallengesPillsHtml}
+
+                    <details style="background:rgba(15,23,42,0.75);border:1px solid rgba(56,189,248,0.28);border-radius:12px;padding:10px 14px;">
+                        <summary style="cursor:pointer;font-size:0.82rem;font-weight:700;color:#38bdf8;">
+                            📖 Ver Enunciado e Casos de Teste do Desafio #${ch.number} (${escapeHtml(ch.title)}) ▾
+                        </summary>
+                        <div style="margin-top:10px;font-size:0.83rem;color:#e2e8f0;line-height:1.55;">
+                            <p style="margin-bottom:8px;white-space:pre-line;">${escapeHtml(ch.description)}</p>
+                            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:8px;">
+                                ${sampleCasesHtml}
+                            </div>
+                        </div>
+                    </details>
+
+                    <div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+                            <h4 style="font-size:0.95rem;color:#6ee7b7;margin:0;">🐍 Código Python 3 Enviado por ${escapeHtml(student.fullName)}:</h4>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                <button type="button" class="tr-btn-ghost" id="admCopyChallengeCodeBtn" style="font-size:0.76rem;padding:5px 12px;">
+                                    📋 Copiar Código
+                                </button>
+                                <button type="button" class="tr-btn-primary" id="admRunChallengeCodeBtn" style="font-size:0.76rem;padding:5px 14px;">
+                                    ▶️ Executar / Testar Resolução Agora
+                                </button>
+                            </div>
+                        </div>
+                        <pre class="nb-q-code" style="max-height:300px;overflow-y:auto;font-size:0.86rem;line-height:1.55;background:#060911;border:1.5px solid rgba(0,229,255,0.3);"><code>${escapeHtml(studentCode || '# (Nenhum código registrado)')}</code></pre>
+                    </div>
+
+                    <div id="admChallengeLiveTestResultBox"></div>
+                </div>
+
+                <div class="tr-hw-modal-footer">
+                    <span style="font-size:0.78rem;color:#94a3b8;">
+                        🛡️ Visualização do Administrador • Código salvo na conta do estudante
+                    </span>
+                    <button type="button" class="tr-btn-ghost" id="cancelAdminChInspectBtn">Fechar</button>
+                </div>
+            `;
+
+            modal.classList.add('active');
+
+            var closeFn = function() { modal.classList.remove('active'); };
+            var cBtn1 = document.getElementById('closeAdminChInspectBtn');
+            var cBtn2 = document.getElementById('cancelAdminChInspectBtn');
+            if (cBtn1) cBtn1.addEventListener('click', closeFn);
+            if (cBtn2) cBtn2.addEventListener('click', closeFn);
+
+            content.querySelectorAll('[data-modal-switch-ch]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    openAdminChallengeInspectModal(userId, btn.getAttribute('data-modal-switch-ch'));
+                });
+            });
+
+            var copyBtn = document.getElementById('admCopyChallengeCodeBtn');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(studentCode || '').then(function() {
+                        copyBtn.textContent = '✅ Código Copiado!';
+                        setTimeout(function() { copyBtn.textContent = '📋 Copiar Código'; }, 2000);
+                    });
+                });
+            }
+
+            var runBtn = document.getElementById('admRunChallengeCodeBtn');
+            if (runBtn) {
+                runBtn.addEventListener('click', async function() {
+                    var outBox = document.getElementById('admChallengeLiveTestResultBox');
+                    if (!outBox) return;
+                    runBtn.disabled = true;
+                    runBtn.textContent = '⏳ Executando no Juiz Python...';
+                    outBox.innerHTML = `<div style="padding:12px;border-radius:10px;background:rgba(15,23,42,0.9);color:#38bdf8;font-size:0.84rem;">⏳ Testando o código do usuário em todos os casos de teste...</div>`;
+                    try {
+                        var jRes = await window.TrilhandoBeecrowd.judgeChallengeSubmissionAsync(ch, studentCode);
+                        var casesBreakdown = (jRes.results || []).map(function(r) {
+                            return `
+                                <div style="padding:8px 10px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid ${r.passed ? 'rgba(16,185,129,0.4)' : 'rgba(239,68,68,0.4)'};font-family:'JetBrains Mono',monospace;font-size:0.76rem;">
+                                    <div style="font-weight:800;color:${r.passed ? '#34d399' : '#fca5a5'};margin-bottom:3px;">
+                                        ${r.passed ? '✅ Caso #' + r.caseIndex + ' Passou' : '❌ Caso #' + r.caseIndex + ' Falhou (' + escapeHtml(r.verdict) + ')'}
+                                    </div>
+                                    <div style="color:#94a3b8;">Entrada: <span style="color:#f8fafc;">${escapeHtml(r.input || '(vazio)')}</span></div>
+                                    <div style="color:#94a3b8;">Esperado: <span style="color:#6ee7b7;">${escapeHtml(r.expected)}</span></div>
+                                    <div style="color:#94a3b8;">Saída do Aluno: <span style="color:${r.passed ? '#6ee7b7' : '#fca5a5'};">${escapeHtml(r.error ? r.error : (r.actual || '(vazio)'))}</span></div>
+                                </div>
+                            `;
+                        }).join('');
+
+                        outBox.innerHTML = `
+                            <div style="padding:14px;border-radius:12px;background:${jRes.allPassed ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)'};border:1.5px solid ${jRes.allPassed ? '#10b981' : '#ef4444'};">
+                                <div style="font-weight:800;font-size:0.9rem;color:${jRes.allPassed ? '#34d399' : '#fca5a5'};margin-bottom:8px;">
+                                    ${jRes.allPassed ? '✅ Todos os casos de teste passaram (ACCEPTED)!' : '⚠️ O código falhou em pelo menos um caso de teste (' + escapeHtml(jRes.verdict) + ')'}
+                                </div>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
+                                    ${casesBreakdown}
+                                </div>
+                            </div>
+                        `;
+                    } catch (err) {
+                        outBox.innerHTML = `<div class="gate-alert-banner">Erro ao executar teste: ${escapeHtml(err.message || String(err))}</div>`;
+                    } finally {
+                        runBtn.disabled = false;
+                        runBtn.textContent = '▶️ Executar / Testar Resolução Agora';
+                    }
+                });
+            }
+        }
+
+        function renderAdminDesafiosResolutionsView(container) {
+            var data = collectAllUsersChallengeResolutions();
+            var students = data.students;
+            var allChallenges = data.allChallenges;
+            var categories = data.categories;
+            var allResolutions = data.resolutions;
+
+            var solvedResolutions = allResolutions.filter(function(r) { return r.solved; });
+            var activeStudentsSet = {};
+            allResolutions.forEach(function(r) { activeStudentsSet[r.userId] = true; });
+            var activeStudentsCount = Object.keys(activeStudentsSet).length;
+
+            var totalClassXp = 0;
+            students.forEach(function(st) {
+                var stStats = window.TrilhandoBeecrowd.getUserChallengeStats(st.id);
+                totalClassXp += (stStats ? stStats.totalXp : 0);
+            });
+
+            // Filtra as resoluções conforme os seletores do ADM
+            var filteredResolutions = allResolutions.filter(function(r) {
+                if (admBeeFilterStudent !== 'all' && r.userId !== admBeeFilterStudent) return false;
+                if (admBeeFilterCategory !== 'all' && r.categoryKey !== admBeeFilterCategory) return false;
+                if (admBeeFilterChallenge !== 'all' && r.challengeId !== admBeeFilterChallenge) return false;
+                if (admBeeFilterStatus === 'solved' && !r.solved) return false;
+                if (admBeeFilterStatus === 'attempt' && r.solved) return false;
+                if (admBeeSearchQuery) {
+                    var q = admBeeSearchQuery.toLowerCase();
+                    var matchStu = r.studentName.toLowerCase().indexOf(q) >= 0;
+                    var matchTitle = r.challengeTitle.toLowerCase().indexOf(q) >= 0;
+                    var matchNum = String(r.challengeNumber).indexOf(q) >= 0;
+                    var matchCode = r.code.toLowerCase().indexOf(q) >= 0;
+                    if (!matchStu && !matchTitle && !matchNum && !matchCode) return false;
+                }
+                return true;
+            });
+
+            var totalPages = Math.max(1, Math.ceil(filteredResolutions.length / admBeePageSize));
+            if (admBeePage > totalPages) admBeePage = totalPages;
+            if (admBeePage < 1) admBeePage = 1;
+            var startIdx = (admBeePage - 1) * admBeePageSize;
+            var pageResolutions = filteredResolutions.slice(startIdx, startIdx + admBeePageSize);
+
+            var studentOptionsHtml = `<option value="all" ${admBeeFilterStudent === 'all' ? 'selected' : ''}>👥 Todos os Usuários (${students.length})</option>` +
+                students.map(function(st) {
+                    var stCount = allResolutions.filter(function(r) { return r.userId === st.id && r.solved; }).length;
+                    return `<option value="${st.id}" ${admBeeFilterStudent === st.id ? 'selected' : ''}>🎓 ${escapeHtml(st.fullName)} (${stCount} resolvidos)</option>`;
+                }).join('');
+
+            var categoryOptionsHtml = categories.map(function(cat) {
+                return `<option value="${cat.key}" ${admBeeFilterCategory === cat.key ? 'selected' : ''}>${escapeHtml(cat.label)}</option>`;
+            }).join('');
+
+            var challengeOptionsHtml = `<option value="all" ${admBeeFilterChallenge === 'all' ? 'selected' : ''}>🐍 Todos os Desafios (${allChallenges.length})</option>` +
+                allChallenges.map(function(ch) {
+                    var countSolvers = solvedResolutions.filter(function(r) { return r.challengeId === ch.id; }).length;
+                    return `<option value="${ch.id}" ${admBeeFilterChallenge === ch.id ? 'selected' : ''}>#${ch.number} — ${escapeHtml(ch.title)} (${countSolvers} resolv.)</option>`;
+                }).join('');
+
+            var hasActiveFilter = admBeeFilterStudent !== 'all' || admBeeFilterCategory !== 'all' || admBeeFilterChallenge !== 'all' || admBeeFilterStatus !== 'all' || Boolean(admBeeSearchQuery);
+
+            var mainContentHtml = '';
+
+            if (admBeeSubView === 'by-student') {
+                var filteredStudents = students.filter(function(st) {
+                    if (admBeeFilterStudent !== 'all' && st.id !== admBeeFilterStudent) return false;
+                    if (admBeeSearchQuery) {
+                        var q = admBeeSearchQuery.toLowerCase();
+                        if (st.fullName.toLowerCase().indexOf(q) < 0) return false;
+                    }
+                    return true;
+                });
+
+                var studentRowsHtml = filteredStudents.length === 0 ? `
+                    <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text-secondary);">Nenhum usuário encontrado neste filtro.</td></tr>
+                ` : filteredStudents.map(function(st) {
+                    var stStats = window.TrilhandoBeecrowd.getUserChallengeStats(st.id);
+                    var tier = stStats.rankInfo.currentTier;
+                    var stRes = allResolutions.filter(function(r) { return r.userId === st.id; });
+                    var pillsHtml = stRes.length === 0
+                        ? `<span style="font-size:0.78rem;color:#64748b;">Nenhuma resolução enviada ainda</span>`
+                        : stRes.map(function(r) {
+                            return `
+                                <button type="button" class="tr-btn-ghost" data-adm-inspect-res="${r.userId}::${r.challengeId}" style="padding:3px 9px;font-size:0.73rem;border-color:${r.solved ? 'rgba(16,185,129,0.45)' : 'rgba(239,68,68,0.4)'};color:${r.solved ? '#6ee7b7' : '#fca5a5'};background:rgba(0,0,0,0.25);" title="Clique para ver o código enviado por ${escapeHtml(st.fullName)} no Desafio #${r.challengeNumber}">
+                                    ${r.solved ? '✅' : '❌'} #${r.challengeNumber}
+                                </button>
+                            `;
+                        }).join(' ');
+
+                    return `
+                        <tr>
+                            <td>
+                                <strong style="color:#fff;font-size:0.9rem;">${escapeHtml(st.fullName)}</strong>
+                                <div style="margin-top:4px;">
+                                    <span style="display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;background:${tier.bg};border:1px solid ${tier.color};color:#fff;font-size:0.7rem;font-weight:700;">
+                                        ${tier.badge} ${escapeHtml(tier.name)}
+                                    </span>
+                                </div>
+                            </td>
+                            <td><strong style="color:#10b981;">${stStats.solvedCount} / ${allChallenges.length}</strong></td>
+                            <td><strong style="color:#fbbf24;font-family:'JetBrains Mono',monospace;">⚡ ${stStats.totalXp} XP</strong></td>
+                            <td>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;max-width:480px;">
+                                    ${pillsHtml}
+                                </div>
+                            </td>
+                            <td>
+                                ${stRes.length > 0 ? `
+                                    <button type="button" class="tr-btn-primary" data-adm-focus-stu-res="${st.id}" style="padding:6px 12px;font-size:0.75rem;">
+                                        👁️ Ver Códigos (${stRes.length})
+                                    </button>
+                                ` : `<span style="font-size:0.75rem;color:#64748b;">—</span>`}
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                mainContentHtml = `
+                    <div style="overflow-x:auto;">
+                        <table class="cls-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuário / Aluno(a)</th>
+                                    <th>Resolvidos</th>
+                                    <th>XP Total</th>
+                                    <th>Desafios Enviados (Clique em um desafio para abrir o código)</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${studentRowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } else if (admBeeSubView === 'by-challenge') {
+                var filteredChallenges = allChallenges.filter(function(ch) {
+                    if (admBeeFilterCategory !== 'all' && ch.category !== admBeeFilterCategory) return false;
+                    if (admBeeFilterChallenge !== 'all' && ch.id !== admBeeFilterChallenge) return false;
+                    if (admBeeSearchQuery) {
+                        var q = admBeeSearchQuery.toLowerCase();
+                        var mT = ch.title.toLowerCase().indexOf(q) >= 0;
+                        var mN = String(ch.number).indexOf(q) >= 0;
+                        if (!mT && !mN) return false;
+                    }
+                    return true;
+                });
+
+                var chRowsHtml = filteredChallenges.map(function(ch) {
+                    var chRes = allResolutions.filter(function(r) { return r.challengeId === ch.id; });
+                    var chSolved = chRes.filter(function(r) { return r.solved; });
+                    var userChips = chRes.length === 0
+                        ? `<span style="font-size:0.76rem;color:#64748b;">Nenhum usuário enviou ainda</span>`
+                        : chRes.map(function(r) {
+                            return `
+                                <button type="button" class="tr-btn-ghost" data-adm-inspect-res="${r.userId}::${r.challengeId}" style="padding:3px 9px;font-size:0.73rem;border-color:${r.solved ? 'rgba(16,185,129,0.45)' : 'rgba(239,68,68,0.4)'};color:${r.solved ? '#6ee7b7' : '#fca5a5'};">
+                                    ${r.solved ? '✅' : '❌'} ${escapeHtml(r.studentName.split(' ').slice(0, 2).join(' '))}
+                                </button>
+                            `;
+                        }).join(' ');
+
+                    return `
+                        <tr>
+                            <td><strong style="font-family:'JetBrains Mono',monospace;color:var(--cefet-cyan);">#${ch.number}</strong></td>
+                            <td>
+                                <strong style="color:#fff;">${escapeHtml(ch.title)}</strong>
+                                <div style="font-size:0.73rem;color:#94a3b8;">${escapeHtml(ch.difficulty)} • +${ch.xp} XP</div>
+                            </td>
+                            <td><strong style="color:${chSolved.length > 0 ? '#10b981' : '#64748b'};">${chSolved.length} resolvido(s)</strong> <span style="font-size:0.74rem;color:#94a3b8;">(${chRes.length} envio(s))</span></td>
+                            <td>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                                    ${userChips}
+                                </div>
+                            </td>
+                            <td>
+                                ${chRes.length > 0 ? `
+                                    <button type="button" class="tr-btn-primary" data-adm-focus-ch-res="${ch.id}" style="padding:5px 12px;font-size:0.74rem;">
+                                        👁️ Comparar (${chRes.length})
+                                    </button>
+                                ` : `<span style="font-size:0.75rem;color:#64748b;">—</span>`}
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                mainContentHtml = `
+                    <div style="overflow-x:auto;">
+                        <table class="cls-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Desafio</th>
+                                    <th>Entregas da Turma</th>
+                                    <th>Usuários que Enviaram (Clique para ver o código)</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${chRowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } else {
+                var resRowsHtml = pageResolutions.length === 0 ? `
+                    <tr>
+                        <td colspan="6" style="text-align:center;padding:30px 20px;color:var(--text-secondary);">
+                            ${allResolutions.length === 0
+                                ? 'Ainda não há resoluções de desafios enviadas pelos alunos. Assim que os usuários enviarem soluções na Arena Python, os códigos aparecerão aqui em tempo real!'
+                                : 'Nenhuma resolução encontrada para o filtro selecionado.'}
+                        </td>
+                    </tr>
+                ` : pageResolutions.map(function(r) {
+                    var codeLines = (r.code || '').split('\n').filter(function(l) { return l.trim() && !l.trim().startsWith('# Desafio'); });
+                    var previewSnippet = codeLines.slice(0, 3).join('\n') || (r.code || '(Sem código)');
+                    if (codeLines.length > 3) previewSnippet += '\n...';
+
+                    return `
+                        <tr>
+                            <td>
+                                <strong style="color:#fff;font-size:0.88rem;">${escapeHtml(r.studentName)}</strong>
+                                <div style="margin-top:3px;">
+                                    <span style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:99px;background:${r.rankTier.bg};border:1px solid ${r.rankTier.color};color:#fff;font-size:0.68rem;font-weight:700;">
+                                        ${r.rankTier.badge} ${escapeHtml(r.rankTier.name)}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <strong style="color:var(--cefet-cyan);font-family:'JetBrains Mono',monospace;">#${r.challengeNumber}</strong>
+                                <strong style="color:#fff;margin-left:4px;">${escapeHtml(r.challengeTitle)}</strong>
+                                <div style="font-size:0.72rem;color:#94a3b8;margin-top:2px;">
+                                    ${escapeHtml(r.categoryShort)} • ${escapeHtml(r.difficulty)} • <span style="color:#fbbf24;font-weight:700;">+${r.xp} XP</span>
+                                </div>
+                            </td>
+                            <td>
+                                ${r.solved
+                                    ? `<span class="nb-feedback-pill nb-pill-correct">✅ Resolvido</span>`
+                                    : `<span class="nb-feedback-pill nb-pill-wrong">❌ ${escapeHtml(r.lastVerdict)}</span>`
+                                }
+                                <div style="font-size:0.71rem;color:#94a3b8;margin-top:3px;">${r.attempts} tentativa(s)</div>
+                            </td>
+                            <td style="max-width:310px;">
+                                <pre style="background:#060911;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:#e2e8f0;overflow-x:auto;white-space:pre-wrap;max-height:72px;"><code>${escapeHtml(previewSnippet)}</code></pre>
+                            </td>
+                            <td style="font-size:0.75rem;color:var(--text-secondary);">
+                                ${formatDate(r.timestamp)}
+                            </td>
+                            <td>
+                                <button type="button" class="tr-btn-primary" style="padding:6px 12px;font-size:0.75rem;white-space:nowrap;" data-adm-inspect-res="${r.userId}::${r.challengeId}">
+                                    👁️ Ver Resolução
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                mainContentHtml = `
+                    <div style="overflow-x:auto;">
+                        <table class="cls-table">
+                            <thead>
+                                <tr>
+                                    <th>Usuário / Aluno(a)</th>
+                                    <th>Desafio Python</th>
+                                    <th>Status / Juiz</th>
+                                    <th>Prévia da Resolução (Código)</th>
+                                    <th>Data / Hora</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${resRowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bee-pagination-bar">
+                        <span>Mostrando <strong>${filteredResolutions.length === 0 ? 0 : startIdx + 1}–${Math.min(startIdx + admBeePageSize, filteredResolutions.length)}</strong> de <strong>${filteredResolutions.length}</strong> resoluções</span>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <button type="button" class="tr-btn-ghost" id="admBeePrevPageBtn" style="padding:5px 12px;font-size:0.78rem;" ${admBeePage <= 1 ? 'disabled' : ''}>◀ Anterior</button>
+                            <span style="font-weight:700;color:#fff;">Página ${admBeePage} de ${totalPages}</span>
+                            <button type="button" class="tr-btn-ghost" id="admBeeNextPageBtn" style="padding:5px 12px;font-size:0.78rem;" ${admBeePage >= totalPages ? 'disabled' : ''}>Próxima ▶</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="stats-grid" style="margin-bottom:18px;">
+                    <div class="stat-card">
+                        <span class="stat-label">💻 Resoluções Enviadas</span>
+                        <span class="stat-value" style="color:var(--cefet-cyan);">${allResolutions.length}</span>
+                        <span class="stat-sub">${solvedResolutions.length} solução(ões) aceita(s) pelo juiz</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">👥 Usuários Praticando</span>
+                        <span class="stat-value" style="color:#10b981;">${activeStudentsCount} / ${students.length}</span>
+                        <span class="stat-sub">Alunos com desafios enviados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">⚡ XP Acumulado da Turma</span>
+                        <span class="stat-value" style="color:#fbbf24;">${totalClassXp} XP</span>
+                        <span class="stat-sub">Soma de XP nos desafios Python</span>
+                    </div>
+                </div>
+
+                <div class="panel-box" style="border-color:rgba(0,229,255,0.35);padding:22px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+                        <div>
+                            <span class="tr-badge-cyan">🛡️ PAINEL DO PROFESSOR • AUDITORIA DE CÓDIGO</span>
+                            <h3 style="margin-top:6px;font-size:1.28rem;">Resoluções dos Usuários nos Desafios Python</h3>
+                            <p style="font-size:0.83rem;color:var(--text-secondary);">
+                                Visualize, filtre e execute os códigos enviados pelos alunos em qualquer um dos ${allChallenges.length} desafios da plataforma.
+                            </p>
+                        </div>
+
+                        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                            ${hasActiveFilter ? `
+                                <button type="button" class="tr-btn-ghost" id="admBeeClearFiltersBtn" style="font-size:0.76rem;padding:6px 12px;border-color:#f59e0b;color:#fcd34d;">
+                                    ↺ Limpar Filtros
+                                </button>
+                            ` : ''}
+                            <div class="subview-segmented-bar">
+                                <button type="button" class="subview-seg-btn ${admBeeSubView === 'resolutions' ? 'active' : ''}" id="admBeeViewResBtn">
+                                    💻 Todas as Resoluções (${allResolutions.length})
+                                </button>
+                                <button type="button" class="subview-seg-btn ${admBeeSubView === 'by-student' ? 'active' : ''}" id="admBeeViewStuBtn">
+                                    👥 Por Usuário (${students.length})
+                                </button>
+                                <button type="button" class="subview-seg-btn ${admBeeSubView === 'by-challenge' ? 'active' : ''}" id="admBeeViewChBtn">
+                                    📚 Por Desafio (${allChallenges.length})
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE FILTROS DO ADM -->
+                    <div class="adm-filter-toolbar">
+                        <div>
+                            <label class="tr-field-label" for="admBeeStudentSelect">🎓 Usuário / Aluno(a):</label>
+                            <select id="admBeeStudentSelect" class="tr-input" style="background:#0f172a;color:#fff;padding:7px 10px;font-size:0.82rem;">
+                                ${studentOptionsHtml}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tr-field-label" for="admBeeCategorySelect">📂 Categoria:</label>
+                            <select id="admBeeCategorySelect" class="tr-input" style="background:#0f172a;color:#fff;padding:7px 10px;font-size:0.82rem;">
+                                ${categoryOptionsHtml}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tr-field-label" for="admBeeChallengeSelect">🐍 Desafio Específico:</label>
+                            <select id="admBeeChallengeSelect" class="tr-input" style="background:#0f172a;color:#fff;padding:7px 10px;font-size:0.82rem;">
+                                ${challengeOptionsHtml}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tr-field-label" for="admBeeStatusSelect">✅ Status:</label>
+                            <select id="admBeeStatusSelect" class="tr-input" style="background:#0f172a;color:#fff;padding:7px 10px;font-size:0.82rem;">
+                                <option value="all" ${admBeeFilterStatus === 'all' ? 'selected' : ''}>Todos (${allResolutions.length})</option>
+                                <option value="solved" ${admBeeFilterStatus === 'solved' ? 'selected' : ''}>✅ Resolvidos (${solvedResolutions.length})</option>
+                                <option value="attempt" ${admBeeFilterStatus === 'attempt' ? 'selected' : ''}>❌ Em Tentativa (${allResolutions.length - solvedResolutions.length})</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="tr-field-label" for="admBeeSearchInput">🔎 Buscar Aluno, # ou Código:</label>
+                            <input type="text" id="admBeeSearchInput" class="tr-input" style="padding:7px 10px;font-size:0.82rem;" placeholder="Nome, #1001, print..." value="${escapeHtml(admBeeSearchQuery)}">
+                        </div>
+                    </div>
+
+                    ${mainContentHtml}
+                </div>
+            `;
+
+            // Listeners for ADM Resolutions Viewer
+            var vResBtn = document.getElementById('admBeeViewResBtn');
+            var vStuBtn = document.getElementById('admBeeViewStuBtn');
+            var vChBtn = document.getElementById('admBeeViewChBtn');
+            if (vResBtn) vResBtn.addEventListener('click', function() { admBeeSubView = 'resolutions'; admBeePage = 1; renderDesafiosView(); });
+            if (vStuBtn) vStuBtn.addEventListener('click', function() { admBeeSubView = 'by-student'; admBeePage = 1; renderDesafiosView(); });
+            if (vChBtn) vChBtn.addEventListener('click', function() { admBeeSubView = 'by-challenge'; admBeePage = 1; renderDesafiosView(); });
+
+            var clearFBtn = document.getElementById('admBeeClearFiltersBtn');
+            if (clearFBtn) {
+                clearFBtn.addEventListener('click', function() {
+                    admBeeFilterStudent = 'all';
+                    admBeeFilterCategory = 'all';
+                    admBeeFilterChallenge = 'all';
+                    admBeeFilterStatus = 'all';
+                    admBeeSearchQuery = '';
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            }
+
+            var stuSel = document.getElementById('admBeeStudentSelect');
+            if (stuSel) {
+                stuSel.addEventListener('change', function() {
+                    admBeeFilterStudent = stuSel.value;
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            }
+
+            var catSel = document.getElementById('admBeeCategorySelect');
+            if (catSel) {
+                catSel.addEventListener('change', function() {
+                    admBeeFilterCategory = catSel.value;
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            }
+
+            var chSel = document.getElementById('admBeeChallengeSelect');
+            if (chSel) {
+                chSel.addEventListener('change', function() {
+                    admBeeFilterChallenge = chSel.value;
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            }
+
+            var stSel = document.getElementById('admBeeStatusSelect');
+            if (stSel) {
+                stSel.addEventListener('change', function() {
+                    admBeeFilterStatus = stSel.value;
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            }
+
+            var sInp = document.getElementById('admBeeSearchInput');
+            if (sInp) {
+                sInp.addEventListener('input', function() {
+                    admBeeSearchQuery = sInp.value;
+                    admBeePage = 1;
+                    renderDesafiosView();
+                    var el = document.getElementById('admBeeSearchInput');
+                    if (el) {
+                        el.focus();
+                        el.setSelectionRange(el.value.length, el.value.length);
+                    }
+                });
+            }
+
+            var prevP = document.getElementById('admBeePrevPageBtn');
+            var nextP = document.getElementById('admBeeNextPageBtn');
+            if (prevP) prevP.addEventListener('click', function() { if (admBeePage > 1) { admBeePage--; renderDesafiosView(); } });
+            if (nextP) nextP.addEventListener('click', function() { if (admBeePage < totalPages) { admBeePage++; renderDesafiosView(); } });
+
+            container.querySelectorAll('[data-adm-inspect-res]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var raw = btn.getAttribute('data-adm-inspect-res') || '';
+                    var parts = raw.split('::');
+                    if (parts.length === 2) {
+                        openAdminChallengeInspectModal(parts[0], parts[1]);
+                    }
+                });
+            });
+
+            container.querySelectorAll('[data-adm-focus-stu-res]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    admBeeFilterStudent = btn.getAttribute('data-adm-focus-stu-res');
+                    admBeeSubView = 'resolutions';
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            });
+
+            container.querySelectorAll('[data-adm-focus-ch-res]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    admBeeFilterChallenge = btn.getAttribute('data-adm-focus-ch-res');
+                    admBeeSubView = 'resolutions';
+                    admBeePage = 1;
+                    renderDesafiosView();
+                });
+            });
+        }
+
+        // =====================================================================
         // ABA 2: ARENA DE DESAFIOS PYTHON — SEPARADA EM SUB-VIEWS PAGINADAS (NIELSEN H3, H7, H8)
         // =====================================================================
         function renderDesafiosView() {
@@ -2410,7 +3659,12 @@
                 return;
             }
 
-            var isAdm = user.role === 'admin';
+            var isAdm = Boolean(user.role === 'admin' || user.id === 'adm_trilhando_unico' || user.username === 'trilhando-adm');
+            // Quando logado como ADM, exibe o painel de resoluções dos outros usuários em vez da IDE de resolução
+            if (isAdm) {
+                renderAdminDesafiosResolutionsView(container);
+                return;
+            }
             var myStats = window.TrilhandoBeecrowd.getUserChallengeStats(user.id);
             var rTier = myStats.rankInfo.currentTier;
             var nextTier = myStats.rankInfo.nextTier;
@@ -3434,6 +4688,9 @@
             var currentLessonObj = schedule.find(function(l) { return l.key === adminChamadaLesson; }) || schedule[0];
 
             var pendingReviewCount = allSubs.filter(function(s) { return !s.codeReviewed; }).length;
+            var chResData = collectAllUsersChallengeResolutions();
+            var totalChResCount = chResData.resolutions.length;
+            var solvedChResCount = chResData.resolutions.filter(function(r) { return r.solved; }).length;
 
             var presentInSelectedDay = 0;
             students.forEach(function(st) {
@@ -3501,7 +4758,12 @@
                     <div class="stat-card clickable-stat" id="admKpiSubsCard" title="Clique para corrigir tarefas">
                         <span class="stat-label">📋 Tarefas Entregues</span>
                         <span class="stat-value" style="color:var(--cefet-cyan);">${allSubs.length}</span>
-                        <span class="stat-sub">${pendingReviewCount > 0 ? pendingReviewCount + ' pendente(s) de revisão →' : 'Ver entregas e desafios →'}</span>
+                        <span class="stat-sub">${pendingReviewCount > 0 ? pendingReviewCount + ' pendente(s) de revisão →' : 'Ver entregas de tarefas →'}</span>
+                    </div>
+                    <div class="stat-card clickable-stat" id="admKpiChallengesCard" title="Clique para ver as resoluções de desafios dos usuários">
+                        <span class="stat-label">🐍 Resoluções (Desafios)</span>
+                        <span class="stat-value" style="color:#a78bfa;">${totalChResCount}</span>
+                        <span class="stat-sub">${solvedChResCount} aceita(s) • Ver códigos dos alunos →</span>
                     </div>
                     <div class="stat-card">
                         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -3595,9 +4857,11 @@
             var kpiStu = document.getElementById('admKpiStudentsCard');
             var kpiAtt = document.getElementById('admKpiAttendanceCard');
             var kpiSubs = document.getElementById('admKpiSubsCard');
+            var kpiCh = document.getElementById('admKpiChallengesCard');
             if (kpiStu) kpiStu.addEventListener('click', function() { switchTab('admin-chamada'); });
             if (kpiAtt) kpiAtt.addEventListener('click', function() { switchTab('admin-chamada'); });
             if (kpiSubs) kpiSubs.addEventListener('click', function() { switchTab('admin-correcoes'); });
+            if (kpiCh) kpiCh.addEventListener('click', function() { switchTab('desafios'); });
 
             container.querySelectorAll('[data-adm-toggle-lesson]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
@@ -3675,6 +4939,9 @@
                             if (Array.isArray(parsed.users)) window.TrilhandoClassroom.saveUsers(parsed.users);
                             if (Array.isArray(parsed.submissions)) window.TrilhandoClassroom.saveSubmissions(parsed.submissions);
                             if (parsed.attendance && typeof parsed.attendance === 'object') window.TrilhandoClassroom.saveAttendance(parsed.attendance);
+                            if (parsed.challenges && typeof parsed.challenges === 'object' && window.TrilhandoClassroom.saveAllChallengesProgress) {
+                                window.TrilhandoClassroom.saveAllChallengesProgress(parsed.challenges);
+                            }
                             alert('Backup importado com sucesso!');
                             renderAllViews();
                         } catch (err) {
@@ -4144,10 +5411,22 @@
                 return true;
             });
 
+            var allResData = collectAllUsersChallengeResolutions();
             var beeAdminRowsHtml = filteredLeaderboard.length === 0 ? `
-                <tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text-secondary);">Nenhum aluno encontrado neste filtro.</td></tr>
+                <tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text-secondary);">Nenhum aluno encontrado neste filtro.</td></tr>
             ` : filteredLeaderboard.map(function(row) {
                 var tier = row.rankInfo.currentTier;
+                var stRes = allResData.resolutions.filter(function(r) { return r.userId === row.userId; });
+                var chipsHtml = stRes.length === 0
+                    ? `<span style="font-size:0.75rem;color:#64748b;">Nenhuma resolução enviada</span>`
+                    : stRes.slice(0, 8).map(function(r) {
+                        return `
+                            <button type="button" class="tr-btn-ghost" data-corr-inspect-ch="${r.userId}::${r.challengeId}" style="padding:2px 8px;font-size:0.72rem;border-color:${r.solved ? 'rgba(16,185,129,0.45)' : 'rgba(239,68,68,0.4)'};color:${r.solved ? '#6ee7b7' : '#fca5a5'};" title="Clique para ver o código enviado no Desafio #${r.challengeNumber}">
+                                ${r.solved ? '✅' : '❌'} #${r.challengeNumber}
+                            </button>
+                        `;
+                    }).join(' ') + (stRes.length > 8 ? ` <span style="font-size:0.72rem;color:#94a3b8;">+${stRes.length - 8}</span>` : '');
+
                 return `
                     <tr>
                         <td><strong>${escapeHtml(row.fullName)}</strong></td>
@@ -4159,9 +5438,19 @@
                         <td><strong style="color:#10b981;">${row.solvedCount} / ${window.TrilhandoBeecrowd ? window.TrilhandoBeecrowd.PYTHON_CHALLENGES.length : 100}</strong></td>
                         <td><strong style="color:#fbbf24;font-family:'JetBrains Mono',monospace;">⚡ ${row.totalXp} XP</strong></td>
                         <td>
-                            <button type="button" class="tr-btn-ghost" style="font-size:0.74rem;padding:4px 10px;" data-adm-filter-stu="${row.userId}">
-                                🎯 Ver Tarefas
-                            </button>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:340px;">
+                                ${chipsHtml}
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                <button type="button" class="tr-btn-primary" style="font-size:0.74rem;padding:5px 10px;" data-adm-open-stu-res="${row.userId}">
+                                    👁️ Ver Resoluções (${stRes.length})
+                                </button>
+                                <button type="button" class="tr-btn-ghost" style="font-size:0.74rem;padding:5px 10px;" data-adm-filter-stu="${row.userId}">
+                                    📝 Tarefas
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -4257,6 +5546,7 @@
                                         <th>Patente</th>
                                         <th>Resolvidos</th>
                                         <th>XP Total</th>
+                                        <th>Resoluções (Clique p/ abrir o código)</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -4327,6 +5617,25 @@
                     adminFilterStudent = btn.getAttribute('data-adm-filter-stu');
                     adminCorrecoesSubTab = 'tarefas';
                     renderAdminCorrecoesView();
+                });
+            });
+
+            container.querySelectorAll('[data-adm-open-stu-res]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    admBeeFilterStudent = btn.getAttribute('data-adm-open-stu-res');
+                    admBeeSubView = 'resolutions';
+                    admBeePage = 1;
+                    switchTab('desafios');
+                });
+            });
+
+            container.querySelectorAll('[data-corr-inspect-ch]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var raw = btn.getAttribute('data-corr-inspect-ch') || '';
+                    var parts = raw.split('::');
+                    if (parts.length === 2) {
+                        openAdminChallengeInspectModal(parts[0], parts[1]);
+                    }
                 });
             });
 
@@ -4459,8 +5768,37 @@
             });
         }
 
-        // Auth Modal Logic
+        // Auth Modal & Landing Page Navigation Logic
+        function openUnauthGate(flowMode) {
+            if (flowMode === 'register') {
+                unauthScreenMode = 'register';
+                gateMode = 'register';
+            } else {
+                unauthScreenMode = 'login';
+                if (gateMode !== 'login' && gateMode !== 'admin') {
+                    gateMode = 'login';
+                }
+            }
+            var nameInp = document.getElementById('gateFullName');
+            var passInp = document.getElementById('gatePassword');
+            var passConfirmInp = document.getElementById('gatePasswordConfirm');
+            if (passInp) passInp.value = '';
+            if (passConfirmInp) passConfirmInp.value = '';
+            if (flowMode === 'register' && nameInp) nameInp.value = '';
+            renderAllViews();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(function() {
+                var nEl = document.getElementById('gateFullName');
+                if (nEl) nEl.focus();
+            }, 60);
+        }
+
         function openAuthModal(defaultMode) {
+            var user = window.TrilhandoClassroom.getCurrentUser();
+            if (!user) {
+                openUnauthGate(defaultMode === 'register' ? 'register' : 'login');
+                return;
+            }
             portalAuthMode = defaultMode || 'register';
             var modal = document.getElementById('portalAuthModal');
             if (!modal) return;
@@ -4584,13 +5922,30 @@
                 return;
             }
             if (window.TrilhandoClassroom && window.TrilhandoClassroom.isUsernameTaken && window.TrilhandoClassroom.isUsernameTaken(typed)) {
-                availEl.innerHTML = `<div class="gate-status-hint" style="color:#f87171;">${SVG_ALERT_ICON}<span>Nome já cadastrado. Use a aba <strong>Entrar</strong> ou adicione outro sobrenome.</span></div>`;
+                availEl.innerHTML = `<div class="gate-status-hint" style="color:#f87171;">${SVG_ALERT_ICON}<span>Nome já cadastrado na turma. Adicione mais um sobrenome para diferenciar.</span></div>`;
             } else {
                 availEl.innerHTML = `<div class="gate-status-hint" style="color:#10b981;">${SVG_CHECK_ICON}<span>Nome disponível para cadastro.</span></div>`;
             }
         }
 
         function updateLoginGateModeUI() {
+            // Se o usuário clicou em "Criar Conta" na Landing Page, força modo 'register' e oculta qualquer aba de login
+            if (unauthScreenMode === 'register') {
+                gateMode = 'register';
+            } else if (unauthScreenMode === 'login' && gateMode === 'register') {
+                gateMode = 'login';
+            }
+
+            var roleTabsEl = document.getElementById('gateLoginRoleTabs');
+            var flowBadgeEl = document.getElementById('gateFlowBadge');
+            if (roleTabsEl) {
+                // Ao clicar em "Logar", mostra as opções Aluno ou ADM. Ao clicar em "Criar Conta", não mostra opção de logar!
+                roleTabsEl.style.display = (unauthScreenMode === 'register') ? 'none' : 'grid';
+            }
+            if (flowBadgeEl) {
+                flowBadgeEl.textContent = (unauthScreenMode === 'register') ? 'CRIAR CONTA DE ALUNO' : 'LOGIN • ALUNO OU ADM';
+            }
+
             document.querySelectorAll('[data-gate-mode]').forEach(function(btn) {
                 btn.classList.toggle('active', btn.getAttribute('data-gate-mode') === gateMode);
             });
@@ -4616,29 +5971,29 @@
             }
 
             if (gateMode === 'admin') {
-                if (titleText) titleText.textContent = 'Acesso do Professor';
-                if (subtitleText) subtitleText.innerHTML = 'Entre com a identificação da coordenação e a senha de administrador.';
+                if (titleText) titleText.textContent = 'Login de Administrador (ADM)';
+                if (subtitleText) subtitleText.innerHTML = 'Entre com a identificação da coordenação/tutores e a senha de administrador.';
                 if (nameLabel) nameLabel.textContent = 'Identificação ADM';
-                if (passLabel) passLabel.textContent = 'Senha';
+                if (passLabel) passLabel.textContent = 'Senha de Administrador';
                 if (nameInp) nameInp.placeholder = 'Trilhando o Caminho do Código';
                 if (passInp) passInp.placeholder = 'Senha de administrador';
-                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Painel';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Painel ADM';
             } else if (gateMode === 'register') {
                 if (titleText) titleText.textContent = 'Criar Conta de Aluno(a)';
-                if (subtitleText) subtitleText.innerHTML = 'Cadastre seu nome completo e crie uma senha para salvar seu progresso.';
+                if (subtitleText) subtitleText.innerHTML = 'Cadastre seu nome completo e crie uma senha para acessar o menu da plataforma.';
                 if (nameLabel) nameLabel.textContent = 'Nome e Sobrenome';
                 if (passLabel) passLabel.textContent = 'Crie uma Senha (mín. 4 caracteres)';
                 if (nameInp) nameInp.placeholder = 'Ex: Lucas Almeida Santos';
                 if (passInp) passInp.placeholder = 'Mínimo de 4 caracteres';
-                if (submitBtnLabel) submitBtnLabel.textContent = 'Criar Conta e Entrar';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Criar Conta e Ir para o Menu';
             } else {
-                if (titleText) titleText.textContent = 'Entrar na Minha Conta';
-                if (subtitleText) subtitleText.innerHTML = 'Digite seu nome completo e senha para continuar seus estudos.';
+                if (titleText) titleText.textContent = 'Entrar como Aluno(a)';
+                if (subtitleText) subtitleText.innerHTML = 'Digite seu nome completo e senha para acessar o menu de aulas e desafios.';
                 if (nameLabel) nameLabel.textContent = 'Nome Completo';
                 if (passLabel) passLabel.textContent = 'Senha';
                 if (nameInp) nameInp.placeholder = 'Ex: Lucas Almeida Santos';
                 if (passInp) passInp.placeholder = 'Digite sua senha';
-                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Portal';
+                if (submitBtnLabel) submitBtnLabel.textContent = 'Entrar no Menu';
             }
 
             updateGateUsernameAvailabilityUI();
@@ -4655,18 +6010,26 @@
 
         function renderAllViews(isBackgroundSync) {
             var user = window.TrilhandoClassroom.getCurrentUser();
+            var landingEl = document.getElementById('landingPageScreen');
             var gateEl = document.getElementById('loginGateScreen');
             var appEl = document.getElementById('classroomAppContent');
 
             if (!user) {
-                if (gateEl) gateEl.style.display = 'flex';
                 if (appEl) appEl.style.display = 'none';
-                if (!isBackgroundSync || !isUserTypingInside('loginGateScreen')) {
-                    updateLoginGateModeUI();
+                if (unauthScreenMode === 'landing') {
+                    if (landingEl) landingEl.style.display = 'flex';
+                    if (gateEl) gateEl.style.display = 'none';
+                } else {
+                    if (landingEl) landingEl.style.display = 'none';
+                    if (gateEl) gateEl.style.display = 'flex';
+                    if (!isBackgroundSync || !isUserTypingInside('loginGateScreen')) {
+                        updateLoginGateModeUI();
+                    }
                 }
                 return;
             }
 
+            if (landingEl) landingEl.style.display = 'none';
             if (gateEl) gateEl.style.display = 'none';
             if (appEl) appEl.style.display = 'flex';
 
@@ -4695,9 +6058,27 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Login Gate tabs & submit
+            // Landing Page buttons ("Logar" vs "Criar Conta")
+            document.querySelectorAll('[data-open-gate]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var targetFlow = btn.getAttribute('data-open-gate') || 'login';
+                    openUnauthGate(targetFlow);
+                });
+            });
+
+            var backToLandingBtn = document.getElementById('gateBackToLandingBtn');
+            if (backToLandingBtn) {
+                backToLandingBtn.addEventListener('click', function() {
+                    unauthScreenMode = 'landing';
+                    renderAllViews();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Login Gate tabs (Aluno vs ADM — exibidos apenas quando clicou em Logar) & submit
             document.querySelectorAll('[data-gate-mode]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
+                    if (unauthScreenMode === 'register') return;
                     gateMode = btn.getAttribute('data-gate-mode') || 'login';
                     updateLoginGateModeUI();
                 });
