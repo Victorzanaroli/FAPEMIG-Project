@@ -660,283 +660,220 @@
         /* ===================================================================
            ESTILOS DA LANDING PAGE (PÁGINA INICIAL DO PROJETO)
         =================================================================== */
-        .lp-shell {
-            width: 100%;
-            max-width: 1220px;
+        #landingPageScreen {
+            --lp-bg: #0B1726;
+            --lp-surface: #0E1C2E;
+            --lp-line: rgba(148, 163, 184, 0.14);
+            --lp-line-2: rgba(148, 163, 184, 0.22);
+            --lp-text: #F1F5F9;
+            --lp-muted: #94A3B8;
+            --lp-soft: #CBD5E1;
+            --lp-accent: #5ED4C8;
+            --lp-accent-ink: #06201D;
+            width: calc(100% + 40px);
+            margin: -16px -20px -60px;
             display: flex;
             flex-direction: column;
-            gap: 36px;
-            padding-bottom: 40px;
+            background: var(--lp-bg);
+            color: var(--lp-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
             animation: fadeIn 0.3s ease;
         }
-        .lp-navbar {
+        #landingPageScreen a { color: inherit; text-decoration: none; }
+        .lp-wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+        /* Navbar */
+        .lp-nav {
             position: sticky;
-            top: 10px;
+            top: 0;
             z-index: 950;
-            width: 100%;
-            background: rgba(11, 19, 41, 0.94);
-            border: 1px solid rgba(0, 229, 255, 0.28);
-            border-radius: 18px;
-            padding: 12px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+            background: rgba(14, 28, 46, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--lp-line);
         }
-        .lp-nav-links {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .lp-nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: color 0.18s ease;
-        }
-        .lp-nav-link:hover {
-            color: var(--cefet-cyan);
-        }
-        .lp-nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .lp-btn-login {
-            background: rgba(0, 229, 255, 0.1);
-            border: 1.5px solid rgba(0, 229, 255, 0.45);
-            color: #e0f2fe;
-            padding: 9px 18px;
-            border-radius: 11px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
+        .lp-nav .lp-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+        .lp-brand { display: flex; align-items: center; gap: 14px; }
+        .lp-brand img { height: 30px; display: block; }
+        .lp-brand-sep { width: 1px; height: 26px; background: var(--lp-line-2); }
+        .lp-brand-name { font-weight: 600; font-size: 0.95rem; letter-spacing: -0.01em; }
+        .lp-links { display: flex; gap: 32px; font-size: 0.9rem; color: var(--lp-muted); }
+        #landingPageScreen .lp-links a:hover { color: var(--lp-text); }
+        .lp-actions { display: flex; gap: 10px; }
+
+        /* Botões */
+        .lp-btn {
             display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-        .lp-btn-login:hover {
-            background: rgba(0, 229, 255, 0.22);
-            border-color: var(--cefet-cyan);
-            color: #fff;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 229, 255, 0.22);
-        }
-        .lp-btn-register {
-            background: linear-gradient(135deg, #2563eb 0%, #00adb5 100%);
-            border: 1.5px solid rgba(56, 189, 248, 0.45);
-            color: #ffffff;
-            padding: 9px 20px;
-            border-radius: 11px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: all 0.2s ease;
-            font-family: inherit;
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
-        }
-        .lp-btn-register:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.38);
-            filter: brightness(1.08);
-        }
-        .lp-hero {
-            display: grid;
-            grid-template-columns: 1.15fr 0.95fr;
-            gap: 28px;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(11, 19, 41, 0.88) 100%);
-            border: 1.5px solid rgba(0, 229, 255, 0.28);
-            border-radius: 26px;
-            padding: 40px 38px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 40px rgba(37, 99, 235, 0.14);
-            position: relative;
-            overflow: hidden;
-        }
-        .lp-hero-title {
-            font-size: clamp(2rem, 3.6vw, 2.95rem);
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            color: #fff;
-            margin-bottom: 14px;
-            background: none;
-            -webkit-text-fill-color: initial;
-        }
-        .lp-hero-gradient {
-            background: linear-gradient(135deg, #38bdf8 0%, #00e5ff 50%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .lp-hero-desc {
-            font-size: 1.02rem;
-            color: #cbd5e1;
-            line-height: 1.65;
-            margin-bottom: 24px;
-        }
-        .lp-hero-ctas {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-bottom: 22px;
-        }
-        .lp-hero-ctas .lp-btn-register,
-        .lp-hero-ctas .lp-btn-login {
-            padding: 13px 24px;
-            font-size: 0.95rem;
-            border-radius: 13px;
-        }
-        .lp-trust-strip {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .lp-trust-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 99px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: #94a3b8;
-        }
-        .lp-showcase-card {
-            background: rgba(9, 13, 22, 0.92);
-            border: 1.5px solid rgba(56, 189, 248, 0.32);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
-        }
-        .lp-code-window {
-            background: #060911;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-        .lp-code-topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 14px;
-            background: rgba(255, 255, 255, 0.04);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.74rem;
-            color: #94a3b8;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .lp-code-dots {
-            display: flex;
-            gap: 6px;
-        }
-        .lp-code-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .lp-metrics-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .lp-metric-box {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 12px;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .lp-section-header {
-            text-align: center;
-            max-width: 720px;
-            margin: 0 auto 22px;
-        }
-        .lp-section-header h2 {
-            font-size: clamp(1.45rem, 2.5vw, 2rem);
-            font-weight: 800;
-            color: #fff;
-            margin-top: 6px;
-            margin-bottom: 8px;
-        }
-        .lp-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-            gap: 18px;
-        }
-        .lp-feature-card {
-            background: rgba(15, 23, 42, 0.82);
-            border: 1px solid rgba(59, 130, 246, 0.24);
-            border-radius: 20px;
-            padding: 24px 22px;
-            transition: all 0.25s ease;
-        }
-        .lp-feature-card:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-4px);
-            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
-        }
-        .lp-feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 14px;
-            background: rgba(0, 229, 255, 0.12);
-            border: 1px solid rgba(0, 229, 255, 0.32);
+            gap: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
+            white-space: nowrap;
         }
-        .lp-roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 14px;
+        .lp-btn-primary { background: var(--lp-accent); color: var(--lp-accent-ink); }
+        .lp-btn-primary:hover { filter: brightness(1.08); }
+        .lp-btn-ghost { background: transparent; color: var(--lp-text); border-color: var(--lp-line-2); }
+        .lp-btn-ghost:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(148, 163, 184, 0.4); }
+        .lp-btn-lg { padding: 13px 24px; font-size: 0.95rem; }
+
+        /* Hero */
+        .lp-hero { padding: 96px 0 88px; position: relative; overflow: hidden; }
+        .lp-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px 300px at 80% 20%, rgba(94, 212, 200, 0.10), transparent 70%);
+            pointer-events: none;
         }
-        .lp-roadmap-item {
-            background: rgba(15, 23, 42, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--cefet-cyan);
+        .lp-hero .lp-wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; position: relative; }
+        .lp-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lp-accent); margin-bottom: 20px; }
+        #landingPageScreen h1.lp-title {
+            font-size: 3.25rem;
+            line-height: 1.08;
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            margin-bottom: 22px;
+            color: var(--lp-text);
+            background: none;
+            -webkit-text-fill-color: currentColor;
+        }
+        .lp-title-dim { color: var(--lp-muted); }
+        .lp-lead { font-size: 1.1rem; color: var(--lp-soft); max-width: 520px; margin-bottom: 34px; }
+        .lp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+        .lp-stats { display: flex; gap: 40px; padding-top: 28px; border-top: 1px solid var(--lp-line); }
+        .lp-stat b { display: block; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+        .lp-stat span { display: block; font-size: 0.82rem; line-height: 1.4; margin-top: 2px; color: var(--lp-muted); }
+
+        /* Prévia da plataforma */
+        .lp-preview {
+            background: var(--lp-surface);
+            border: 1px solid var(--lp-line-2);
             border-radius: 14px;
-            padding: 16px 18px;
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
         }
-        .lp-cta-banner {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.22) 0%, rgba(0, 173, 181, 0.18) 100%);
-            border: 1.5px solid rgba(0, 229, 255, 0.38);
-            border-radius: 24px;
-            padding: 32px 28px;
-            text-align: center;
+        .lp-pv-top { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--lp-line); }
+        .lp-pv-top i { width: 10px; height: 10px; border-radius: 50%; background: #334155; display: block; }
+        .lp-pv-top span { margin-left: 10px; font-size: 0.78rem; color: var(--lp-muted); }
+        .lp-pv-head { padding: 18px 20px 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+        .lp-pv-head h4 { font-size: 0.95rem; font-weight: 600; }
+        .lp-pv-head small { font-size: 0.75rem; color: var(--lp-muted); }
+        .lp-pv-desc { padding: 0 20px 14px; font-size: 0.82rem; color: var(--lp-muted); }
+        .lp-pv-code {
+            margin: 0 20px;
+            background: #081220;
+            border: 1px solid var(--lp-line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font: 400 0.8rem/1.7 'JetBrains Mono', monospace;
+            font-variant-ligatures: none;
+            color: #CBD5E1;
+            overflow-x: auto;
+        }
+        .lp-pv-code .k { color: #93C5FD; }
+        .lp-pv-code .s { color: #A7F3D0; }
+        .lp-pv-code .f { color: var(--lp-accent); }
+        .lp-pv-result {
+            margin: 14px 20px 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 14px;
+            justify-content: space-between;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: rgba(94, 212, 200, 0.07);
+            border: 1px solid rgba(94, 212, 200, 0.25);
+            font-size: 0.82rem;
         }
-        @media (max-width: 920px) {
-            .lp-hero {
-                grid-template-columns: 1fr;
-                padding: 26px 20px;
-            }
-            .lp-nav-links {
-                display: none;
-            }
+        .lp-pv-ok { display: flex; align-items: center; gap: 8px; color: var(--lp-accent); font-weight: 600; }
+        .lp-pv-meta { color: var(--lp-muted); }
+
+        /* Faixa institucional */
+        .lp-inst { border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line); background: var(--lp-surface); }
+        .lp-inst .lp-wrap { display: flex; align-items: center; justify-content: center; gap: 56px; padding-top: 26px; padding-bottom: 26px; }
+        .lp-inst p { font-size: 0.78rem; color: var(--lp-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+        .lp-inst img { height: 44px; display: block; opacity: 0.92; }
+
+        /* Seções */
+        .lp-block { padding: 104px 0; }
+        .lp-alt { background: var(--lp-surface); border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line); }
+        .lp-sec-head { max-width: 620px; margin-bottom: 56px; }
+        .lp-sec-head h2 { font-size: 2.1rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 14px; color: var(--lp-text); }
+        .lp-sec-head p { color: var(--lp-muted); font-size: 1.02rem; }
+
+        .lp-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--lp-line);
+            border: 1px solid var(--lp-line);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .lp-feat { background: var(--lp-bg); padding: 32px 28px; }
+        .lp-ico {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: rgba(94, 212, 200, 0.08);
+            border: 1px solid rgba(94, 212, 200, 0.2);
+            color: var(--lp-accent);
+            margin-bottom: 22px;
+        }
+        .lp-feat h3, .lp-step h3 { font-size: 1.02rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; color: var(--lp-text); }
+        .lp-feat p { font-size: 0.9rem; color: var(--lp-muted); }
+
+        .lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .lp-step { padding: 28px; border: 1px solid var(--lp-line); border-radius: 12px; background: var(--lp-bg); }
+        .lp-step-n { font: 500 0.8rem 'JetBrains Mono', monospace; color: var(--lp-accent); margin-bottom: 14px; display: block; }
+        .lp-step p { font-size: 0.88rem; color: var(--lp-muted); }
+
+        /* CTA final */
+        .lp-cta { text-align: center; padding: 112px 0; }
+        .lp-cta h2 { font-size: 2.3rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 14px; color: var(--lp-text); }
+        .lp-cta p { color: var(--lp-muted); margin-bottom: 32px; font-size: 1.05rem; }
+        .lp-cta .lp-cta-row { justify-content: center; margin: 0; }
+
+        /* Rodapé */
+        .lp-footer { border-top: 1px solid var(--lp-line); background: var(--lp-surface); }
+        .lp-footer .lp-wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 30px; padding-bottom: 30px; font-size: 0.84rem; color: var(--lp-muted); }
+        .lp-footer .lp-brand img { height: 26px; }
+
+        @media (max-width: 980px) {
+            .lp-hero .lp-wrap { grid-template-columns: 1fr; gap: 48px; }
+            .lp-features { grid-template-columns: repeat(2, 1fr); }
+            .lp-steps { grid-template-columns: repeat(2, 1fr); }
+            .lp-links { display: none; }
+        }
+        @media (max-width: 768px) {
+            #landingPageScreen { width: calc(100% + 20px); margin: -12px -10px -48px; }
+            .lp-wrap { padding: 0 20px; }
+            .lp-brand-name, .lp-brand-sep { display: none; }
+            .lp-btn { padding: 9px 14px; font-size: 0.85rem; }
+            .lp-btn-lg { padding: 12px 20px; font-size: 0.92rem; }
+            .lp-hero { padding: 56px 0 64px; }
+            #landingPageScreen h1.lp-title { font-size: 2.2rem !important; line-height: 1.12 !important; }
+            .lp-lead { font-size: 1rem; }
+            .lp-stats { gap: 24px; }
+            .lp-stat b { font-size: 1.35rem; }
+            .lp-inst .lp-wrap { gap: 28px; flex-wrap: wrap; }
+            .lp-inst img { height: 36px; }
+            .lp-block { padding: 72px 0; }
+            .lp-sec-head { margin-bottom: 36px; }
+            .lp-sec-head h2 { font-size: 1.6rem; }
+            .lp-features, .lp-steps { grid-template-columns: 1fr; }
+            .lp-cta { padding: 80px 0; }
+            .lp-cta h2 { font-size: 1.8rem; }
+            .lp-footer .lp-wrap { flex-direction: column; text-align: center; }
         }
 
         /* ─────────────────────────────────────────────────────────────
@@ -1759,221 +1696,144 @@
     <!-- =======================================================================
          LANDING PAGE INICIAL — TRILHANDO O CAMINHO DO CÓDIGO (UFCI-MG & FAPEMIG)
     ======================================================================= -->
-    <div id="landingPageScreen" class="lp-shell">
-        <!-- TOP NAVBAR DA LANDING PAGE -->
-        <header class="lp-navbar">
-            <div class="nav-brand">
-                <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG" class="nav-logo">
-                <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG" class="nav-logo circle">
-                <div class="nav-brand-title">
-                    <span style="font-size:1rem;">Trilhando o Caminho do Código</span>
-                    <small>UFCI-MG &amp; FAPEMIG</small>
+    <div id="landingPageScreen">
+        <header class="lp-nav">
+            <div class="lp-wrap">
+                <div class="lp-brand">
+                    <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG">
+                    <div class="lp-brand-sep"></div>
+                    <span class="lp-brand-name">Trilhando o Caminho do Código</span>
                 </div>
-            </div>
-
-            <nav class="lp-nav-links">
-                <a href="#lp-sobre" class="lp-nav-link">Sobre o Projeto</a>
-                <a href="#lp-recursos" class="lp-nav-link">Recursos</a>
-                <a href="#lp-trilha" class="lp-nav-link">Trilha de Aulas</a>
-            </nav>
-
-            <div class="lp-nav-actions">
-                <button type="button" class="lp-btn-login" data-open-gate="login">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                    <span>Logar</span>
-                </button>
-                <button type="button" class="lp-btn-register" data-open-gate="register">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                    <span>Criar Conta</span>
-                </button>
+                <nav class="lp-links">
+                    <a href="#lp-projeto">O projeto</a>
+                    <a href="#lp-plataforma">Plataforma</a>
+                    <a href="#lp-trilha">Trilha</a>
+                </nav>
+                <div class="lp-actions">
+                    <button type="button" class="lp-btn lp-btn-ghost" data-open-gate="login">Entrar</button>
+                    <button type="button" class="lp-btn lp-btn-primary" data-open-gate="register">Criar conta</button>
+                </div>
             </div>
         </header>
 
-        <!-- HERO SECTION -->
-        <section class="lp-hero" id="lp-sobre">
-            <div>
-                <span class="badge" style="margin-bottom:14px;">⚡ PROJETO DE PESQUISA E EXTENSÃO • UFCI-MG &amp; FAPEMIG</span>
-                <h1 class="lp-hero-title">
-                    Do Pensamento Computacional aos Apps com <span class="lp-hero-gradient">Python, Flet &amp; IA</span>
-                </h1>
-                <p class="lp-hero-desc">
-                    Bem-vindo à plataforma oficial do projeto <strong>Trilhando o Caminho do Código</strong>. Acesse aulas interativas, resolva <strong>100 desafios práticos em Python</strong> direto no navegador, acompanhe seu ranking de XP e aprenda com o <strong>Tutor Inteligente Gemini Flash 24/7</strong>.
-                </p>
-
-                <div class="lp-hero-ctas">
-                    <button type="button" class="lp-btn-login" data-open-gate="login">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                        <span>Logar (Aluno ou ADM)</span>
-                    </button>
-                    <button type="button" class="lp-btn-register" data-open-gate="register">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                        <span>Criar Conta de Aluno</span>
-                    </button>
+        <section class="lp-hero" id="lp-projeto">
+            <div class="lp-wrap">
+                <div>
+                    <div class="lp-eyebrow">Projeto de extensão · UFCI-MG &amp; FAPEMIG</div>
+                    <h1 class="lp-title">Aprenda a programar<br>construindo <span class="lp-title-dim">aplicativos reais.</span></h1>
+                    <p class="lp-lead">Um percurso guiado de Python, do primeiro comando ao seu próprio aplicativo — com aulas interativas, desafios práticos e um tutor de IA para apoiar cada passo.</p>
+                    <div class="lp-cta-row">
+                        <button type="button" class="lp-btn lp-btn-primary lp-btn-lg" data-open-gate="register">
+                            Criar conta de aluno
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </button>
+                        <button type="button" class="lp-btn lp-btn-ghost lp-btn-lg" data-open-gate="login">Já tenho conta</button>
+                    </div>
+                    <div class="lp-stats">
+                        <div class="lp-stat"><b>7</b><span>encontros presenciais</span></div>
+                        <div class="lp-stat"><b>100</b><span>desafios em Python</span></div>
+                        <div class="lp-stat"><b>30h</b><span>de certificação</span></div>
+                    </div>
                 </div>
 
-                <div class="lp-trust-strip">
-                    <span class="lp-trust-pill">🔒 Acesso rápido sem e-mail (SHA-256)</span>
-                    <span class="lp-trust-pill">🐍 Interpretador Python 3 no Navegador</span>
-                    <span class="lp-trust-pill">🤖 Copiloto Gemini IA 24/7</span>
-                    <span class="lp-trust-pill">🎓 Certificação 30h UFCI-MG</span>
-                </div>
-            </div>
+                <div class="lp-preview" aria-hidden="true">
+                    <div class="lp-pv-top"><i></i><i></i><i></i><span>Arena de desafios</span></div>
+                    <div class="lp-pv-head"><h4>Desafio 12 · Média escolar</h4><small>Iniciante</small></div>
+                    <div class="lp-pv-desc">Leia duas notas e informe se o aluno foi aprovado (média ≥ 6).</div>
+<pre class="lp-pv-code"><span class="k">n1</span> = <span class="f">float</span>(<span class="f">input</span>())
+<span class="k">n2</span> = <span class="f">float</span>(<span class="f">input</span>())
+media = (n1 + n2) / <span class="s">2</span>
 
-            <div class="lp-showcase-card">
-                <div class="lp-code-window">
-                    <div class="lp-code-topbar">
-                        <div class="lp-code-dots">
-                            <span style="background:#ef4444;"></span>
-                            <span style="background:#f59e0b;"></span>
-                            <span style="background:#10b981;"></span>
-                        </div>
-                        <span>🐍 trilhando_app.py • Python 3 + Flet</span>
-                    </div>
-                    <pre style="padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;line-height:1.55;color:#e2e8f0;overflow-x:auto;"><code><span style="color:#5ED4C8;">import</span> flet <span style="color:#5ED4C8;">as</span> ft
-
-<span style="color:#a78bfa;">def</span> <span style="color:#34d399;">iniciar_jornada</span>(aluno):
-    patente = <span style="color:#fbbf24;">"Explorador Lógico 🥇"</span>
-    xp = <span style="color:#5ED4C8;">250</span>
-    <span style="color:#a78bfa;">return</span> <span style="color:#6ee7b7;">f"🚀 Bem-vindo, {aluno}! ({patente} • +{xp} XP)"</span>
-
-print(iniciar_jornada(<span style="color:#fde68a;">"Estudante UFCI-MG"</span>))</code></pre>
-                </div>
-
-                <div class="lp-metrics-row">
-                    <div class="lp-metric-box">
-                        <span style="font-size:1.5rem;">📚</span>
-                        <div>
-                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">7 Módulos Práticos</div>
-                            <div style="font-size:0.73rem;color:#94a3b8;">Slides, Quizzes e Tarefas</div>
-                        </div>
-                    </div>
-                    <div class="lp-metric-box">
-                        <span style="font-size:1.5rem;">🐍</span>
-                        <div>
-                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">100 Desafios Python</div>
-                            <div style="font-size:0.73rem;color:#94a3b8;">Juiz Automático &amp; 8 Patentes</div>
-                        </div>
-                    </div>
-                    <div class="lp-metric-box">
-                        <span style="font-size:1.5rem;">🤖</span>
-                        <div>
-                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">Tutor Gemini 24/7</div>
-                            <div style="font-size:0.73rem;color:#94a3b8;">IA Pedagógica Integrada</div>
-                        </div>
-                    </div>
-                    <div class="lp-metric-box">
-                        <span style="font-size:1.5rem;">🏆</span>
-                        <div>
-                            <div style="font-weight:800;color:#fff;font-size:0.95rem;">Feira de Soluções</div>
-                            <div style="font-size:0.73rem;color:#94a3b8;">Apps Reais Conectados aos ODS</div>
-                        </div>
+<span class="k">if</span> media &gt;= <span class="s">6</span>:
+    <span class="f">print</span>(<span class="s">f"Aprovado ({media:.1f})"</span>)
+<span class="k">else</span>:
+    <span class="f">print</span>(<span class="s">f"Reprovado ({media:.1f})"</span>)</pre>
+                    <div class="lp-pv-result">
+                        <span class="lp-pv-ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>5 de 5 testes aprovados</span>
+                        <span class="lp-pv-meta">0,04 s</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO DE RECURSOS DA PLATAFORMA -->
-        <section id="lp-recursos">
-            <div class="lp-section-header">
-                <span class="badge">✨ ECOSSISTEMA EDUCACIONAL COMPLETO</span>
-                <h2>Tudo o que você precisa para aprender a programar</h2>
-                <p class="subtitle" style="font-size:0.92rem;">
-                    Uma plataforma desenhada para unir prática mão na massa, gamificação e acompanhamento pedagógico em tempo real.
-                </p>
+        <div class="lp-inst">
+            <div class="lp-wrap">
+                <p>Realização</p>
+                <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG">
+                <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG">
             </div>
+        </div>
 
-            <div class="lp-features-grid">
-                <div class="lp-feature-card">
-                    <div class="lp-feature-icon">📊</div>
-                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Slides &amp; Quizzes NotebookLM</h3>
-                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
-                        Aulas visuais com demonstrações interativas de código, simulador de terminal e quizzes com feedback imediato e explicação detalhada de cada alternativa.
-                    </p>
+        <section class="lp-block" id="lp-plataforma">
+            <div class="lp-wrap">
+                <div class="lp-sec-head">
+                    <div class="lp-eyebrow">Plataforma</div>
+                    <h2>Tudo o que o aluno precisa, em um só lugar.</h2>
+                    <p>Conteúdo, prática e acompanhamento integrados para que cada estudante avance no seu ritmo.</p>
                 </div>
-                <div class="lp-feature-card">
-                    <div class="lp-feature-icon">🐍</div>
-                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Arena com 100 Desafios Python</h3>
-                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
-                        Pratique do nível Iniciante ao Avançado estilo Beecrowd. Escreva e execute Python 3 direto no navegador, acumule XP e suba no ranking da turma.
-                    </p>
-                </div>
-                <div class="lp-feature-card">
-                    <div class="lp-feature-icon">🤖</div>
-                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Tutor Inteligente Gemini Flash</h3>
-                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
-                        Tire dúvidas 24 horas por dia com nossa IA configurada como tutora pedagógica, pronta para explicar conceitos passo a passo ou ajudar nos seus códigos.
-                    </p>
-                </div>
-                <div class="lp-feature-card">
-                    <div class="lp-feature-icon">📱</div>
-                    <h3 style="font-size:1.1rem;color:#fff;margin-bottom:8px;">Apps Visuais com Flet &amp; ODS</h3>
-                    <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.55;">
-                        Evolua dos comandos de terminal para a criação de aplicativos gráficos completos voltados para resolver problemas reais da escola e da comunidade.
-                    </p>
+                <div class="lp-features">
+                    <div class="lp-feat">
+                        <div class="lp-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                        <h3>Aulas interativas</h3>
+                        <p>Slides com exemplos de código executáveis e quizzes com explicação de cada resposta.</p>
+                    </div>
+                    <div class="lp-feat">
+                        <div class="lp-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+                        <h3>Desafios com correção automática</h3>
+                        <p>100 exercícios do básico ao avançado, resolvidos e avaliados direto no navegador.</p>
+                    </div>
+                    <div class="lp-feat">
+                        <div class="lp-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                        <h3>Tutor com inteligência artificial</h3>
+                        <p>Apoio a qualquer hora para tirar dúvidas e entender conceitos passo a passo.</p>
+                    </div>
+                    <div class="lp-feat">
+                        <div class="lp-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+                        <h3>Projeto final aplicado</h3>
+                        <p>Cada aluno desenvolve um aplicativo voltado a um problema real da sua comunidade.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO TRILHA DE AULAS -->
-        <section id="lp-trilha">
-            <div class="lp-section-header">
-                <span class="badge">🗺️ CRONOGRAMA &amp; JORNADA</span>
-                <h2>Nossa Trilha de Aprendizado</h2>
-                <p class="subtitle" style="font-size:0.92rem;">
-                    7 encontros estruturados levando você do primeiro <code>print()</code> até a apresentação do seu próprio aplicativo na Feira de Soluções da UFCI-MG.
-                </p>
-            </div>
-
-            <div class="lp-roadmap-grid">
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 01 • 07/10</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Engenharia de Prompt &amp; Primeiros Comandos</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Boas-vindas, uso inteligente de IA e primeiros passos com <code>print()</code> e <code>input()</code>.</div>
+        <section class="lp-block lp-alt" id="lp-trilha">
+            <div class="lp-wrap">
+                <div class="lp-sec-head">
+                    <div class="lp-eyebrow">Trilha de aprendizagem</div>
+                    <h2>Do primeiro comando ao aplicativo publicado.</h2>
+                    <p>Sete encontros estruturados, cada um construindo sobre o anterior.</p>
                 </div>
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 02 • 04/11</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Variáveis, Tipos e Condicionais (if / else)</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Tipos de dados (<code>str</code>, <code>int</code>, <code>float</code>), operadores lógicos e tomada de decisão.</div>
-                </div>
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 03 • 11/11</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Blindagem (try/except), Laços &amp; Listas</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Prevenção de erros, repetições com <code>while</code> e <code>for</code> e coleções com Listas <code>[]</code>.</div>
-                </div>
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 04 • 18/11</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Funções (def/return) &amp; Dicionários (dict)</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Modularização de código reutilizável e estruturação de dados com <code>{chave: valor}</code>.</div>
-                </div>
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULA 05 • 25/11</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Interfaces Visuais com Flet</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Criação de janelas, botões, campos de texto, eventos <code>on_click</code> e navegação multi-telas.</div>
-                </div>
-                <div class="lp-roadmap-item">
-                    <div style="font-size:0.74rem;font-weight:800;color:var(--cefet-cyan);margin-bottom:4px;">AULAS 06 &amp; 07 • 02/12 e 09/12</div>
-                    <div style="font-weight:700;color:#fff;font-size:0.96rem;margin-bottom:4px;">Sprint Final, Pitch &amp; Feira de Soluções</div>
-                    <div style="font-size:0.8rem;color:var(--text-secondary);">Integração com <code>GEMINI.md</code>, testes cruzados, apresentação pública e certificação 30h.</div>
+                <div class="lp-steps">
+                    <div class="lp-step"><span class="lp-step-n">01</span><h3>Primeiros passos e IA</h3><p>Uso responsável de IA e os primeiros programas com entrada e saída.</p></div>
+                    <div class="lp-step"><span class="lp-step-n">02</span><h3>Variáveis e decisões</h3><p>Tipos de dados, operadores lógicos e estruturas condicionais.</p></div>
+                    <div class="lp-step"><span class="lp-step-n">03</span><h3>Repetições e listas</h3><p>Laços, coleções de dados e tratamento de erros.</p></div>
+                    <div class="lp-step"><span class="lp-step-n">04</span><h3>Funções e dicionários</h3><p>Código reutilizável e organização de informações.</p></div>
+                    <div class="lp-step"><span class="lp-step-n">05</span><h3>Interfaces visuais</h3><p>Telas, botões e eventos para criar aplicativos de verdade.</p></div>
+                    <div class="lp-step"><span class="lp-step-n">06 — 07</span><h3>Projeto final e apresentação</h3><p>Desenvolvimento do aplicativo e apresentação na Feira de Soluções.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- CHAMADA FINAL (CTA) -->
-        <section class="lp-cta-banner">
-            <span class="badge" style="margin-bottom:0;">🚀 COMECE AGORA MESMO</span>
-            <h2 style="font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:800;color:#fff;">Pronto para acessar o Menu do Portal?</h2>
-            <p style="font-size:0.92rem;color:#cbd5e1;max-width:600px;line-height:1.55;">
-                Se você já possui cadastro (Aluno ou Professor ADM), clique em <strong>Logar</strong>. Se é o seu primeiro acesso como estudante, clique em <strong>Criar Conta</strong>.
-            </p>
-            <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px;">
-                <button type="button" class="lp-btn-login" data-open-gate="login" style="padding:12px 24px;font-size:0.93rem;">
-                    🔐 Logar (Aluno ou ADM)
-                </button>
-                <button type="button" class="lp-btn-register" data-open-gate="register" style="padding:12px 24px;font-size:0.93rem;">
-                    ✨ Criar Conta de Aluno
-                </button>
+        <section class="lp-cta">
+            <div class="lp-wrap">
+                <h2>Pronto para começar?</h2>
+                <p>Crie sua conta de aluno e acesse as aulas e desafios.</p>
+                <div class="lp-cta-row">
+                    <button type="button" class="lp-btn lp-btn-primary lp-btn-lg" data-open-gate="register">Criar conta de aluno</button>
+                    <button type="button" class="lp-btn lp-btn-ghost lp-btn-lg" data-open-gate="login">Entrar</button>
+                </div>
             </div>
         </section>
+
+        <footer class="lp-footer">
+            <div class="lp-wrap">
+                <div class="lp-brand">
+                    <img src="arquivos-trilhando/Imagens/logo-cefet.jpg" alt="UFCI-MG">
+                    <img src="arquivos-trilhando/Imagens/logo-fapemig.jpg" alt="FAPEMIG">
+                </div>
+                <span>© 2026 Trilhando o Caminho do Código · Projeto de extensão financiado pela FAPEMIG</span>
+            </div>
+        </footer>
     </div>
 
     <!-- =======================================================================
