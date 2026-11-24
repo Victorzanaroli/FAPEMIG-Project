@@ -37,18 +37,18 @@
             background: rgba(245,158,11,.06);
             border: 1.5px solid rgba(245,158,11,.42);
             border-radius: 16px;
-            padding: 15px 18px;
+            padding: 13px 16px;
         }
-        .detective-card h4 { color: #fcd34d; font-size: .98rem; margin-bottom: 8px; }
-        .detective-questions { list-style: none; padding-left: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+        .detective-card h4 { color: #fcd34d; font-size: .94rem; margin-bottom: 6px; }
+        .detective-questions { list-style: none; padding-left: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
         .detective-questions li {
             background: rgba(0,0,0,.35);
             border: 1px solid rgba(255,255,255,.08);
             border-radius: 10px;
-            padding: 9px 12px;
-            font-size: .84rem;
+            padding: 7px 11px;
+            font-size: .81rem;
             color: #e2e8f0;
-            line-height: 1.5;
+            line-height: 1.44;
         }
         .detective-questions li::before { content: none !important; }
         .detective-q-num {
@@ -57,22 +57,23 @@
             color: #fcd34d;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 800;
-            font-size: .74rem;
+            font-size: .72rem;
             padding: 1px 7px;
             border-radius: 6px;
             margin-right: 6px;
         }
         .hint-box {
-            margin-top: 10px;
+            margin-top: 8px;
             background: rgba(37,99,235,.1);
             border: 1px dashed rgba(0,229,255,.4);
-            border-radius: 11px;
-            padding: 10px 13px;
-            font-size: .8rem;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: .78rem;
             color: #cbd5e1;
-            line-height: 1.5;
+            line-height: 1.44;
         }
         .hint-box strong { color: #00e5ff; }
+        .slide-body { justify-content: flex-start !important; padding-top: 4px; }
 
         .hw-gate-card {
             background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.22), rgba(10, 18, 38, 0.95));
@@ -438,11 +439,10 @@ page.<span class="fn">add</span>(nome_input, btn, resposta)
                 <div class="grid-2" style="gap:16px;align-items:start">
                     <div class="content-box" style="background:rgba(0,0,0,.45)">
                         <span class="engage-label" style="margin-bottom:6px">🔎 Código Sob Investigação — caso_02.py</span>
-                        <div class="prompt-code" style="font-size:.8rem;line-height:1.58">
+                        <div class="prompt-code" style="font-size:.78rem;line-height:1.52">
 <span class="kw">import</span> flet <span class="kw">as</span> ft
 
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Contador Gamer"</span>
     <span class="kw">placar</span> = ft.<span class="fn">Text</span>(<span class="str">"10"</span>, size=<span class="num">45</span>, weight=<span class="str">"bold"</span>)
 
     <span class="kw">def</span> <span class="fn">ganhar_ponto</span>(e):
@@ -452,13 +452,11 @@ page.<span class="fn">add</span>(nome_input, btn, resposta)
     <span class="kw">def</span> <span class="fn">zerar</span>(e):
         placar.value = <span class="str">"0"</span>
 
-    page.<span class="fn">add</span>(
-        placar,
-        ft.<span class="fn">Row</span>([
-            ft.<span class="fn">ElevatedButton</span>(<span class="str">"⚡ Bônus"</span>, on_click=ganhar_ponto),
-            ft.<span class="fn">ElevatedButton</span>(<span class="str">"🔄 Zerar"</span>, on_click=zerar)
-        ])
-    )
+    <span class="kw">botoes</span> = ft.<span class="fn">Row</span>([
+        ft.<span class="fn">ElevatedButton</span>(<span class="str">"⚡ Bônus"</span>, on_click=ganhar_ponto),
+        ft.<span class="fn">ElevatedButton</span>(<span class="str">"🔄 Zerar"</span>, on_click=zerar)
+    ])
+    page.<span class="fn">add</span>(placar, botoes)
 
 ft.<span class="fn">app</span>(target=main)
                         </div>
@@ -466,12 +464,12 @@ ft.<span class="fn">app</span>(target=main)
                     <div class="detective-card">
                         <h4>🕵️ Missão do Detetive — Explique o Código:</h4>
                         <ul class="detective-questions">
-                            <li><span class="detective-q-num">Pista 1</span>Qual valor aparece no placar quando o app abre, e para qual valor ele muda se clicarmos <strong>2 vezes</strong> no botão <code>"⚡ Bônus"</code>?</li>
-                            <li><span class="detective-q-num">Pista 2</span>Na linha 8, por que o código precisou usar <code>int(...)</code> por dentro e <code>str(...)</code> por fora para somar os pontos?</li>
-                            <li><span class="detective-q-num">Pista 3</span>Quando o usuário clica no botão <code>"🔄 Zerar"</code>, o número na janela <strong>não muda para 0</strong>! O que faltou dentro da função <code>zerar(e)</code>?</li>
+                            <li><span class="detective-q-num">Pista 1</span>Qual valor aparece no placar quando o app abre, e para qual valor ele muda se clicarmos <strong>2 vezes</strong> em <code>"⚡ Bônus"</code>?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Na função <code>ganhar_ponto</code>, por que usamos <code>int(...)</code> por dentro e <code>str(...)</code> por fora para somar 5?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Ao clicar em <code>"🔄 Zerar"</code>, o número na tela <strong>não muda para 0</strong>! O que faltou dentro de <code>zerar(e)</code>?</li>
                         </ul>
                         <div class="hint-box">
-                            💡 <strong>Dica do Detetive:</strong> Lembre que todo <code>.value</code> de um <code>ft.Text</code> é texto (string), e compare as linhas dentro de <code>ganhar_ponto(e)</code> com as linhas dentro de <code>zerar(e)</code>!
+                            💡 <strong>Dica:</strong> Lembre que <code>placar.value</code> é sempre texto (string) e compare as linhas de <code>ganhar_ponto(e)</code> com <code>zerar(e)</code>!
                         </div>
                     </div>
                 </div>
@@ -810,18 +808,18 @@ page.<span class="fn">update</span>()
             </div>
         </section>
 
-        <!-- SLIDE 18 — TÓPICO 5: EXEMPLO COMPLETO DE PROJETO FINAL (EXPLICAÇÃO 2/2) -->
+        <!-- SLIDE 18 — TÓPICO 5: EXEMPLO COMPLETO DE PROJETO FINAL — PARTE 1 (INTERFACE & CONTROLES) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge" style="background:rgba(245,158,11,.16);border-color:#f59e0b;color:#fcd34d">🏆 Tópico 5 • Exemplo Completo de Projeto Final — Explicação (2/2)</span>
-                <h2 class="slide-title">Arquitetura Completa: App de Feedback &amp; Avaliação</h2>
-                <p class="slide-subtitle">Veja como E-mail, Categoria (<code>Dropdown</code>), Avaliação (<code>Slider</code>), Blindagem e Lista funcionam juntos!</p>
+                <span class="step-badge" style="background:rgba(245,158,11,.16);border-color:#f59e0b;color:#fcd34d">🏆 Tópico 5 • Exemplo de Projeto Final — Parte 1/2 (Interface)</span>
+                <h2 class="slide-title">Projeto Final (Parte 1): Montando os Controles da Tela</h2>
+                <p class="slide-subtitle">Primeiro configuramos a janela mobile e criamos o E-mail, o <code>Dropdown</code>, o <code>Slider</code> de nota, o <code>Switch</code> e a coluna <code>historico</code>!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div class="content-box" style="background:rgba(0,0,0,.48);padding:12px 14px">
-                        <span class="engage-label" style="margin-bottom:4px">⌨️ projeto_final_exemplo.py</span>
-                        <div class="prompt-code" style="font-size:.73rem;line-height:1.48;padding:10px 12px">
+                    <div class="content-box" style="background:rgba(0,0,0,.48)">
+                        <span class="engage-label" style="margin-bottom:6px">⌨️ Parte 1 — Janela e Controles (projeto_final.py)</span>
+                        <div class="prompt-code" style="font-size:.78rem;line-height:1.56">
 <span class="kw">import</span> flet <span class="kw">as</span> ft
 
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
@@ -830,85 +828,111 @@ page.<span class="fn">update</span>()
     page.window.width = <span class="num">430</span>
     page.scroll = ft.ScrollMode.AUTO
 
-    <span class="kw">banco_dados</span> = []
+    <span class="kw">banco_dados</span> = [] <span class="cm"># Lista Python para guardar os dicionários</span>
     <span class="kw">email</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Seu E-mail"</span>, prefix_icon=ft.Icons.EMAIL)
     <span class="kw">area</span> = ft.<span class="fn">Dropdown</span>(label=<span class="str">"Área"</span>, value=<span class="str">"Ensino"</span>, options=[
-        ft.dropdown.<span class="fn">Option</span>(<span class="str">"Ensino"</span>), ft.dropdown.<span class="fn">Option</span>(<span class="str">"Estrutura"</span>)])
-    <span class="kw">nota</span> = ft.<span class="fn">Slider</span>(min=<span class="num">0</span>, max=<span class="num">10</span>, divisions=<span class="num">10</span>, value=<span class="num">8</span>, label=<span class="str">"Nota: {value}"</span>)
+        ft.dropdown.<span class="fn">Option</span>(<span class="str">"Ensino"</span>), ft.dropdown.<span class="fn">Option</span>(<span class="str">"Estrutura"</span>)
+    ])
+    <span class="kw">nota</span> = ft.<span class="fn">Slider</span>(min=<span class="num">0</span>, max=<span class="num">10</span>, divisions=<span class="num">10</span>, value=<span class="num">8</span>)
     <span class="kw">urgente</span> = ft.<span class="fn">Switch</span>(label=<span class="str">"🔥 Demanda Urgente?"</span>, value=<span class="kw">False</span>)
     <span class="kw">aviso</span> = ft.<span class="fn">Text</span>(<span class="str">""</span>, weight=<span class="str">"bold"</span>)
-    <span class="kw">historico</span> = ft.<span class="fn">Column</span>()
-
-    <span class="kw">def</span> <span class="fn">salvar_avaliacao</span>(e):
-        <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value:
-            aviso.value = <span class="str">"⚠️ Informe um e-mail válido com @!"</span>
-            aviso.color = <span class="str">"red"</span>
-        <span class="kw">else</span>:
-            <span class="kw">registro</span> = {<span class="str">"email"</span>: email.value, <span class="str">"area"</span>: area.value, <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)}
-            banco_dados.<span class="fn">append</span>(registro)
-            <span class="kw">tag</span> = <span class="str">"🚨"</span> <span class="kw">if</span> urgente.value <span class="kw">else</span> <span class="str">"✅"</span>
-            historico.controls.<span class="fn">append</span>(ft.<span class="fn">Text</span>(
-                <span class="str">f"{tag} [{registro['area']}] {registro['email']} — Nota {registro['nota']}/10"</span>))
-            aviso.value = <span class="str">f"🎉 Salvo! Total de avaliações: {len(banco_dados)}"</span>
-            aviso.color = <span class="str">"green"</span>
-            email.value = <span class="str">""</span>
-        page.<span class="fn">update</span>()
-
-    page.<span class="fn">add</span>(ft.<span class="fn">Text</span>(<span class="str">"🌟 Central de Avaliação"</span>, size=<span class="num">22</span>, weight=<span class="str">"bold"</span>),
-             email, area, ft.<span class="fn">Text</span>(<span class="str">"Sua Nota (0 a 10):"</span>), nota, urgente,
-             ft.<span class="fn">ElevatedButton</span>(<span class="str">"Enviar Avaliação"</span>, icon=ft.Icons.SEND, on_click=salvar_avaliacao),
-             aviso, ft.<span class="fn">Text</span>(<span class="str">"📋 Histórico:"</span>, weight=<span class="str">"bold"</span>), historico)
-
-ft.<span class="fn">app</span>(target=main)
+    <span class="kw">historico</span> = ft.<span class="fn">Column</span>() <span class="cm"># Coluna visual que mostrará os itens</span>
                         </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="display:flex;flex-direction:column;gap:10px">
                         <div class="summary-item">
-                            <span class="summary-check">✉️</span>
-                            <div class="summary-text"><strong>1. Entrada Identificada e Blindada</strong>O campo <code>email</code> exige <code>"@"</code> antes de aceitar o envio, exibindo feedback colorido em <code>aviso</code>.</div>
+                            <span class="summary-check">📱</span>
+                            <div class="summary-text"><strong>1. Janela Pronta para Celular</strong><code>ThemeMode.DARK</code>, largura <code>430</code> e <code>ScrollMode.AUTO</code> para a tela rolar quando a lista crescer.</div>
                         </div>
                         <div class="summary-item">
-                            <span class="summary-check">🎛️</span>
-                            <div class="summary-text"><strong>2. Seletores e Nota de Avaliação</strong>Combina <code>Dropdown</code> (setor), <code>Slider</code> (nota 0 a 10) e <code>Switch</code> (prioridade) sem risco de erro numérico.</div>
+                            <span class="summary-check">✉️</span>
+                            <div class="summary-text"><strong>2. Entradas Completas do Usuário</strong>Temos caixa de texto com ícone (<code>email</code>), menu de área (<code>Dropdown</code>), barra de nota 0 a 10 (<code>Slider</code>) e interruptor (<code>Switch</code>).</div>
                         </div>
                         <div class="summary-item">
                             <span class="summary-check">🗂️</span>
-                            <div class="summary-text"><strong>3. Lista de Dicionários + Lista Visual</strong>Guarda cada cadastro em <code>banco_dados</code> (Aula 04) e adiciona na tela com <code>historico.controls.append(...)</code>!</div>
+                            <div class="summary-text"><strong>3. Dupla de Listas (Memória + Tela)</strong><code>banco_dados = []</code> guarda os dicionários no Python e <code>historico = ft.Column()</code> exibe os textos na janela!</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 19 — TÓPICO 5: PRÁTICA FINAL — DETETIVE DO CÓDIGO #5 -->
+        <!-- SLIDE 19 — TÓPICO 5: EXEMPLO COMPLETO DE PROJETO FINAL — PARTE 2 (FUNÇÃO & PAGE.ADD) -->
+        <section class="slide">
+            <div class="slide-header">
+                <span class="step-badge" style="background:rgba(245,158,11,.16);border-color:#f59e0b;color:#fcd34d">🏆 Tópico 5 • Exemplo de Projeto Final — Parte 2/2 (Motor &amp; Validação)</span>
+                <h2 class="slide-title">Projeto Final (Parte 2): Função de Salvar e <code>page.add()</code></h2>
+                <p class="slide-subtitle">Agora criamos a função <code>salvar_avaliacao(e)</code> que valida o e-mail, salva no dicionário e atualiza a tela!</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2" style="gap:16px;align-items:start">
+                    <div class="content-box" style="background:rgba(0,0,0,.48)">
+                        <span class="engage-label" style="margin-bottom:6px">⌨️ Parte 2 — Função do Botão e page.add (continuação)</span>
+                        <div class="prompt-code" style="font-size:.77rem;line-height:1.54">
+    <span class="kw">def</span> <span class="fn">salvar_avaliacao</span>(e):
+        <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value:
+            aviso.value = <span class="str">"⚠️ Informe um e-mail válido com @!"</span>
+            aviso.color = <span class="str">"red"</span>
+        <span class="kw">else</span>:
+            <span class="kw">reg</span> = {<span class="str">"email"</span>: email.value, <span class="str">"area"</span>: area.value, <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)}
+            banco_dados.<span class="fn">append</span>(reg)
+            <span class="kw">tag</span> = <span class="str">"🚨"</span> <span class="kw">if</span> urgente.value <span class="kw">else</span> <span class="str">"✅"</span>
+            historico.controls.<span class="fn">append</span>(
+                ft.<span class="fn">Text</span>(<span class="str">f"{tag} [{reg['area']}] {reg['email']} — Nota {reg['nota']}/10"</span>)
+            )
+            aviso.value = <span class="str">f"🎉 Salvo! Total: {len(banco_dados)}"</span>
+            aviso.color = <span class="str">"green"</span>
+            email.value = <span class="str">""</span>
+        page.<span class="fn">update</span>()
+
+    <span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Enviar Avaliação"</span>, icon=ft.Icons.SEND, on_click=salvar_avaliacao)
+    page.<span class="fn">add</span>(email, area, nota, urgente, btn, aviso, historico)
+
+ft.<span class="fn">app</span>(target=main)
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                        <div class="summary-item">
+                            <span class="summary-check">🛡️</span>
+                            <div class="summary-text"><strong>1. Blindagem antes de Cadastrar</strong>Se o campo <code>email.value</code> não tiver <code>"@"</code>, mostra aviso vermelho e não cadastra dado errado.</div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">📦</span>
+                            <div class="summary-text"><strong>2. Dicionário + Lista Visual</strong>Cria o dicionário <code>reg</code>, guarda em <code>banco_dados.append(reg)</code> e pendura um novo <code>ft.Text</code> em <code>historico.controls</code>.</div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">🧹</span>
+                            <div class="summary-text"><strong>3. Limpeza e Atualização</strong>Faz <code>email.value = ""</code> para deixar a caixa limpa para o próximo cadastro e chama <code>page.update()</code>!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 20 — TÓPICO 5: PRÁTICA FINAL — DETETIVE DO CÓDIGO #5 -->
         <section class="slide">
             <div class="slide-header">
                 <span class="detective-badge">🕵️ Tópico 5 • Prática Final: Detetive do Código #5</span>
                 <h2 class="slide-title">Investigação Mestre: Desvendando o Projeto Completo</h2>
-                <p class="slide-subtitle">Olhe novamente o código do Projeto Final (ou analise o trecho principal abaixo) e responda aos 4 desafios!</p>
+                <p class="slide-subtitle">Analise o trecho principal da função <code>salvar_avaliacao(e)</code> e responda às 3 perguntas de investigação!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
                     <div class="content-box" style="background:rgba(0,0,0,.45)">
-                        <span class="engage-label" style="margin-bottom:6px">🔎 Trecho Central do Projeto Final — caso_05.py</span>
-                        <div class="prompt-code" style="font-size:.77rem;line-height:1.55">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Trecho Central Sob Investigação — caso_05.py</span>
+                        <div class="prompt-code" style="font-size:.78rem;line-height:1.56">
 <span class="kw">def</span> <span class="fn">salvar_avaliacao</span>(e):
     <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value:
         aviso.value = <span class="str">"⚠️ Informe um e-mail válido com @!"</span>
         aviso.color = <span class="str">"red"</span>
     <span class="kw">else</span>:
-        <span class="kw">registro</span> = {
-            <span class="str">"email"</span>: email.value,
-            <span class="str">"area"</span>: area.value,
-            <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)
-        }
-        banco_dados.<span class="fn">append</span>(registro)
+        <span class="kw">reg</span> = {<span class="str">"email"</span>: email.value, <span class="str">"area"</span>: area.value, <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)}
+        banco_dados.<span class="fn">append</span>(reg)
         <span class="kw">tag</span> = <span class="str">"🚨"</span> <span class="kw">if</span> urgente.value <span class="kw">else</span> <span class="str">"✅"</span>
         historico.controls.<span class="fn">append</span>(
-            ft.<span class="fn">Text</span>(<span class="str">f"{tag} [{registro['area']}] {registro['email']} — Nota {registro['nota']}/10"</span>)
+            ft.<span class="fn">Text</span>(<span class="str">f"{tag} [{reg['area']}] {reg['email']} — Nota {reg['nota']}/10"</span>)
         )
-        aviso.value = <span class="str">f"🎉 Salvo! Total de avaliações: {len(banco_dados)}"</span>
-        aviso.color = <span class="str">"green"</span>
+        aviso.value = <span class="str">f"🎉 Salvo! Total: {len(banco_dados)}"</span>
         email.value = <span class="str">""</span>
     page.<span class="fn">update</span>()
                         </div>
@@ -916,13 +940,12 @@ ft.<span class="fn">app</span>(target=main)
                     <div class="detective-card">
                         <h4>🕵️ Missão Mestre do Detetive — Explique o Código:</h4>
                         <ul class="detective-questions">
-                            <li><span class="detective-q-num">Pista 1</span>Qual é a diferença entre o que é guardado em <code>banco_dados.append(...)</code> (linha 11) e o que é guardado em <code>historico.controls.append(...)</code> (linha 13)?</li>
-                            <li><span class="detective-q-num">Pista 2</span>Como o código descobre quantas avaliações já foram cadastradas no total para mostrar na linha 16?</li>
-                            <li><span class="detective-q-num">Pista 3</span>Por que a linha 18 faz <code>email.value = ""</code> logo depois de salvar uma avaliação válida?</li>
-                            <li><span class="detective-q-num">Pista 4</span>Se você quisesse criar um botão de lixeira (<code>IconButton</code>) para zerar tudo, quais <strong>duas listas</strong> você precisaria limpar com <code>.clear()</code>?</li>
+                            <li><span class="detective-q-num">Pista 1</span>Qual é a diferença entre o que é guardado em <code>banco_dados.append(reg)</code> e o que é guardado em <code>historico.controls.append(...)</code>?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Como o código descobre quantas avaliações já foram salvas para mostrar no texto <code>aviso.value</code>, e por que fazemos <code>email.value = ""</code> logo depois?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Se criarmos um botão de lixeira (<code>IconButton</code>) para apagar tudo, quais <strong>duas listas</strong> precisaremos esvaziar com <code>.clear()</code>?</li>
                         </ul>
                         <div class="hint-box">
-                            💡 <strong>Dica do Detetive:</strong> Uma lista guarda dados puros do Python (dicionários) na memória, enquanto a outra guarda componentes visuais (<code>ft.Text</code>) dentro da <code>ft.Column</code> da tela!
+                            💡 <strong>Dica:</strong> Uma lista guarda dicionários do Python na memória (<code>banco_dados</code>), enquanto a outra guarda componentes visuais dentro da coluna da tela (<code>historico.controls</code>)!
                         </div>
                     </div>
                 </div>
@@ -1014,7 +1037,7 @@ ft.<span class="fn">app</span>(target=main)
 
     <!-- Bottom Navigation -->
     <footer class="bottom-nav">
-        <div class="slide-counter" id="slideCounter">1 / 22</div>
+        <div class="slide-counter" id="slideCounter">1 / 23</div>
         <div class="nav-buttons">
             <button class="nav-btn" id="prevBtn">← Anterior <span class="key-hint">←</span></button>
             <button class="nav-btn primary" id="nextBtn">Próximo → <span class="key-hint">→</span></button>
