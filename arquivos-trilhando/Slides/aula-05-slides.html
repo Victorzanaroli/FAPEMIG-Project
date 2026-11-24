@@ -245,7 +245,7 @@ python -m pip install flet
     <span class="kw">titulo</span> = ft.<span class="fn">Text</span>(<span class="str">"🚀 Olá, Mundo Visual!"</span>, size=<span class="num">28</span>)
     page.<span class="fn">add</span>(titulo)
 
-ft.<span class="fn">app</span>(target=main)
+ft.<span class="fn">run</span>(main)
                         </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px">
@@ -259,7 +259,7 @@ ft.<span class="fn">app</span>(target=main)
                         </div>
                         <div class="summary-item" style="padding:12px 14px">
                             <span class="summary-check">▶️</span>
-                            <div class="summary-text"><strong>ft.app(target=main) → Liga o Motor</strong>Fica sempre na última linha (sem espaços antes) para iniciar o aplicativo.</div>
+                            <div class="summary-text"><strong>ft.run(main) → Liga o Motor</strong>Fica sempre na última linha (sem espaços antes) para iniciar o aplicativo.</div>
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@ ft.<span class="fn">app</span>(target=main)
         <section class="slide">
             <div class="slide-header">
                 <span class="step-badge">📱 Tópico 1 • Flet Básico — Explicação (2/2)</span>
-                <h2 class="slide-title">Os 3 Blocos Base: <code>Text</code>, <code>TextField</code> e <code>ElevatedButton</code></h2>
+                <h2 class="slide-title">Os 3 Blocos Base: <code>Text</code>, <code>TextField</code> e <code>Button</code></h2>
                 <p class="slide-subtitle">Veja a tradução direta do que fazíamos no terminal para os componentes visuais do Flet!</p>
             </div>
             <div class="slide-body">
@@ -294,7 +294,7 @@ ft.<span class="fn">app</span>(target=main)
                         <tr>
                             <td><strong>Executar uma ação</strong></td>
                             <td>Apertar <kbd>Enter</kbd></td>
-                            <td><code style="color:#00e5ff">btn = ft.ElevatedButton("Enviar", on_click=acao)</code></td>
+                            <td><code style="color:#00e5ff">btn = ft.Button("Enviar", on_click=acao)</code></td>
                             <td>Chama a função <code>def acao(e):</code> no clique!</td>
                         </tr>
                     </tbody>
@@ -325,11 +325,11 @@ ft.<span class="fn">app</span>(target=main)
     <span class="kw">boas_vindas</span> = ft.<span class="fn">Text</span>(<span class="str">"🎮 Escolha seu Herói"</span>, size=<span class="num">26</span>, weight=<span class="str">"bold"</span>)
     <span class="kw">apelido</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Digite seu Nickname"</span>)
     <span class="kw">segredo</span> = ft.<span class="fn">Text</span>(<span class="str">"💎 Bônus Secreto Ativado!"</span>)
-    <span class="kw">botao</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Entrar na Partida"</span>)
+    <span class="kw">botao</span> = ft.<span class="fn">Button</span>(<span class="str">"Entrar na Partida"</span>)
 
     page.<span class="fn">add</span>(boas_vindas, apelido, botao)
 
-ft.<span class="fn">app</span>(target=main)
+ft.<span class="fn">run</span>(main)
                         </div>
                     </div>
                     <div class="detective-card">
@@ -340,7 +340,7 @@ ft.<span class="fn">app</span>(target=main)
                             <li><span class="detective-q-num">Pista 3</span>Se o usuário digitar um apelido e clicar em <code>"Entrar na Partida"</code>, por que o botão ainda não executa nenhuma ação?</li>
                         </ul>
                         <div class="hint-box">
-                            💡 <strong>Dica do Detetive:</strong> Compare as variáveis criadas entre as linhas 6 e 9 com o que foi colocado dentro dos parênteses de <code>page.add(...)</code> na linha 11, e observe o que falta nos parâmetros do <code>ElevatedButton</code>.
+                            💡 <strong>Dica do Detetive:</strong> Compare as variáveis criadas entre as linhas 6 e 9 com o que foi colocado dentro dos parênteses de <code>page.add(...)</code> na linha 11, e observe o que falta nos parâmetros do <code>Button</code>.
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,7 @@ ft.<span class="fn">app</span>(target=main)
     page.<span class="fn">update</span>() <span class="cm"># OBRIGATÓRIO para atualizar a tela!</span>
 
 <span class="cm"># 2. Passamos o nome da função SEM parênteses no on_click:</span>
-<span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Dizer Olá"</span>, on_click=saudar)
+<span class="kw">btn</span> = ft.<span class="fn">Button</span>(<span class="str">"Dizer Olá"</span>, on_click=saudar)
 page.<span class="fn">add</span>(nome_input, btn, resposta)
                         </div>
                     </div>
@@ -405,7 +405,7 @@ page.<span class="fn">add</span>(nome_input, btn, resposta)
 <span class="kw">coluna</span> = ft.<span class="fn">Column</span>([
     ft.<span class="fn">Text</span>(<span class="str">"Título em cima"</span>),
     ft.<span class="fn">TextField</span>(label=<span class="str">"Campo no meio"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"Botão embaixo"</span>)
+    ft.<span class="fn">Button</span>(<span class="str">"Botão embaixo"</span>)
 ], spacing=<span class="num">15</span>)
                         </div>
                         <p style="font-size:.8rem;color:#cbd5e1;margin-top:8px">
@@ -416,9 +416,9 @@ page.<span class="fn">add</span>(nome_input, btn, resposta)
                         <h4 style="color:#a78bfa;margin-bottom:8px">➡️ <code>ft.Row([...])</code> → Alinha Lado a Lado</h4>
                         <div class="prompt-code" style="font-size:.82rem;line-height:1.65">
 <span class="kw">linha_botoes</span> = ft.<span class="fn">Row</span>([
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➕ Somar"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➖ Subtrair"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"🧹 Limpar"</span>)
+    ft.<span class="fn">Button</span>(<span class="str">"➕ Somar"</span>),
+    ft.<span class="fn">Button</span>(<span class="str">"➖ Subtrair"</span>),
+    ft.<span class="fn">Button</span>(<span class="str">"🧹 Limpar"</span>)
 ], alignment=ft.MainAxisAlignment.CENTER)
                         </div>
                         <p style="font-size:.8rem;color:#cbd5e1;margin-top:8px">
@@ -454,12 +454,12 @@ page.<span class="fn">add</span>(nome_input, btn, resposta)
         placar.value = <span class="str">"0"</span>
 
     <span class="kw">botoes</span> = ft.<span class="fn">Row</span>([
-        ft.<span class="fn">ElevatedButton</span>(<span class="str">"⚡ Bônus"</span>, on_click=ganhar_ponto),
-        ft.<span class="fn">ElevatedButton</span>(<span class="str">"🔄 Zerar"</span>, on_click=zerar)
+        ft.<span class="fn">Button</span>(<span class="str">"⚡ Bônus"</span>, on_click=ganhar_ponto),
+        ft.<span class="fn">Button</span>(<span class="str">"🔄 Zerar"</span>, on_click=zerar)
     ])
     page.<span class="fn">add</span>(placar, botoes)
 
-ft.<span class="fn">app</span>(target=main)
+ft.<span class="fn">run</span>(main)
                         </div>
                     </div>
                     <div class="detective-card">
@@ -489,7 +489,7 @@ ft.<span class="fn">app</span>(target=main)
                     <div style="font-size:4.5rem;margin-bottom:12px">☕</div>
                     <div style="font-size:1.25rem;font-weight:700;color:#f8fafc;margin-bottom:10px">Até aqui: Flet Básico Dominado!</div>
                     <div style="font-size:.9rem;color:#94a3b8;max-width:520px;margin:0 auto;line-height:1.6">
-                        Já vimos como instalar o Flet, criar a janela <code>main(page)</code>, usar <code>Text</code>, <code>TextField</code>, <code>ElevatedButton</code>, eventos com <code>on_click</code> + <code>page.update()</code> e alinhar com <code>Column</code> e <code>Row</code>.<br><br>
+                        Já vimos como instalar o Flet, criar a janela <code>main(page)</code>, usar <code>Text</code>, <code>TextField</code>, <code>Button</code>, eventos com <code>on_click</code> + <code>page.update()</code> e alinhar com <code>Column</code> e <code>Row</code>.<br><br>
                         Agora vamos montar os recursos que todo <strong style="color:#00e5ff">Projeto Final</strong> precisa!
                     </div>
                 </div>
@@ -528,7 +528,7 @@ ft.<span class="fn">app</span>(target=main)
 )
 
 <span class="cm"># Botão estilizado com ícone e cor:</span>
-<span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(
+<span class="kw">btn</span> = ft.<span class="fn">Button</span>(
     <span class="str">"Salvar Cadastro"</span>,
     icon=ft.Icons.CHECK_CIRCLE,
     bgcolor=<span class="str">"#10b981"</span>, color=<span class="str">"white"</span>
@@ -559,7 +559,7 @@ ft.<span class="fn">app</span>(target=main)
     bgcolor=<span class="str">"#1e293b"</span>,
     padding=<span class="num">16</span>,
     border_radius=<span class="num">14</span>,
-    border=ft.border.<span class="fn">all</span>(<span class="num">1</span>, <span class="str">"#38bdf8"</span>)
+    border=ft.Border.<span class="fn">all</span>(<span class="num">1</span>, <span class="str">"#38bdf8"</span>)
 )
                         </div>
                     </div>
@@ -707,7 +707,7 @@ ft.<span class="fn">app</span>(target=main)
 )
                         </div>
                         <p style="font-size:.79rem;color:#cbd5e1;margin-top:8px">
-                            💡 Enquanto botões usam <code>on_click</code>, controles como <code>Dropdown</code>, <code>Slider</code> e <code>Switch</code> também aceitam <code>on_change=funcao</code> para reagir na mesma hora!
+                            💡 Enquanto botões usam <code>on_click</code>, controles como <code>Slider</code> e <code>Switch</code> usam <code>on_change=funcao</code> (e o <code>Dropdown</code> usa <code>on_select=funcao</code>) para reagir na mesma hora!
                         </p>
                     </div>
                 </div>
@@ -882,10 +882,10 @@ page.<span class="fn">update</span>()
             email.value = <span class="str">""</span>
         page.<span class="fn">update</span>()
 
-    <span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Enviar Avaliação"</span>, icon=ft.Icons.SEND, on_click=salvar_avaliacao)
+    <span class="kw">btn</span> = ft.<span class="fn">Button</span>(<span class="str">"Enviar Avaliação"</span>, icon=ft.Icons.SEND, on_click=salvar_avaliacao)
     page.<span class="fn">add</span>(email, area, nota, urgente, btn, aviso, historico)
 
-ft.<span class="fn">app</span>(target=main)
+ft.<span class="fn">run</span>(main)
                         </div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px">
@@ -1014,7 +1014,7 @@ ft.<span class="fn">app</span>(target=main)
             <div class="slide-body">
                 <div class="grid-2" style="gap:14px">
                     <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="summary-item"><span class="summary-check">🪟</span><div class="summary-text"><strong>pip install flet + Text, TextField e ElevatedButton</strong>Instalação do Flet, janela <code>main(page)</code>, leitura e alteração de dados com <code>.value</code></div></div>
+                        <div class="summary-item"><span class="summary-check">🪟</span><div class="summary-text"><strong>pip install flet + Text, TextField e Button</strong>Instalação do Flet, janela <code>main(page)</code> com <code>ft.run(main)</code>, leitura e alteração com <code>.value</code></div></div>
                         <div class="summary-item"><span class="summary-check">🔄</span><div class="summary-text"><strong>on_click, page.update(), Column e Row</strong>Conecta botões às funções <code>def(e)</code> e organiza layouts verticais e horizontais</div></div>
                         <div class="summary-item"><span class="summary-check">🎛️</span><div class="summary-text"><strong>E-mail com Ícone, Container, Dropdown, Slider e Switch</strong>Validação de e-mail, cards estilizados e barra de avaliação de 0 a 10 com <code>on_change</code></div></div>
                         <div class="summary-item"><span class="summary-check">🧭</span><div class="summary-text"><strong>ft.NavigationBar + .controls.append() / .clear()</strong>Navegação multi-telas e histórico visual conectado com lista de dicionários!</div></div>
