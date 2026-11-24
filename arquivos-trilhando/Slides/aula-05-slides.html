@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 05 — Interfaces Visuais com Flet (Modo Estudo em Casa) | Trilhando o Caminho do Código</title>
+    <title>Aula 05 — Interfaces Visuais com Flet (Básico &amp; Avançado) | Trilhando o Caminho do Código</title>
     <link rel="stylesheet" href="slides-style.css">
     <style>
-        /* ===== Ajustes de layout para slides mais longos (modo autoestudo) ===== */
-        .presentation-stage .slide { justify-content: flex-start; }
-        .presentation-stage .slide-body { justify-content: flex-start; flex: 0 0 auto; }
-        .presentation-stage .slide-body.centered { justify-content: center; flex: 1 1 auto; }
-
         .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 10px 0; }
         .pillar-card { background: rgba(255,255,255,.04); border: 1.5px solid rgba(255,255,255,.12); border-radius: 16px; padding: 16px 14px; text-align: center; }
         .pillar-icon { font-size: 2.1rem; margin-bottom: 6px; }
@@ -18,8 +13,7 @@
         .pillar-label { font-size: .78rem; color: #94a3b8; line-height: 1.45; }
 
         .step-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,.22); border: 1px solid rgba(0,229,255,.35); border-radius: 100px; padding: 5px 16px; font-size: .75rem; font-weight: 700; color: #00e5ff; letter-spacing: .5px; margin-bottom: 6px; text-transform: uppercase; }
-        .step-badge.practice { background: rgba(16,185,129,.18); border-color: #10b981; color: #6ee7b7; }
-        .step-badge.fire { background: rgba(245,158,11,.16); border-color: #f59e0b; color: #fcd34d; }
+        .detective-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,158,11,.18); border: 1px solid rgba(245,158,11,.55); border-radius: 100px; padding: 5px 16px; font-size: .75rem; font-weight: 800; color: #fcd34d; letter-spacing: .5px; margin-bottom: 6px; text-transform: uppercase; }
         .engage-label { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.45); border-radius: 8px; padding: 4px 12px; font-size: .76rem; font-weight: 700; color: #f59e0b; margin-bottom: 6px; }
 
         .prompt-code { background: #040916; border: 1px solid rgba(0,229,255,.25); border-radius: 10px; padding: 12px 16px; font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: #a7f3d0; line-height: 1.65; white-space: pre-wrap; margin: 6px 0; }
@@ -28,81 +22,57 @@
         .prompt-code .cm { color: #64748b; font-style: italic; }
         .prompt-code .fn { color: #c084fc; }
         .prompt-code .num { color: #fb923c; }
-        .prompt-code .bad { color: #fca5a5; text-decoration: line-through; }
 
-        .stress-table { width: 100%; border-collapse: collapse; font-size: .8rem; margin-top: 8px; }
+        .stress-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 8px; }
         .stress-table th { background: rgba(37,99,235,.3); color: #00e5ff; font-weight: 700; padding: 9px 12px; text-align: left; border-bottom: 1px solid rgba(0,229,255,.3); }
-        .stress-table td { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,.07); color: #cbd5e1; vertical-align: top; }
+        .stress-table td { padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.07); color: #cbd5e1; vertical-align: top; }
         .stress-table tr:nth-child(even) td { background: rgba(255,255,255,.03); }
 
-        .summary-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 9px 14px; }
+        .summary-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 10px 14px; }
         .summary-check { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-        .summary-text { font-size: .82rem; color: #cbd5e1; line-height: 1.45; }
+        .summary-text { font-size: .83rem; color: #cbd5e1; line-height: 1.48; }
         .summary-text strong { color: #fff; display: block; margin-bottom: 2px; }
 
-        /* ===== Blocos didáticos para estudo autônomo ===== */
-        .lede { font-size: .92rem; color: #cbd5e1; line-height: 1.65; }
-        .lede strong { color: #fff; }
-        .analogy-box { background: linear-gradient(135deg, rgba(139,92,246,.13), rgba(37,99,235,.08)); border: 1px solid rgba(167,139,250,.4); border-radius: 14px; padding: 13px 18px; font-size: .88rem; color: #e2e8f0; line-height: 1.62; }
-        .analogy-box .tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: #c4b5fd; margin-bottom: 4px; }
-
-        .line-list { display: flex; flex-direction: column; gap: 7px; }
-        .line-item { display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 8px 12px; font-size: .83rem; color: #cbd5e1; line-height: 1.5; }
-        .line-item strong { color: #fff; }
-        .line-num { flex-shrink: 0; min-width: 26px; height: 26px; border-radius: 8px; background: rgba(0,229,255,.15); border: 1px solid rgba(0,229,255,.35); color: #00e5ff; font-family: 'JetBrains Mono', monospace; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: .74rem; }
-
-        .mock-window { background: #0b1220; border: 1px solid rgba(148,163,184,.35); border-radius: 12px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,.45); }
-        .mock-titlebar { display: flex; align-items: center; gap: 6px; background: #1e293b; padding: 7px 12px; font-size: .72rem; color: #94a3b8; }
-        .mock-titlebar i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-        .mock-titlebar i:nth-child(1) { background: #ef4444; } .mock-titlebar i:nth-child(2) { background: #f59e0b; } .mock-titlebar i:nth-child(3) { background: #10b981; }
-        .mock-titlebar span { margin-left: 8px; }
-        .mock-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-        .mock-text { color: #f8fafc; font-size: .9rem; }
-        .mock-input { border: 1px solid #64748b; border-radius: 6px; padding: 8px 10px; font-size: .8rem; color: #94a3b8; }
-        .mock-input.filled { color: #f8fafc; border-color: #38bdf8; }
-        .mock-btn { align-self: flex-start; background: #1e293b; color: #a5b4fc; border-radius: 20px; padding: 7px 16px; font-size: .8rem; box-shadow: 0 2px 6px rgba(0,0,0,.4); border: 1px solid rgba(165,180,252,.25); }
-        .mock-row { display: flex; gap: 8px; flex-wrap: wrap; }
-        .mock-caption { font-size: .72rem; color: #64748b; text-align: center; margin-top: 6px; }
-        .mock-card { background: #1e293b; border: 1px solid #38bdf8; border-radius: 12px; padding: 12px; }
-        .mock-nav { display: flex; justify-content: space-around; background: #111827; border-top: 1px solid rgba(148,163,184,.25); padding: 8px 0; font-size: .72rem; color: #94a3b8; }
-        .mock-nav .on { color: #00e5ff; font-weight: 700; }
-
-        .solution { margin-top: 10px; border: 1px dashed rgba(16,185,129,.55); border-radius: 12px; background: rgba(16,185,129,.05); }
-        .solution summary { cursor: pointer; padding: 10px 14px; font-weight: 700; color: #6ee7b7; font-size: .88rem; }
-        .solution[open] summary { border-bottom: 1px dashed rgba(16,185,129,.35); }
-        .solution .sol-body { padding: 10px 14px 12px; }
-        .hint { border-color: rgba(245,158,11,.5); background: rgba(245,158,11,.05); }
-        .hint summary { color: #fcd34d; }
-        .hint[open] summary { border-bottom-color: rgba(245,158,11,.35); }
-
-        .flow { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; }
-        .flow-step { flex: 1; min-width: 120px; background: rgba(255,255,255,.04); border: 1px solid rgba(0,229,255,.28); border-radius: 12px; padding: 10px; text-align: center; font-size: .78rem; color: #cbd5e1; line-height: 1.45; }
-        .flow-step b { display: block; font-size: 1.4rem; margin-bottom: 4px; }
-        .flow-arrow { align-self: center; color: #00e5ff; font-size: 1.2rem; font-weight: 800; }
-
-        .bad-box { background: rgba(239,68,68,.07); border: 1px solid rgba(239,68,68,.45); border-radius: 12px; padding: 12px 14px; }
-        .bad-box h4 { color: #fca5a5 !important; }
-        .good-box { background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.45); border-radius: 12px; padding: 12px 14px; }
-        .good-box h4 { color: #6ee7b7 !important; }
-        .bad-box h4, .good-box h4 { font-size: .9rem; margin-bottom: 6px; }
-        .bad-box p, .good-box p { font-size: .8rem; color: #cbd5e1; line-height: 1.5; }
-
-        .practice-steps { font-size: .86rem; color: #e2e8f0; line-height: 1.75; padding-left: 20px; margin: 0; }
-        .practice-steps li { margin-bottom: 4px; }
-        .done-list { list-style: none; padding: 0; margin: 0; font-size: .82rem; color: #cbd5e1; line-height: 1.7; }
-        .time-chip { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 700; color: #94a3b8; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 100px; padding: 3px 10px; margin-left: 8px; vertical-align: middle; }
-        .legend-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .legend-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 12px; font-size: .8rem; color: #cbd5e1; line-height: 1.45; }
-        .legend-card b { display: block; font-size: 1.5rem; margin-bottom: 4px; }
-        .legend-card strong { color: #fff; }
-        .roadmap { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-        .roadmap-item { background: rgba(255,255,255,.04); border: 1px solid rgba(0,229,255,.25); border-radius: 12px; padding: 10px 12px; font-size: .78rem; color: #cbd5e1; line-height: 1.45; }
-        .roadmap-item .rm-n { font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #00e5ff; font-size: .72rem; }
-        .roadmap-item strong { display: block; color: #fff; font-size: .86rem; margin: 2px 0; }
-
-        .copy-wrap { position: relative; }
-        .copy-btn { position: absolute; top: 8px; right: 8px; z-index: 2; background: rgba(37,99,235,.35); border: 1px solid rgba(0,229,255,.45); color: #e0f2fe; font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; cursor: pointer; }
-        .copy-btn:hover { background: rgba(37,99,235,.7); }
+        .detective-card {
+            background: rgba(245,158,11,.06);
+            border: 1.5px solid rgba(245,158,11,.42);
+            border-radius: 16px;
+            padding: 15px 18px;
+        }
+        .detective-card h4 { color: #fcd34d; font-size: .98rem; margin-bottom: 8px; }
+        .detective-questions { list-style: none; padding-left: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+        .detective-questions li {
+            background: rgba(0,0,0,.35);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: .84rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+        .detective-questions li::before { content: none !important; }
+        .detective-q-num {
+            display: inline-block;
+            background: rgba(245,158,11,.22);
+            color: #fcd34d;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            font-size: .74rem;
+            padding: 1px 7px;
+            border-radius: 6px;
+            margin-right: 6px;
+        }
+        .hint-box {
+            margin-top: 10px;
+            background: rgba(37,99,235,.1);
+            border: 1px dashed rgba(0,229,255,.4);
+            border-radius: 11px;
+            padding: 10px 13px;
+            font-size: .8rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+        .hint-box strong { color: #00e5ff; }
 
         .hw-gate-card {
             background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.22), rgba(10, 18, 38, 0.95));
@@ -132,11 +102,6 @@
             transition: transform .2s ease;
         }
         .hw-gate-btn:hover { transform: translateY(-3px) scale(1.02); }
-
-        @media (max-width: 900px) {
-            .pillar-grid, .legend-grid, .roadmap { grid-template-columns: 1fr 1fr; }
-            .flow-arrow { display: none; }
-        }
     </style>
 </head>
 <body>
@@ -157,7 +122,7 @@
             <span style="opacity:.3">|</span>
             <span>TRILHANDO O CAMINHO DO CÓDIGO</span>
             <span style="opacity:.3">•</span>
-            <span style="color:#00e5ff">AULA 05 • ESTUDO EM CASA</span>
+            <span style="color:#00e5ff">AULA 05</span>
         </div>
         <div class="top-controls">
             <a href="../../index.html" class="control-btn">🏠 Classroom</a>
@@ -169,1529 +134,860 @@
 
     <main class="presentation-stage">
 
-        <!-- SLIDE 1 — CAPA -->
+        <!-- SLIDE 1 — CAPA DA AULA 05 -->
         <section class="slide active">
             <div class="slide-header">
-                <span class="slide-step">MÓDULO 05 • DO TERMINAL PARA AS TELAS • 🏠 VERSÃO PARA ESTUDAR SOZINHO</span>
+                <span class="slide-step">MÓDULO 05 • DO TERMINAL PARA AS TELAS: INTERFACES VISUAIS COM FLET</span>
                 <h1 class="slide-title">Construindo Aplicativos Reais com <code>Flet</code></h1>
-                <p class="slide-subtitle">Hoje você sai da "tela preta" do terminal e cria <strong>janelas de verdade</strong>, com botões, caixas de texto, cores, menus e abas — tudo em Python!</p>
+                <p class="slide-subtitle">Da instalação até um exemplo completo de Projeto Final com E-mail, Avaliação, Temas, Listas e Multi-Telas!</p>
             </div>
             <div class="slide-body">
                 <div class="pillar-grid">
                     <div class="pillar-card" style="border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06)">
                         <div class="pillar-icon">📱</div>
                         <div class="pillar-name">Text &amp; TextField</div>
-                        <div class="pillar-label">Substituem o <code>print()</code> e o <code>input()</code> por textos e caixas de digitação visuais.</div>
+                        <div class="pillar-label">Substituem o <code>print()</code> e o <code>input()</code> por textos estilizados e caixas de digitação visuais!</div>
                     </div>
                     <div class="pillar-card" style="border-color:rgba(139,92,246,.4)">
                         <div class="pillar-icon">🖱️</div>
                         <div class="pillar-name" style="color:#a78bfa">on_click &amp; update</div>
-                        <div class="pillar-label">Fazem o botão chamar uma função <code>def</code> e atualizam a tela com <code>page.update()</code>.</div>
+                        <div class="pillar-label">Conecta botões às nossas funções <code>def</code> e atualiza a tela em tempo real com <code>page.update()</code>.</div>
                     </div>
                     <div class="pillar-card" style="border-color:rgba(16,185,129,.4)">
                         <div class="pillar-icon">🎨</div>
                         <div class="pillar-name" style="color:#34d399">Temas &amp; Seletores</div>
-                        <div class="pillar-label">Modo escuro, cards (<code>Container</code>), <code>Dropdown</code>, <code>Slider</code>, <code>Switch</code> e ícones.</div>
+                        <div class="pillar-label">Modo escuro, <code>Container</code>, <code>Dropdown</code>, <code>Slider</code> (Avaliação), <code>Switch</code> e ícones <code>ft.Icons</code>!</div>
                     </div>
                     <div class="pillar-card" style="border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.06)">
-                        <div class="pillar-icon">🧭</div>
-                        <div class="pillar-name" style="color:#fbbf24">NavigationBar</div>
-                        <div class="pillar-label">Abas de aplicativo de celular e listas que crescem na tela com <code>.controls.append()</code>.</div>
+                        <div class="pillar-icon">🕵️</div>
+                        <div class="pillar-name" style="color:#fbbf24">Detetive do Código</div>
+                        <div class="pillar-label">Em cada prática você analisa um código Flet pronto e investiga o que cada bloco faz!</div>
                     </div>
                 </div>
-                <div class="content-box accent-box" style="padding:12px 16px">
-                    <p style="font-size:.88rem;margin:0">🏠 <strong>Esta aula foi preparada para você estudar em casa, no seu ritmo.</strong> Cada assunto tem: <strong>explicação com exemplo do dia a dia</strong> → <strong>código explicado linha por linha</strong> → <strong>imagem de como fica a janela</strong> → <strong>prática guiada com solução escondida</strong>. Avance com as setas <kbd>←</kbd> <kbd>→</kbd> ou com os botões lá embaixo.</p>
+                <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#94a3b8">
+                    ⚡ Começaremos com o <strong>Quiz Interativo de Revisão (10 questões)</strong> da Aula 04 (<code>Funções def/return</code> e <code>Dicionários dict</code>)!
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 2 — COMO ESTUDAR ESTA AULA SOZINHO -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">🧭 Antes de Começar • Guia de Estudo</span>
-                <h2 class="slide-title">Como estudar esta aula sozinho (e não se perder!)</h2>
-                <p class="slide-subtitle">Tempo total estimado: <strong>2h a 2h30</strong>. Pode dividir em 2 dias: Tópicos 1 e 2 num dia, Tópicos 3, 4 e 5 no outro.</p>
-            </div>
-            <div class="slide-body">
-                <div class="legend-grid">
-                    <div class="legend-card"><b>📖</b><strong>Explicação</strong>Slides com a ideia principal e uma comparação com o mundo real. Leia com calma.</div>
-                    <div class="legend-card"><b>🔍</b><strong>Linha por linha</strong>Cada número do lado direito explica uma parte do código da esquerda.</div>
-                    <div class="legend-card"><b>⚡</b><strong>Prática</strong>Slides verdes. Abra o VS Code e faça! Tente antes de abrir a solução.</div>
-                    <div class="legend-card"><b>💡</b><strong>Dica / Solução</strong>Caixas que abrem ao clicar. Use a <em>Dica</em> primeiro; a <em>Solução</em> só se travar mesmo.</div>
-                </div>
-                <h4 style="color:#00e5ff;font-size:.95rem;margin:4px 0 0">🗺️ Roteiro da aula</h4>
-                <div class="roadmap">
-                    <div class="roadmap-item"><span class="rm-n">TÓPICO 1</span><strong>Primeira janela</strong>Text, TextField, Botão</div>
-                    <div class="roadmap-item"><span class="rm-n">TÓPICO 2</span><strong>Botões que funcionam</strong>on_click, update, Column/Row</div>
-                    <div class="roadmap-item"><span class="rm-n">TÓPICO 3</span><strong>App bonito e seguro</strong>Temas, ícones, cards, try/except</div>
-                    <div class="roadmap-item"><span class="rm-n">TÓPICO 4</span><strong>Escolher sem digitar</strong>Dropdown, Slider, Switch</div>
-                    <div class="roadmap-item"><span class="rm-n">TÓPICO 5</span><strong>App completo</strong>Abas e listas dinâmicas</div>
-                </div>
-                <div class="grid-2" style="gap:14px">
-                    <div class="content-box tip-box" style="padding:12px 16px">
-                        <h4 style="font-size:.9rem">✅ Regras de ouro para estudar em casa</h4>
-                        <ul style="font-size:.83rem">
-                            <li><strong>Digite</strong> os códigos (não só copie). Digitar é o que faz aprender.</li>
-                            <li>Crie uma pasta <code>aula05</code> e salve um arquivo por exercício.</li>
-                            <li>Deu erro? Leia a <strong>última linha</strong> da mensagem vermelha — é ela que diz o problema.</li>
-                        </ul>
-                    </div>
-                    <div class="content-box accent-box" style="padding:12px 16px">
-                        <h4 style="font-size:.9rem">🤖 Travou? Use o Chat IA!</h4>
-                        <p style="font-size:.83rem">Clique em <strong>🤖 Chat IA</strong> (ou aperte <kbd>I</kbd>) e peça: <em>"Explique este slide com outras palavras"</em>. Ele lê o slide em que você está! Também pode colar seu código e o erro.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 3 — QUIZ DE AQUECIMENTO (AULA 04) -->
+        <!-- SLIDE 2 — BLOCO 1: QUIZ ESTILO NOTEBOOK LM (10 QUESTÕES DA AULA 04) -->
         <section class="slide">
             <div class="slide-header" style="margin-bottom:10px">
-                <span class="step-badge">⚡ Aquecimento — Quiz de Revisão da Aula 04 (10 Questões)</span>
+                <span class="step-badge">⚡ Bloco 1 — Quiz Interativo de Aquecimento (10 Questões)</span>
                 <h2 class="slide-title" style="font-size:1.55rem">Relembrando: Funções (<code>def / return</code>) e Dicionários (<code>dict</code>)</h2>
-                <p class="slide-subtitle" style="font-size:.88rem">Por que revisar funções? Porque <strong>no Flet, todo botão chama uma função <code>def</code></strong>. Se ainda tiver dúvida em <code>def</code>, revise a Aula 04 antes de seguir.</p>
             </div>
-            <div class="slide-body">
+            <div class="slide-body" style="justify-content:flex-start">
                 <div id="quizAula05Container" data-trilhando-quiz="aula05"></div>
             </div>
         </section>
 
-        <!-- SLIDE 4 — PREPARANDO O AMBIENTE -->
+        <!-- SLIDE 3 — PASSO 0: INSTALANDO E RODANDO O FLET -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">🛠️ Passo 0 • Preparando o Computador <span class="time-chip">⏱️ 10 min</span></span>
-                <h2 class="slide-title">Instalando o Flet e testando se está tudo certo</h2>
-                <p class="slide-subtitle">O Flet é uma <strong>biblioteca</strong>: um pacote de código pronto que alguém criou e que a gente instala para usar. Faça isso só uma vez.</p>
+                <span class="step-badge">🛠️ Passo 0 • Preparando o Ambiente</span>
+                <h2 class="slide-title">Como Instalar e Rodar o <code>Flet</code> no Computador</h2>
+                <p class="slide-subtitle">O Flet é uma biblioteca externa do Python que cria janelas gráficas. Instalamos uma única vez no terminal!</p>
             </div>
             <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div class="content-box" style="background:rgba(0,0,0,.4)">
-                        <h4 style="color:#00e5ff;font-size:.95rem">1️⃣ Abra o terminal do VS Code</h4>
-                        <p style="font-size:.83rem">Menu <strong>Terminal → Novo Terminal</strong> (ou <kbd>Ctrl</kbd> + <kbd>'</kbd>). Digite e aperte <kbd>Enter</kbd>:</p>
-                        <div class="prompt-code">pip install flet</div>
-                        <p style="font-size:.8rem">Se aparecer <em>"pip não é reconhecido"</em>, use:</p>
-                        <div class="prompt-code">python -m pip install flet</div>
-                        <h4 style="color:#00e5ff;font-size:.95rem;margin-top:10px">2️⃣ Teste se instalou</h4>
-                        <div class="prompt-code">python -c "import flet; print('Flet OK!')"</div>
-                        <p style="font-size:.8rem">Apareceu <code>Flet OK!</code>? Perfeito, pode seguir! 🎉</p>
+                <div class="grid-2" style="gap:18px;align-items:start">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">💻 1. Instalando pelo Terminal do VS Code</span>
+                        <div class="prompt-code" style="font-size:.84rem;line-height:1.7">
+<span class="cm"># Abra o terminal (Ctrl + ') e digite:</span>
+pip install flet
+
+<span class="cm"># Se aparecer erro no comando pip, use:</span>
+python -m pip install flet
+                        </div>
+                        <p style="font-size:.82rem;color:#cbd5e1;margin-top:8px">
+                            Depois de instalar, crie um arquivo normal com final <code>.py</code> (ex: <code>meu_app.py</code>) e clique em <strong>▶ Run</strong> para abrir a janela!
+                        </p>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="padding:14px">
-                            <h4 style="color:#a78bfa;font-size:.95rem">3️⃣ Como rodar um app Flet</h4>
-                            <p style="font-size:.83rem">Salve o arquivo (ex.: <code>ola_flet.py</code>) e clique no botão ▶️ do VS Code <strong>ou</strong> digite no terminal:</p>
-                            <div class="prompt-code">python ola_flet.py</div>
-                            <p style="font-size:.8rem">Uma <strong>janela nova</strong> vai abrir. Para fechar o app, feche a janela (ou <kbd>Ctrl</kbd>+<kbd>C</kbd> no terminal).</p>
+                        <div class="summary-item">
+                            <span class="summary-check">1️⃣</span>
+                            <div class="summary-text"><strong>Uma janela de verdade vai abrir</strong>Em vez de responder no terminal preto, o Python abre uma janela própria do seu aplicativo.</div>
                         </div>
-                        <div class="content-box warn-box" style="padding:12px 14px">
-                            <h4 style="font-size:.88rem">🚨 Problemas comuns</h4>
-                            <p style="font-size:.8rem;margin-bottom:4px"><strong><code>ModuleNotFoundError: No module named 'flet'</code></strong> → o Flet não foi instalado. Repita o passo 1.</p>
-                            <p style="font-size:.8rem;margin-bottom:4px"><strong>Arquivo chamado <code>flet.py</code></strong> → NUNCA dê ao seu arquivo o nome da biblioteca! Renomeie para <code>meu_app.py</code>.</p>
-                            <p style="font-size:.8rem;margin:0"><strong>Sem computador em casa?</strong> Estude os slides normalmente (as imagens mostram o resultado) e faça a prática na próxima aula presencial.</p>
+                        <div class="summary-item">
+                            <span class="summary-check">2️⃣</span>
+                            <div class="summary-text"><strong>Para atualizar, feche a janela e rode de novo</strong>Sempre salve com <code>Ctrl + S</code> antes de clicar em ▶ para ver suas alterações.</div>
+                        </div>
+                        <div class="content-box warn-box" style="padding:10px 14px">
+                            <p style="font-size:.8rem;color:#cbd5e1;margin:0">
+                                🚨 <strong>Regra de Ouro:</strong> Nunca salve seu arquivo com o nome <code>flet.py</code>! Se fizer isso, o Python confunde seu arquivo com a biblioteca oficial.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== TÓPICO 1 ===================== -->
-
-        <!-- SLIDE 5 — TÓPICO 1: O QUE É O FLET -->
+        <!-- SLIDE 4 — TÓPICO 1: ESQUELETO MÍNIMO DO FLET (EXPLICAÇÃO 1/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 1 • Flet Básico — Explicação (1/3)</span>
-                <h2 class="slide-title">Adeus tela preta! O que é o <code>Flet</code> e como ele pensa?</h2>
-                <p class="slide-subtitle">Até agora nossos programas conversavam pelo terminal. Com o Flet, eles ganham uma janela igual à de qualquer aplicativo.</p>
+                <span class="step-badge">📱 Tópico 1 • Flet Básico — Explicação (1/2)</span>
+                <h2 class="slide-title">Adeus Tela Preta! O Esqueleto de Todo App <code>Flet</code></h2>
+                <p class="slide-subtitle">Com <code>import flet as ft</code>, a função <code>main(page: ft.Page)</code> vira a janela do nosso aplicativo!</p>
             </div>
             <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="analogy-box">
-                            <span class="tag">🧱 Pense assim: um mural de cortiça</span><br>
-                            A <strong>página</strong> (<code>page</code>) é um <strong>mural em branco</strong>. Cada elemento visual — um texto, uma caixa de digitação, um botão — é um <strong>papelzinho</strong> que você cria e depois <strong>prende no mural</strong> com <code>page.add()</code>. Se você criar o papel mas não prender, ninguém vê!
+                <div class="grid-2" style="gap:18px;align-items:start">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">⌨️ Esqueleto Mínimo — meu_primeiro_app.py</span>
+                        <div class="prompt-code" style="font-size:.84rem;line-height:1.7">
+<span class="kw">import</span> flet <span class="kw">as</span> ft
+
+<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
+    page.title = <span class="str">"Meu Primeiro App!"</span>
+    
+    <span class="cm"># Criamos um texto visual e colocamos na página:</span>
+    <span class="kw">titulo</span> = ft.<span class="fn">Text</span>(<span class="str">"🚀 Olá, Mundo Visual!"</span>, size=<span class="num">28</span>)
+    page.<span class="fn">add</span>(titulo)
+
+ft.<span class="fn">app</span>(target=main)
                         </div>
-                        <p class="lede">No Flet, esses "papeizinhos" se chamam <strong>controles</strong> (ou <em>widgets</em>). Todo controle começa com <code>ft.</code> e uma letra maiúscula: <code>ft.Text</code>, <code>ft.TextField</code>, <code>ft.ElevatedButton</code>...</p>
-                        <p class="lede">E tudo que você já aprendeu continua valendo: <strong>variáveis, if/else, listas, funções</strong>. O Flet só muda <em>onde</em> as coisas aparecem.</p>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:12px">
-                        <div class="grid-2" style="gap:10px">
-                            <div class="content-box" style="padding:12px;background:#000">
-                                <h4 style="font-size:.8rem;color:#94a3b8">⬛ ANTES (terminal)</h4>
-                                <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#a7f3d0;line-height:1.6">Qual seu nome? Ana<br>Olá, Ana!<br>_</div>
-                            </div>
-                            <div class="mock-window">
-                                <div class="mock-titlebar"><i></i><i></i><i></i><span>DEPOIS (Flet)</span></div>
-                                <div class="mock-body" style="padding:10px;gap:6px">
-                                    <div class="mock-input filled" style="padding:5px 8px;font-size:.72rem">Ana</div>
-                                    <div class="mock-btn" style="padding:4px 10px;font-size:.72rem">Dizer Olá</div>
-                                    <div class="mock-text" style="font-size:.78rem;color:#22d3ee">🎉 Olá, Ana!</div>
-                                </div>
-                            </div>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                        <div class="summary-item" style="padding:12px 14px">
+                            <span class="summary-check">🪟</span>
+                            <div class="summary-text"><strong>page: ft.Page → A Janela em Branco</strong>É o quadro onde configuramos o título (<code>page.title</code>), o tema e adicionamos os elementos visuais.</div>
                         </div>
-                        <div class="flow">
-                            <div class="flow-step"><b>🐍</b>Você escreve o código em Python</div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step"><b>⚙️</b>O Flet traduz para elementos visuais</div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-step"><b>🪟</b>Abre uma janela (ou celular / navegador)</div>
+                        <div class="summary-item" style="padding:12px 14px">
+                            <span class="summary-check">➕</span>
+                            <div class="summary-text"><strong>page.add(...) → Coloca na Tela</strong>Se você criar uma variável com <code>ft.Text(...)</code> mas não colocar no <code>page.add()</code>, ela não aparece na janela!</div>
+                        </div>
+                        <div class="summary-item" style="padding:12px 14px">
+                            <span class="summary-check">▶️</span>
+                            <div class="summary-text"><strong>ft.app(target=main) → Liga o Motor</strong>Fica sempre na última linha (sem espaços antes) para iniciar o aplicativo.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 6 — TÓPICO 1: ESQUELETO LINHA POR LINHA -->
+        <!-- SLIDE 5 — TÓPICO 1: OS 3 BLOCOS DE LEGO (EXPLICAÇÃO 2/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">🔍 Tópico 1 • Flet Básico — Explicação (2/3)</span>
-                <h2 class="slide-title">O esqueleto de todo app Flet, linha por linha</h2>
-                <p class="slide-subtitle">Todo programa Flet tem essas mesmas 4 partes. Decore esse "molde" — você vai usá-lo em todos os exercícios!</p>
-            </div>
-            <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <span class="engage-label">⌨️ meu_primeiro_app.py</span>
-                            <div class="prompt-code" style="font-size:.84rem;line-height:1.75">
-<span class="kw">import</span> flet <span class="kw">as</span> ft                <span class="cm"># ①</span>
-
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):         <span class="cm"># ②</span>
-    page.title = <span class="str">"Meu Primeiro App!"</span>  <span class="cm"># ③</span>
-
-    titulo = ft.<span class="fn">Text</span>(<span class="str">"🚀 Olá, Mundo Visual!"</span>, size=<span class="num">28</span>)  <span class="cm"># ④</span>
-    page.<span class="fn">add</span>(titulo)                 <span class="cm"># ⑤</span>
-
-ft.<span class="fn">app</span>(target=main)              <span class="cm"># ⑥</span>
-</div>
-                        </div>
-                        <div class="mock-window">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Meu Primeiro App!</span></div>
-                            <div class="mock-body" style="min-height:70px">
-                                <div class="mock-text" style="font-size:1.35rem">🚀 Olá, Mundo Visual!</div>
-                            </div>
-                        </div>
-                        <div class="mock-caption">👆 É isso que aparece quando você roda o código</div>
-                    </div>
-                    <div class="line-list">
-                        <div class="line-item"><span class="line-num">①</span><div><strong>Importa o Flet</strong> e dá o apelido <code>ft</code>. Assim escrevemos <code>ft.Text</code> em vez de <code>flet.Text</code>.</div></div>
-                        <div class="line-item"><span class="line-num">②</span><div><strong>A função principal.</strong> O Flet chama a <code>main</code> sozinho e entrega a ela a <code>page</code> — a janela vazia (nosso "mural"). Tudo do app fica <strong>dentro</strong> dessa função (repare no recuo!).</div></div>
-                        <div class="line-item"><span class="line-num">③</span><div><strong>Configura a janela.</strong> <code>page.title</code> é o nome que aparece na barra de cima.</div></div>
-                        <div class="line-item"><span class="line-num">④</span><div><strong>Cria um controle</strong> de texto e guarda na variável <code>titulo</code>. <code>size=28</code> é o tamanho da letra. Ainda <em>não</em> aparece na tela!</div></div>
-                        <div class="line-item"><span class="line-num">⑤</span><div><strong>Prende no mural.</strong> <code>page.add(...)</code> coloca o controle na janela. Pode adicionar vários de uma vez: <code>page.add(a, b, c)</code>.</div></div>
-                        <div class="line-item"><span class="line-num">⑥</span><div><strong>Liga o motor.</strong> Fica <strong>fora</strong> da função (sem recuo), sempre na última linha. É ela que abre a janela e chama a <code>main</code>.</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 7 — TÓPICO 1: OS 3 BLOCOS DE LEGO -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">📖 Tópico 1 • Flet Básico — Explicação (3/3)</span>
-                <h2 class="slide-title">Os 3 blocos de LEGO: <code>Text</code>, <code>TextField</code> e <code>ElevatedButton</code></h2>
-                <p class="slide-subtitle">Veja a "tradução" do que fazíamos no terminal para os controles visuais do Flet.</p>
+                <span class="step-badge">📱 Tópico 1 • Flet Básico — Explicação (2/2)</span>
+                <h2 class="slide-title">Os 3 Blocos Base: <code>Text</code>, <code>TextField</code> e <code>ElevatedButton</code></h2>
+                <p class="slide-subtitle">Veja a tradução direta do que fazíamos no terminal para os componentes visuais do Flet!</p>
             </div>
             <div class="slide-body">
                 <table class="stress-table">
                     <thead>
-                        <tr><th>O que queremos fazer</th><th>No Terminal (antigo)</th><th>No Flet (novo!)</th><th>Como ler / mudar o valor?</th></tr>
+                        <tr><th>O que queremos fazer</th><th>No Terminal (Antigo)</th><th>No Flet Visual (Novo!)</th><th>Como ler ou mudar o valor?</th></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>📝 Mostrar texto na tela</strong></td>
+                            <td><strong>Mostrar texto na tela</strong></td>
                             <td><code>print("Olá!")</code></td>
                             <td><code style="color:#00e5ff">msg = ft.Text("Olá!", size=20)</code></td>
                             <td><code>msg.value = "Novo texto"</code></td>
                         </tr>
                         <tr>
-                            <td><strong>⌨️ Pedir digitação do usuário</strong></td>
+                            <td><strong>Pedir digitação do usuário</strong></td>
                             <td><code>nome = input("Nome: ")</code></td>
                             <td><code style="color:#00e5ff">campo = ft.TextField(label="Nome")</code></td>
-                            <td><code>campo.value</code> (guarda o que foi digitado)</td>
+                            <td><code>campo.value</code> (guarda o que foi digitado!)</td>
                         </tr>
                         <tr>
-                            <td><strong>🖱️ Executar uma ação</strong></td>
+                            <td><strong>Executar uma ação</strong></td>
                             <td>Apertar <kbd>Enter</kbd></td>
                             <td><code style="color:#00e5ff">btn = ft.ElevatedButton("Enviar", on_click=acao)</code></td>
-                            <td>Chama a função <code>def acao(e):</code> no clique</td>
+                            <td>Chama a função <code>def acao(e):</code> no clique!</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="grid-2" style="gap:14px;align-items:start">
-                    <div class="analogy-box">
-                        <span class="tag">🔑 A palavra mágica: <code>.value</code></span><br>
-                        Pense no <code>.value</code> como o <strong>"conteúdo da caixinha"</strong>. Em um <code>ft.Text</code>, é o texto que aparece. Em um <code>ft.TextField</code>, é o que a pessoa digitou. <strong>Ler</strong>: <code>campo.value</code>. <strong>Mudar</strong>: <code>msg.value = "..."</code>.
-                    </div>
-                    <div class="content-box" style="padding:12px 14px">
-                        <h4 style="font-size:.88rem;color:#fbbf24">🎨 Opções extras que você pode testar</h4>
-                        <p style="font-size:.8rem;margin:0"><code>ft.Text("Oi", size=30, weight="bold", color="cyan")</code><br><code>ft.TextField(label="Idade", hint_text="Ex.: 15", width=200)</code><br><code>ft.ElevatedButton("Salvar", width=200)</code></p>
-                        <p style="font-size:.76rem;color:#94a3b8;margin-top:6px">⚠️ <code>TextField.value</code> é sempre <strong>texto (str)</strong>, mesmo se digitarem números — igual ao <code>input()</code>. Para fazer contas, use <code>int()</code> ou <code>float()</code>.</p>
-                    </div>
+                <div class="content-box tip-box" style="margin-top:10px;padding:12px 16px;font-size:.86rem">
+                    💡 <strong>Propriedade <code>.value</code>:</strong> Tanto o <code>ft.Text</code> quanto o <code>ft.TextField</code> guardam seu texto atual dentro de <code>.value</code>!
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 8 — TÓPICO 1: PRÁTICA 1 -->
+        <!-- SLIDE 6 — TÓPICO 1: PRÁTICA — DETETIVE DO CÓDIGO #1 -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge practice">⚡ Tópico 1 • Prática 1 — Mão na Massa! <span class="time-chip">⏱️ 15 min</span></span>
-                <h2 class="slide-title">Minha primeira janela: o "Mural dos Sonhos"</h2>
-                <p class="slide-subtitle">Objetivo: criar uma janela com seu nome no título, um texto grande, uma caixa de digitação e um botão. (O botão ainda não faz nada — isso é o Tópico 2!)</p>
+                <span class="detective-badge">🕵️ Tópico 1 • Prática: Detetive do Código #1</span>
+                <h2 class="slide-title">Investigação: O Mistério da Janela de Boas-Vindas</h2>
+                <p class="slide-subtitle">Leia o código abaixo com atenção e explique (no caderno ou testando no VS Code) o que está acontecendo!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.06);padding:14px 16px">
-                            <h4 style="color:#34d399;font-size:.95rem">🪜 Passo a passo</h4>
-                            <ol class="practice-steps">
-                                <li>Crie o arquivo <code>pratica1_mural.py</code> na pasta <code>aula05</code>.</li>
-                                <li>Escreva o <strong>esqueleto</strong> do slide anterior (import, <code>def main</code>, <code>ft.app</code>).</li>
-                                <li>Dentro da <code>main</code>, mude o <code>page.title</code> para <code>"App da/do SEU NOME"</code>.</li>
-                                <li>Crie 3 variáveis: <code>titulo</code> (um <code>ft.Text</code> com <code>size=26</code>), <code>caixa</code> (um <code>ft.TextField</code> com <code>label="Digite uma meta sua..."</code>) e <code>botao</code> (um <code>ft.ElevatedButton("Registrar Meta")</code>).</li>
-                                <li>Prenda os 3 no mural: <code>page.add(titulo, caixa, botao)</code>.</li>
-                                <li>Salve (<kbd>Ctrl</kbd>+<kbd>S</kbd>) e rode ▶️.</li>
-                            </ol>
-                        </div>
-                        <details class="solution hint">
-                            <summary>💡 Dica (clique para abrir) — a janela não abriu ou deu erro?</summary>
-                            <div class="sol-body lede" style="font-size:.82rem">
-                                • Confira se <code>ft.app(target=main)</code> está <strong>sem recuo</strong>, na última linha.<br>
-                                • Confira os <strong>parênteses e aspas</strong>: cada <code>(</code> precisa de um <code>)</code>.<br>
-                                • Os nomes têm maiúsculas: <code>ft.Text</code>, <code>ft.TextField</code>, <code>ft.ElevatedButton</code>. <code>ft.text</code> dá erro!<br>
-                                • Erro <code>IndentationError</code>? Algum recuo (espaços no começo da linha) está errado.
-                            </div>
-                        </details>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.85rem;color:#94a3b8;text-transform:uppercase">🎯 Resultado esperado</h4>
-                        <div class="mock-window">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>App do Victor</span></div>
-                            <div class="mock-body">
-                                <div class="mock-text" style="font-size:1.25rem;font-weight:800">🌟 Mural dos Sonhos</div>
-                                <div class="mock-input">Digite uma meta sua...</div>
-                                <div class="mock-btn">Registrar Meta</div>
-                            </div>
-                        </div>
-                        <div class="content-box tip-box" style="padding:10px 14px">
-                            <h4 style="font-size:.85rem">✅ Deu certo se...</h4>
-                            <ul class="done-list"><li>☑️ Abriu uma janela com seu nome lá em cima</li><li>☑️ Dá para digitar dentro da caixa</li><li>☑️ O botão aparece (clicar nele não faz nada ainda — é normal!)</li></ul>
-                        </div>
-                        <details class="solution">
-                            <summary>🔓 Ver solução completa (tente sozinho antes!)</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.8rem">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Código Sob Investigação — caso_01.py</span>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.68">
 <span class="kw">import</span> flet <span class="kw">as</span> ft
 
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"App do Victor"</span>
+    page.title = <span class="str">"Portal de Jogos"</span>
 
-    titulo = ft.<span class="fn">Text</span>(<span class="str">"🌟 Mural dos Sonhos"</span>, size=<span class="num">26</span>, weight=<span class="str">"bold"</span>)
-    caixa = ft.<span class="fn">TextField</span>(label=<span class="str">"Digite uma meta sua..."</span>)
-    botao = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Registrar Meta"</span>)
+    <span class="kw">boas_vindas</span> = ft.<span class="fn">Text</span>(<span class="str">"🎮 Escolha seu Herói"</span>, size=<span class="num">26</span>, weight=<span class="str">"bold"</span>)
+    <span class="kw">apelido</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Digite seu Nickname"</span>)
+    <span class="kw">segredo</span> = ft.<span class="fn">Text</span>(<span class="str">"💎 Bônus Secreto Ativado!"</span>)
+    <span class="kw">botao</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Entrar na Partida"</span>)
 
-    page.<span class="fn">add</span>(titulo, caixa, botao)
+    page.<span class="fn">add</span>(boas_vindas, apelido, botao)
 
 ft.<span class="fn">app</span>(target=main)
-</div>
-                            </div>
-                        </details>
+                        </div>
+                    </div>
+                    <div class="detective-card">
+                        <h4>🕵️ Missão do Detetive — Explique o Código:</h4>
+                        <ul class="detective-questions">
+                            <li><span class="detective-q-num">Pista 1</span>Qual nome aparece na barra superior da janela quando esse código roda, e quantos controles são criados dentro da função <code>main</code>?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Por que a variável <code>segredo</code> foi criada perfeitamente na linha 8, mas <strong>não aparece na tela</strong> quando abrimos o aplicativo?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Se o usuário digitar um apelido e clicar em <code>"Entrar na Partida"</code>, por que o botão ainda não executa nenhuma ação?</li>
+                        </ul>
+                        <div class="hint-box">
+                            💡 <strong>Dica do Detetive:</strong> Compare as variáveis criadas entre as linhas 6 e 9 com o que foi colocado dentro dos parênteses de <code>page.add(...)</code> na linha 11, e observe o que falta nos parâmetros do <code>ElevatedButton</code>.
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== TÓPICO 2 ===================== -->
-
-        <!-- SLIDE 9 — TÓPICO 2: O QUE É UM EVENTO -->
+        <!-- SLIDE 7 — TÓPICO 2: EVENTOS ON_CLICK E PAGE.UPDATE (EXPLICAÇÃO 1/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 2 • Eventos &amp; Layouts — Explicação (1/4)</span>
-                <h2 class="slide-title">Dando vida ao botão: o que é um <strong>evento</strong>?</h2>
-                <p class="slide-subtitle">No terminal, o programa rodava de cima para baixo e acabava. Num app, o programa <strong>fica esperando</strong> o usuário fazer alguma coisa.</p>
+                <span class="step-badge">🖱️ Tópico 2 • Eventos &amp; Layouts — Explicação (1/2)</span>
+                <h2 class="slide-title">Dando Vida ao Botão: <code>on_click</code> e <code>page.update()</code></h2>
+                <p class="slide-subtitle">Quando o usuário clica no botão, uma função <code>def</code> lê o <code>.value</code>, altera a tela e chama <code>page.update()</code>!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="analogy-box">
-                            <span class="tag">🔔 Pense assim: a campainha de casa</span><br>
-                            A campainha fica quietinha até alguém apertar. Quando apertam, ela <strong>toca</strong>. No Flet, o botão é a campainha, o <strong>clique é o evento</strong>, e a <strong>função</strong> que você liga a ele é o "som" que toca. A ligação é feita com <code>on_click=nome_da_funcao</code>.
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">⚡ Como conectar o clique do botão:</span>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.62">
+<span class="kw">nome_input</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Qual é o seu nome?"</span>)
+<span class="kw">resposta</span> = ft.<span class="fn">Text</span>(<span class="str">""</span>, size=<span class="num">20</span>, color=<span class="str">"cyan"</span>)
+
+<span class="cm"># 1. Função que roda quando o botão é clicado:</span>
+<span class="kw">def</span> <span class="fn">saudar</span>(e):
+    resposta.value = <span class="str">f"🎉 Olá, <span class="kw">{nome_input.value}</span>!"</span>
+    page.<span class="fn">update</span>() <span class="cm"># OBRIGATÓRIO para atualizar a tela!</span>
+
+<span class="cm"># 2. Passamos o nome da função SEM parênteses no on_click:</span>
+<span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Dizer Olá"</span>, on_click=saudar)
+page.<span class="fn">add</span>(nome_input, btn, resposta)
                         </div>
-                        <p class="lede"><strong>Evento</strong> = qualquer coisa que o usuário faz: clicar, digitar, escolher uma opção, arrastar uma barra... Cada controle avisa o Flet quando um evento acontece.</p>
-                        <p class="lede">A função ligada ao evento recebe um parâmetro chamado <code>e</code> (de <em>evento</em>): <code>def saudar(e):</code>. Por enquanto, basta saber que ele <strong>precisa estar ali</strong>, mesmo que você não use.</p>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.9rem;color:#00e5ff">🔄 O ciclo que acontece a CADA clique:</h4>
-                        <div class="flow" style="flex-direction:column">
-                            <div class="flow-step" style="text-align:left"><b style="display:inline;font-size:1.1rem">1️⃣ 👆</b> O usuário <strong>clica</strong> no botão.</div>
-                            <div class="flow-step" style="text-align:left"><b style="display:inline;font-size:1.1rem">2️⃣ 📞</b> O Flet <strong>chama a função</strong> que está no <code>on_click</code>.</div>
-                            <div class="flow-step" style="text-align:left"><b style="display:inline;font-size:1.1rem">3️⃣ ✏️</b> A função <strong>lê</strong> valores (<code>campo.value</code>) e <strong>muda</strong> controles (<code>msg.value = ...</code>).</div>
-                            <div class="flow-step" style="text-align:left;border-color:rgba(245,158,11,.55)"><b style="display:inline;font-size:1.1rem">4️⃣ 🔄</b> A função chama <code>page.update()</code> → o Flet <strong>redesenha a tela</strong> com as mudanças.</div>
-                        </div>
-                        <div class="content-box warn-box" style="padding:10px 14px">
-                            <p style="font-size:.8rem;margin:0">⚠️ <strong>O passo 4 é o mais esquecido!</strong> Sem <code>page.update()</code>, a mudança acontece "por dentro", mas a tela continua igual.</p>
+                        <div class="content-box warn-box" style="padding:14px">
+                            <h4 style="font-size:.9rem;margin-bottom:6px">🚨 As 3 Regras de Ouro dos Eventos:</h4>
+                            <p style="font-size:.82rem;color:#cbd5e1;line-height:1.55;margin-bottom:6px">
+                                <strong>1. Parâmetro <code>(e)</code>:</strong> Toda função ligada a um botão recebe o evento <code>e</code>: <code>def saudar(e):</code>.
+                            </p>
+                            <p style="font-size:.82rem;color:#cbd5e1;line-height:1.55;margin-bottom:6px">
+                                <strong>2. Chamar <code>page.update()</code>:</strong> Se mudar um <code>.value</code> e esquecer o <code>page.update()</code>, a tela continua igualzinha!
+                            </p>
+                            <p style="font-size:.82rem;color:#cbd5e1;line-height:1.55;margin:0">
+                                <strong>3. Sem parênteses no <code>on_click</code>:</strong> Escreva <code>on_click=saudar</code> (e nunca <code>on_click=saudar()</code>).
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 10 — TÓPICO 2: CÓDIGO SAUDAÇÃO LINHA POR LINHA -->
+        <!-- SLIDE 8 — TÓPICO 2: LAYOUTS COLUMN E ROW (EXPLICAÇÃO 2/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">🔍 Tópico 2 • Eventos &amp; Layouts — Explicação (2/4)</span>
-                <h2 class="slide-title">Exemplo completo: um app que diz "Olá" para você</h2>
-                <p class="slide-subtitle">Copie, rode e teste! Depois leia a explicação de cada parte ao lado.</p>
+                <span class="step-badge">🖱️ Tópico 2 • Eventos &amp; Layouts — Explicação (2/2)</span>
+                <h2 class="slide-title">Organizando a Tela: <code>ft.Column</code> (Vertical) vs <code>ft.Row</code> (Horizontal)</h2>
+                <p class="slide-subtitle">Use <code>Column</code> para empilhar um abaixo do outro e <code>Row</code> para colocar elementos lado a lado!</p>
             </div>
             <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <span class="engage-label">⌨️ saudacao.py</span>
-                            <div class="prompt-code" style="font-size:.8rem;line-height:1.65">
-<span class="kw">import</span> flet <span class="kw">as</span> ft
-
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Saudação"</span>
-
-    nome_input = ft.<span class="fn">TextField</span>(label=<span class="str">"Qual é o seu nome?"</span>)  <span class="cm"># ①</span>
-    resposta = ft.<span class="fn">Text</span>(<span class="str">""</span>, size=<span class="num">20</span>, color=<span class="str">"cyan"</span>)      <span class="cm"># ②</span>
-
-    <span class="kw">def</span> <span class="fn">saudar</span>(e):                                       <span class="cm"># ③</span>
-        resposta.value = <span class="str">f"🎉 Olá, {nome_input.value}!"</span>     <span class="cm"># ④</span>
-        page.<span class="fn">update</span>()                                     <span class="cm"># ⑤</span>
-
-    btn = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Dizer Olá"</span>, on_click=saudar)  <span class="cm"># ⑥</span>
-    page.<span class="fn">add</span>(nome_input, btn, resposta)                     <span class="cm"># ⑦</span>
-
-ft.<span class="fn">app</span>(target=main)
-</div>
-                        </div>
-                        <div class="grid-2" style="gap:10px">
-                            <div class="mock-window">
-                                <div class="mock-titlebar"><i></i><i></i><i></i><span>Antes do clique</span></div>
-                                <div class="mock-body" style="padding:10px;gap:7px">
-                                    <div class="mock-input filled" style="font-size:.74rem">Ana</div>
-                                    <div class="mock-btn" style="font-size:.74rem">Dizer Olá</div>
-                                    <div class="mock-text" style="font-size:.78rem;color:#475569">(texto vazio)</div>
-                                </div>
-                            </div>
-                            <div class="mock-window" style="border-color:#22d3ee">
-                                <div class="mock-titlebar"><i></i><i></i><i></i><span>Depois do clique</span></div>
-                                <div class="mock-body" style="padding:10px;gap:7px">
-                                    <div class="mock-input filled" style="font-size:.74rem">Ana</div>
-                                    <div class="mock-btn" style="font-size:.74rem">Dizer Olá</div>
-                                    <div class="mock-text" style="font-size:.9rem;color:#22d3ee">🎉 Olá, Ana!</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line-list">
-                        <div class="line-item"><span class="line-num">①</span><div>Caixa onde o usuário digita o nome. O que ele digitar fica em <code>nome_input.value</code>.</div></div>
-                        <div class="line-item"><span class="line-num">②</span><div>Um texto <strong>vazio</strong> (<code>""</code>). Ele começa invisível e será preenchido no clique. É como deixar um espaço reservado no mural.</div></div>
-                        <div class="line-item"><span class="line-num">③</span><div>A função do evento. Fica <strong>dentro</strong> da <code>main</code> para conseguir "enxergar" <code>page</code>, <code>nome_input</code> e <code>resposta</code>. O <code>(e)</code> é obrigatório.</div></div>
-                        <div class="line-item"><span class="line-num">④</span><div><strong>Lê</strong> o que foi digitado e <strong>escreve</strong> no texto de resposta, usando f-string (as chaves <code>{ }</code> colocam o valor da variável no meio do texto).</div></div>
-                        <div class="line-item"><span class="line-num">⑤</span><div><strong>Redesenha a tela.</strong> Sem esta linha, a resposta não aparece!</div></div>
-                        <div class="line-item"><span class="line-num">⑥</span><div>Cria o botão e <strong>liga a campainha</strong>: <code>on_click=saudar</code> (o nome da função, <strong>sem parênteses</strong>).</div></div>
-                        <div class="line-item"><span class="line-num">⑦</span><div>Prende os 3 controles no mural, na ordem: caixa, botão e resposta (de cima para baixo).</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 11 — TÓPICO 2: PEGADINHAS -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">🚨 Tópico 2 • Eventos &amp; Layouts — Explicação (3/4)</span>
-                <h2 class="slide-title">As 3 pegadinhas que mais travam quem está começando</h2>
-                <p class="slide-subtitle">Se o seu botão "não funciona", 90% das vezes é uma destas. Compare o <span style="color:#fca5a5">errado</span> com o <span style="color:#6ee7b7">certo</span>.</p>
-            </div>
-            <div class="slide-body">
-                <div class="grid-3" style="gap:14px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="bad-box">
-                            <h4>❌ 1. Esqueceu o <code>page.update()</code></h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-<span class="kw">def</span> <span class="fn">saudar</span>(e):
-    resposta.value = <span class="str">"Olá!"</span>
-    <span class="cm"># faltou atualizar!</span>
-</div>
-                            <p><strong>Sintoma:</strong> clica e nada acontece, nenhum erro aparece.</p>
-                        </div>
-                        <div class="good-box">
-                            <h4>✅ Certo</h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-<span class="kw">def</span> <span class="fn">saudar</span>(e):
-    resposta.value = <span class="str">"Olá!"</span>
-    page.<span class="fn">update</span>()
-</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="bad-box">
-                            <h4>❌ 2. Parênteses no <code>on_click</code></h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-ft.<span class="fn">ElevatedButton</span>(<span class="str">"Oi"</span>,
-    on_click=<span class="bad">saudar()</span>)
-</div>
-                            <p><strong>Sintoma:</strong> a função roda sozinha ao abrir o app (ou dá erro), e o clique não faz nada. Com <code>()</code> você <em>executa</em> a função na hora, em vez de <em>entregá-la</em> ao botão.</p>
-                        </div>
-                        <div class="good-box">
-                            <h4>✅ Certo</h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-ft.<span class="fn">ElevatedButton</span>(<span class="str">"Oi"</span>,
-    on_click=saudar)
-</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="bad-box">
-                            <h4>❌ 3. Esqueceu o <code>(e)</code></h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-<span class="kw">def</span> <span class="fn">saudar</span>():
-    resposta.value = <span class="str">"Olá!"</span>
-    page.<span class="fn">update</span>()
-</div>
-                            <p><strong>Sintoma:</strong> ao clicar, aparece no terminal <code>TypeError: saudar() takes 0 positional arguments but 1 was given</code>. O Flet sempre envia o evento para a função.</p>
-                        </div>
-                        <div class="good-box">
-                            <h4>✅ Certo</h4>
-                            <div class="prompt-code" style="font-size:.76rem">
-<span class="kw">def</span> <span class="fn">saudar</span>(e):
-    ...
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 12 — TÓPICO 2: COLUMN VS ROW -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">📖 Tópico 2 • Eventos &amp; Layouts — Explicação (4/4)</span>
-                <h2 class="slide-title">Organizando a tela: <code>ft.Column</code> (vertical) e <code>ft.Row</code> (horizontal)</h2>
-                <p class="slide-subtitle">Por padrão, o <code>page.add()</code> empilha tudo um embaixo do outro. Para controlar a arrumação, usamos "caixas organizadoras".</p>
-            </div>
-            <div class="slide-body">
-                <div class="analogy-box">
-                    <span class="tag">📦 Pense assim: prateleiras e gavetas</span><br>
-                    <code>ft.Column</code> é uma <strong>pilha de gavetas</strong> (um em cima do outro). <code>ft.Row</code> é uma <strong>prateleira</strong> (um do lado do outro). Os dois recebem uma <strong>lista</strong> <code>[ ]</code> de controles — sim, a mesma lista da Aula 03! E dá para colocar uma <code>Row</code> dentro de uma <code>Column</code>.
-                </div>
-                <div class="grid-3" style="gap:14px;align-items:start">
-                    <div class="content-box" style="border-color:rgba(0,229,255,.35);padding:12px">
-                        <h4 style="color:#00e5ff;font-size:.88rem">⬇️ <code>ft.Column</code> — empilha</h4>
-                        <div class="prompt-code" style="font-size:.76rem">
-coluna = ft.<span class="fn">Column</span>([
-    ft.<span class="fn">Text</span>(<span class="str">"Título"</span>),
-    ft.<span class="fn">TextField</span>(label=<span class="str">"Campo"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"Botão"</span>)
+                <div class="grid-2" style="gap:18px;align-items:start">
+                    <div class="content-box" style="border-color:rgba(0,229,255,.35)">
+                        <h4 style="color:#00e5ff;margin-bottom:8px">⬇️ <code>ft.Column([...])</code> → Empilha na Vertical</h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.65">
+<span class="kw">coluna</span> = ft.<span class="fn">Column</span>([
+    ft.<span class="fn">Text</span>(<span class="str">"Título em cima"</span>),
+    ft.<span class="fn">TextField</span>(label=<span class="str">"Campo no meio"</span>),
+    ft.<span class="fn">ElevatedButton</span>(<span class="str">"Botão embaixo"</span>)
 ], spacing=<span class="num">15</span>)
-page.<span class="fn">add</span>(coluna)
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px;gap:6px">
-                            <div class="mock-text" style="font-size:.78rem">Título</div>
-                            <div class="mock-input" style="padding:4px 8px;font-size:.72rem">Campo</div>
-                            <div class="mock-btn" style="padding:4px 10px;font-size:.72rem">Botão</div>
-                        </div></div>
-                        <p style="font-size:.76rem;margin-top:6px"><code>spacing=15</code> = espaço entre os itens.</p>
+                        </div>
+                        <p style="font-size:.8rem;color:#cbd5e1;margin-top:8px">
+                            💡 O parâmetro <code>spacing=15</code> controla a distância em pixels entre um item e outro.
+                        </p>
                     </div>
-                    <div class="content-box" style="border-color:rgba(167,139,250,.4);padding:12px">
-                        <h4 style="color:#a78bfa;font-size:.88rem">➡️ <code>ft.Row</code> — lado a lado</h4>
-                        <div class="prompt-code" style="font-size:.76rem">
-linha = ft.<span class="fn">Row</span>([
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➕"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➖"</span>),
-    ft.<span class="fn">ElevatedButton</span>(<span class="str">"🧹"</span>)
+                    <div class="content-box" style="border-color:rgba(167,139,250,.4)">
+                        <h4 style="color:#a78bfa;margin-bottom:8px">➡️ <code>ft.Row([...])</code> → Alinha Lado a Lado</h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.65">
+<span class="kw">linha_botoes</span> = ft.<span class="fn">Row</span>([
+    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➕ Somar"</span>),
+    ft.<span class="fn">ElevatedButton</span>(<span class="str">"➖ Subtrair"</span>),
+    ft.<span class="fn">ElevatedButton</span>(<span class="str">"🧹 Limpar"</span>)
 ], alignment=ft.MainAxisAlignment.CENTER)
-page.<span class="fn">add</span>(linha)
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px">
-                            <div class="mock-row" style="justify-content:center"><div class="mock-btn" style="padding:4px 10px;font-size:.72rem">➕</div><div class="mock-btn" style="padding:4px 10px;font-size:.72rem">➖</div><div class="mock-btn" style="padding:4px 10px;font-size:.72rem">🧹</div></div>
-                        </div></div>
-                        <p style="font-size:.76rem;margin-top:6px"><code>alignment=...CENTER</code> = centraliza a fileira.</p>
-                    </div>
-                    <div class="content-box" style="border-color:rgba(16,185,129,.4);padding:12px">
-                        <h4 style="color:#34d399;font-size:.88rem">🧩 Combinando os dois</h4>
-                        <div class="prompt-code" style="font-size:.76rem">
-page.<span class="fn">add</span>(
-  ft.<span class="fn">Column</span>([
-    ft.<span class="fn">Text</span>(<span class="str">"Placar: 0"</span>),
-    ft.<span class="fn">Row</span>([
-      ft.<span class="fn">ElevatedButton</span>(<span class="str">"+1"</span>),
-      ft.<span class="fn">ElevatedButton</span>(<span class="str">"Zerar"</span>)
-    ])
-  ])
-)
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px;gap:6px">
-                            <div class="mock-text" style="font-size:.78rem">Placar: 0</div>
-                            <div class="mock-row"><div class="mock-btn" style="padding:4px 10px;font-size:.72rem">+1</div><div class="mock-btn" style="padding:4px 10px;font-size:.72rem">Zerar</div></div>
-                        </div></div>
+                        </div>
+                        <p style="font-size:.8rem;color:#cbd5e1;margin-top:8px">
+                            💡 Você pode colocar um <code>ft.Row</code> dentro de um <code>ft.Column</code> para montar qualquer tela!
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 13 — TÓPICO 2: PRÁTICA 2 -->
+        <!-- SLIDE 9 — TÓPICO 2: PRÁTICA — DETETIVE DO CÓDIGO #2 -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge practice">⚡ Tópico 2 • Prática 2 — Mão na Massa! <span class="time-chip">⏱️ 20 min</span></span>
-                <h2 class="slide-title">Contador de Cliques Gamer 🎮</h2>
-                <p class="slide-subtitle">Objetivo: um placar grande e dois botões lado a lado — <strong>+1 Ponto</strong> soma 1 e <strong>Zerar</strong> volta para 0.</p>
+                <span class="detective-badge">🕵️ Tópico 2 • Prática: Detetive do Código #2</span>
+                <h2 class="slide-title">Investigação: O Placar que Funciona pela Metade</h2>
+                <p class="slide-subtitle">Analise o código do contador abaixo e descubra o que cada função faz (e por que uma delas falha)!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.06);padding:14px 16px">
-                            <h4 style="color:#34d399;font-size:.95rem">🪜 Passo a passo</h4>
-                            <ol class="practice-steps">
-                                <li>Crie <code>pratica2_contador.py</code> com o esqueleto.</li>
-                                <li>Crie o placar: <code>placar = ft.Text("0", size=45, weight="bold")</code>.</li>
-                                <li>Crie a função <code>def ganhar_ponto(e):</code>. Dentro dela:<br>
-                                    a) pegue o texto do placar e transforme em número: <code>int(placar.value)</code>;<br>
-                                    b) some 1;<br>
-                                    c) transforme de volta em texto com <code>str(...)</code> e guarde em <code>placar.value</code>;<br>
-                                    d) chame <code>page.update()</code>.</li>
-                                <li>Crie a função <code>def zerar(e):</code> que coloca <code>"0"</code> no placar e atualiza.</li>
-                                <li>Crie os 2 botões, cada um com seu <code>on_click</code>, dentro de um <code>ft.Row([...])</code>.</li>
-                                <li>Adicione na página o <code>placar</code> e a <code>Row</code>.</li>
-                            </ol>
-                        </div>
-                        <details class="solution hint">
-                            <summary>💡 Dica — por que preciso de <code>int()</code> e <code>str()</code>?</summary>
-                            <div class="sol-body lede" style="font-size:.82rem">
-                                O <code>.value</code> de um <code>ft.Text</code> é <strong>texto</strong>. <code>"0" + 1</code> dá erro (não dá para somar texto com número). Então fazemos: texto → número (<code>int</code>) → soma → número → texto (<code>str</code>).<br>
-                                Em uma linha só: <code>placar.value = str(int(placar.value) + 1)</code>
-                            </div>
-                        </details>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.85rem;color:#94a3b8;text-transform:uppercase">🎯 Resultado esperado</h4>
-                        <div class="mock-window">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Contador Gamer</span></div>
-                            <div class="mock-body">
-                                <div class="mock-text" style="font-size:2rem;font-weight:800">7</div>
-                                <div class="mock-row"><div class="mock-btn">⚡ +1 Ponto</div><div class="mock-btn">🔄 Zerar</div></div>
-                            </div>
-                        </div>
-                        <div class="content-box tip-box" style="padding:10px 14px">
-                            <h4 style="font-size:.85rem">✅ Deu certo se...</h4>
-                            <ul class="done-list"><li>☑️ Cada clique em "+1 Ponto" aumenta o número</li><li>☑️ "Zerar" volta para 0</li><li>☑️ Os botões estão lado a lado (não um embaixo do outro)</li></ul>
-                            <p style="font-size:.78rem;margin-top:6px">🏅 <strong>Desafio extra:</strong> crie um botão "−1 Ponto" que não deixa o placar ficar negativo (use <code>if</code>!).</p>
-                        </div>
-                        <details class="solution">
-                            <summary>🔓 Ver solução completa</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.78rem">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Código Sob Investigação — caso_02.py</span>
+                        <div class="prompt-code" style="font-size:.8rem;line-height:1.58">
 <span class="kw">import</span> flet <span class="kw">as</span> ft
 
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
     page.title = <span class="str">"Contador Gamer"</span>
-    placar = ft.<span class="fn">Text</span>(<span class="str">"0"</span>, size=<span class="num">45</span>, weight=<span class="str">"bold"</span>)
+    <span class="kw">placar</span> = ft.<span class="fn">Text</span>(<span class="str">"10"</span>, size=<span class="num">45</span>, weight=<span class="str">"bold"</span>)
 
     <span class="kw">def</span> <span class="fn">ganhar_ponto</span>(e):
-        placar.value = <span class="fn">str</span>(<span class="fn">int</span>(placar.value) + <span class="num">1</span>)
+        placar.value = <span class="fn">str</span>(<span class="fn">int</span>(placar.value) + <span class="num">5</span>)
         page.<span class="fn">update</span>()
 
     <span class="kw">def</span> <span class="fn">zerar</span>(e):
         placar.value = <span class="str">"0"</span>
-        page.<span class="fn">update</span>()
 
     page.<span class="fn">add</span>(
         placar,
         ft.<span class="fn">Row</span>([
-            ft.<span class="fn">ElevatedButton</span>(<span class="str">"⚡ +1 Ponto"</span>, on_click=ganhar_ponto),
+            ft.<span class="fn">ElevatedButton</span>(<span class="str">"⚡ Bônus"</span>, on_click=ganhar_ponto),
             ft.<span class="fn">ElevatedButton</span>(<span class="str">"🔄 Zerar"</span>, on_click=zerar)
         ])
     )
 
 ft.<span class="fn">app</span>(target=main)
-</div>
-                            </div>
-                        </details>
+                        </div>
+                    </div>
+                    <div class="detective-card">
+                        <h4>🕵️ Missão do Detetive — Explique o Código:</h4>
+                        <ul class="detective-questions">
+                            <li><span class="detective-q-num">Pista 1</span>Qual valor aparece no placar quando o app abre, e para qual valor ele muda se clicarmos <strong>2 vezes</strong> no botão <code>"⚡ Bônus"</code>?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Na linha 8, por que o código precisou usar <code>int(...)</code> por dentro e <code>str(...)</code> por fora para somar os pontos?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Quando o usuário clica no botão <code>"🔄 Zerar"</code>, o número na janela <strong>não muda para 0</strong>! O que faltou dentro da função <code>zerar(e)</code>?</li>
+                        </ul>
+                        <div class="hint-box">
+                            💡 <strong>Dica do Detetive:</strong> Lembre que todo <code>.value</code> de um <code>ft.Text</code> é texto (string), e compare as linhas dentro de <code>ganhar_ponto(e)</code> com as linhas dentro de <code>zerar(e)</code>!
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 14 — CHECKPOINT (SUBSTITUI O INTERVALO) -->
+        <!-- SLIDE 10 — INTERVALO (ENTRE FLET BÁSICO E FLET AVANÇADO) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="slide-step">☕ CHECKPOINT • METADE DA AULA</span>
-                <h2 class="slide-title">Pausa + autoavaliação: você entendeu o Flet Básico?</h2>
-                <p class="slide-subtitle">Responda de cabeça e depois clique para conferir. Se errar 2 ou mais, volte aos slides 6 a 12 antes de continuar. Depois, faça uma pausa de 10–15 min! 💧</p>
+                <span class="slide-step">☕ PAUSA / METADE DA AULA</span>
+                <h2 class="slide-title">Intervalo — 15 Minutos</h2>
+                <p class="slide-subtitle">Descanse e tome água! Na sequência: Temas, E-mail com Ícone, Cards, Avaliação com Slider, Multi-Telas e Exemplo de Projeto Final!</p>
             </div>
-            <div class="slide-body">
-                <div class="grid-2" style="gap:12px;align-items:start">
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 1. Criei um <code>ft.Text</code>, mas ele não aparece na janela. O que faltou?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem">Faltou <strong>prender no mural</strong> com <code>page.add(meu_texto)</code>. Criar o controle só guarda na memória.</div>
-                    </details>
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 2. Como pego o que o usuário digitou num <code>ft.TextField</code> chamado <code>campo</code>?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem">Com <code>campo.value</code>. Lembre: é sempre texto (<code>str</code>), mesmo que tenha número.</div>
-                    </details>
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 3. Qual está certo: <code>on_click=enviar</code> ou <code>on_click=enviar()</code>?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem"><code>on_click=enviar</code>, <strong>sem parênteses</strong>. Entregamos a função ao botão para ele chamá-la só no clique.</div>
-                    </details>
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 4. Mudei <code>msg.value</code> dentro da função, mas a tela não mudou. Por quê?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem">Faltou chamar <code>page.update()</code> no final da função para redesenhar a tela.</div>
-                    </details>
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 5. Quero 3 botões um do lado do outro. Uso <code>Column</code> ou <code>Row</code>?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem"><code>ft.Row([...])</code> — fileira horizontal. <code>Column</code> empilha na vertical.</div>
-                    </details>
-                    <details class="solution hint" style="margin:0">
-                        <summary>❓ 6. Por que a função do botão tem um <code>(e)</code>?</summary>
-                        <div class="sol-body lede" style="font-size:.84rem">Porque o Flet sempre envia as informações do <strong>evento</strong> para a função. Sem o <code>e</code>, dá <code>TypeError</code> no clique.</div>
-                    </details>
-                </div>
-                <div class="content-box accent-box" style="padding:12px 16px">
-                    <p style="font-size:.86rem;margin:0">🚀 <strong>Na volta da pausa:</strong> vamos deixar o app com cara profissional — <strong>tema escuro, cores, ícones, cards</strong>, proteção contra erros, <strong>menus de escolha</strong> e <strong>abas</strong>. Deixe aberto um arquivo novo: <code>aula05_flet_avancado.py</code>.</p>
+            <div class="slide-body" style="display:flex;align-items:center;justify-content:center">
+                <div style="text-align:center;padding:24px">
+                    <div style="font-size:4.5rem;margin-bottom:12px">☕</div>
+                    <div style="font-size:1.25rem;font-weight:700;color:#f8fafc;margin-bottom:10px">Até aqui: Flet Básico Dominado!</div>
+                    <div style="font-size:.9rem;color:#94a3b8;max-width:520px;margin:0 auto;line-height:1.6">
+                        Já vimos como instalar o Flet, criar a janela <code>main(page)</code>, usar <code>Text</code>, <code>TextField</code>, <code>ElevatedButton</code>, eventos com <code>on_click</code> + <code>page.update()</code> e alinhar com <code>Column</code> e <code>Row</code>.<br><br>
+                        Agora vamos montar os recursos que todo <strong style="color:#00e5ff">Projeto Final</strong> precisa!
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== TÓPICO 3 ===================== -->
-
-        <!-- SLIDE 15 — TÓPICO 3: TEMAS, CORES E JANELA -->
+        <!-- SLIDE 11 — TÓPICO 3: TEMAS, CORES E CAMPO DE E-MAIL COM ÍCONE (EXPLICAÇÃO 1/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 3 • Flet Avançado — Explicação (1/3)</span>
-                <h2 class="slide-title">Identidade visual: tema escuro, cores e tamanho da janela</h2>
-                <p class="slide-subtitle">Essas linhas ficam <strong>no começo da <code>main</code></strong>, logo depois do <code>page.title</code>. Elas configuram o "mural" antes de prender qualquer coisa.</p>
+                <span class="step-badge">🎨 Tópico 3 • Flet Avançado — Explicação (1/2)</span>
+                <h2 class="slide-title">Tema Escuro, Formato Mobile e Campo de E-mail com Ícones</h2>
+                <p class="slide-subtitle">Deixe seu aplicativo com visual profissional configurando o tema, o tamanho da janela e ícones <code>ft.Icons</code>!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <div class="prompt-code" style="font-size:.82rem;line-height:1.7">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <h4 style="color:#00e5ff;margin-bottom:8px">🌙 Tema Escuro, Cores e Janela de Celular</h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.65">
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
     page.title = <span class="str">"EcoÁgua App"</span>
-    page.theme_mode = ft.ThemeMode.DARK   <span class="cm"># ①</span>
-    page.bgcolor = <span class="str">"#0f172a"</span>              <span class="cm"># ②</span>
-    page.window.width = <span class="num">420</span>               <span class="cm"># ③</span>
+    page.theme_mode = ft.ThemeMode.DARK
+    page.bgcolor = <span class="str">"#0f172a"</span> <span class="cm"># Azul escuro elegante</span>
+    page.window.width = <span class="num">420</span>  <span class="cm"># Largura de celular!</span>
     page.window.height = <span class="num">720</span>
-    page.scroll = ft.ScrollMode.AUTO      <span class="cm"># ④</span>
-    page.padding = <span class="num">20</span>                     <span class="cm"># ⑤</span>
-</div>
-                        </div>
-                        <div class="content-box" style="padding:12px 14px">
-                            <h4 style="font-size:.88rem;color:#fbbf24">🎨 Como escolher cores?</h4>
-                            <p style="font-size:.8rem;margin:0">Você pode usar o <strong>nome em inglês</strong> (<code>"red"</code>, <code>"green"</code>, <code>"cyan"</code>, <code>"white"</code>) ou um <strong>código hexadecimal</strong> (<code>"#10b981"</code>). Para achar códigos bonitos, pesquise <em>"color picker"</em> no Google e copie o valor que começa com <code>#</code>.</p>
+    page.scroll = ft.ScrollMode.AUTO <span class="cm"># Rolagem automática!</span>
                         </div>
                     </div>
-                    <div class="line-list">
-                        <div class="line-item"><span class="line-num">①</span><div><strong>Tema escuro.</strong> Textos ficam claros e o fundo escuro. Troque <code>DARK</code> por <code>LIGHT</code> para o modo claro.</div></div>
-                        <div class="line-item"><span class="line-num">②</span><div><strong>Cor de fundo</strong> da janela inteira. <code>"#0f172a"</code> é um azul bem escuro.</div></div>
-                        <div class="line-item"><span class="line-num">③</span><div><strong>Tamanho da janela</strong> em pixels. 420 × 720 deixa com "formato de celular" — ótimo para o projeto final!</div></div>
-                        <div class="line-item"><span class="line-num">④</span><div><strong>Barra de rolagem automática.</strong> Se o conteúdo não couber, aparece a rolagem. Sem isso, itens podem "sumir" embaixo da janela.</div></div>
-                        <div class="line-item"><span class="line-num">⑤</span><div><strong>Margem interna</strong>: espaço entre a borda da janela e o conteúdo.</div></div>
-                        <div class="mock-window" style="max-width:240px;margin:4px auto 0">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>EcoÁgua App</span></div>
-                            <div class="mock-body" style="background:#0f172a;min-height:120px">
-                                <div class="mock-text" style="font-weight:800">💧 EcoÁgua</div>
-                                <div class="mock-text" style="font-size:.75rem;color:#94a3b8">Janela estreita, tema escuro</div>
-                            </div>
+                    <div class="content-box" style="border-color:rgba(16,185,129,.4)">
+                        <h4 style="color:#34d399;margin-bottom:8px">✉️ Campo de E-mail e Botão com <code>ft.Icons</code></h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.65">
+<span class="cm"># Campo de E-mail com ícone dentro da caixa:</span>
+<span class="kw">email</span> = ft.<span class="fn">TextField</span>(
+    label=<span class="str">"Seu E-mail"</span>,
+    hint_text=<span class="str">"aluno@escola.com"</span>,
+    prefix_icon=ft.Icons.EMAIL
+)
+
+<span class="cm"># Botão estilizado com ícone e cor:</span>
+<span class="kw">btn</span> = ft.<span class="fn">ElevatedButton</span>(
+    <span class="str">"Salvar Cadastro"</span>,
+    icon=ft.Icons.CHECK_CIRCLE,
+    bgcolor=<span class="str">"#10b981"</span>, color=<span class="str">"white"</span>
+)
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 16 — TÓPICO 3: ÍCONES E CONTAINER (CARD) -->
+        <!-- SLIDE 12 — TÓPICO 3: CARDS COM CONTAINER E BLINDAGEM (EXPLICAÇÃO 2/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 3 • Flet Avançado — Explicação (2/3)</span>
-                <h2 class="slide-title">Ícones (<code>ft.Icons</code>) e cards bonitos com <code>ft.Container</code></h2>
-                <p class="slide-subtitle">Ícones deixam o app intuitivo. O <code>Container</code> é uma "moldura" que envolve outros controles e permite cor de fundo, borda e cantos arredondados.</p>
+                <span class="step-badge">🎨 Tópico 3 • Flet Avançado — Explicação (2/2)</span>
+                <h2 class="slide-title">Cards Estilizados (<code>ft.Container</code>) e Blindagem de Dados</h2>
+                <p class="slide-subtitle">Use <code>ft.Container</code> para criar cartões com bordas arredondadas e valide e-mails ou números antes de salvar!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div class="content-box" style="border-color:rgba(16,185,129,.4);padding:14px">
-                        <h4 style="color:#34d399;font-size:.92rem">✨ Ícones em caixas e botões</h4>
-                        <div class="prompt-code" style="font-size:.78rem">
-<span class="cm"># Ícone dentro da caixa de texto:</span>
-email = ft.<span class="fn">TextField</span>(label=<span class="str">"E-mail"</span>, prefix_icon=ft.Icons.EMAIL)
-
-<span class="cm"># Botão com ícone + cores personalizadas:</span>
-btn = ft.<span class="fn">ElevatedButton</span>(
-    <span class="str">"Salvar Registro"</span>,
-    icon=ft.Icons.CHECK_CIRCLE,
-    bgcolor=<span class="str">"#10b981"</span>,   <span class="cm"># cor do botão</span>
-    color=<span class="str">"white"</span>        <span class="cm"># cor do texto</span>
-)
-</div>
-                        <div class="mock-window" style="margin-top:8px"><div class="mock-body" style="padding:10px;gap:8px">
-                            <div class="mock-input">✉️ &nbsp;E-mail</div>
-                            <div class="mock-btn" style="background:#10b981;color:#fff;border-color:#10b981">✔️ Salvar Registro</div>
-                        </div></div>
-                        <p style="font-size:.78rem;margin-top:8px">🔎 <strong>Outros ícones úteis:</strong> <code>HOME</code>, <code>SEND</code>, <code>DELETE</code>, <code>ADD</code>, <code>PERSON</code>, <code>SETTINGS</code>, <code>FAVORITE</code>, <code>WATER_DROP</code>. Sempre em MAIÚSCULAS, depois de <code>ft.Icons.</code></p>
-                    </div>
-                    <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                        <h4 style="color:#a78bfa;font-size:.92rem">🃏 Anatomia de um card</h4>
-                        <div class="prompt-code" style="font-size:.78rem">
-card = ft.<span class="fn">Container</span>(
-    content=ft.<span class="fn">Column</span>([                 <span class="cm"># ① o que vai dentro</span>
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <h4 style="color:#a78bfa;margin-bottom:6px">🃏 Criando um Card com <code>ft.Container</code></h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.62">
+<span class="kw">card_resumo</span> = ft.<span class="fn">Container</span>(
+    content=ft.<span class="fn">Column</span>([
         ft.<span class="fn">Text</span>(<span class="str">"💧 Consumo de Hoje"</span>, size=<span class="num">18</span>, weight=<span class="str">"bold"</span>),
         ft.<span class="fn">Text</span>(<span class="str">"Meta: 110 litros/dia"</span>, color=<span class="str">"#94a3b8"</span>)
     ]),
-    bgcolor=<span class="str">"#1e293b"</span>,                    <span class="cm"># ② cor de fundo</span>
-    padding=<span class="num">16</span>,                           <span class="cm"># ③ espaço interno</span>
-    border_radius=<span class="num">14</span>,                     <span class="cm"># ④ cantos redondos</span>
-    border=ft.border.<span class="fn">all</span>(<span class="num">1</span>, <span class="str">"#38bdf8"</span>)   <span class="cm"># ⑤ borda fina azul</span>
+    bgcolor=<span class="str">"#1e293b"</span>,
+    padding=<span class="num">16</span>,
+    border_radius=<span class="num">14</span>,
+    border=ft.border.<span class="fn">all</span>(<span class="num">1</span>, <span class="str">"#38bdf8"</span>)
 )
-page.<span class="fn">add</span>(card)
-</div>
-                        <div class="mock-card" style="margin-top:8px">
-                            <div class="mock-text" style="font-weight:800">💧 Consumo de Hoje</div>
-                            <div class="mock-text" style="font-size:.78rem;color:#94a3b8">Meta: 110 litros/dia</div>
                         </div>
-                        <p style="font-size:.78rem;margin-top:8px">💡 O <code>Container</code> só aceita <strong>um</strong> <code>content</code>. Quer vários itens dentro? Coloque uma <code>Column</code> ou <code>Row</code> como conteúdo (igual ao exemplo).</p>
+                    </div>
+                    <div class="content-box" style="border-color:rgba(245,158,11,.4)">
+                        <h4 style="color:#fbbf24;margin-bottom:6px">🛡️ Blindagem Visual com <code>try / except</code></h4>
+                        <div class="prompt-code" style="font-size:.82rem;line-height:1.62">
+<span class="kw">def</span> <span class="fn">validar_dados</span>(e):
+    <span class="kw">try</span>:
+        <span class="kw">valor</span> = <span class="fn">float</span>(campo_num.value)
+        aviso.value = <span class="str">f"✅ Valor válido: <span class="kw">{valor}</span>"</span>
+        aviso.color = <span class="str">"green"</span>
+    <span class="kw">except</span> <span class="fn">ValueError</span>:
+        aviso.value = <span class="str">"⚠️ Digite apenas números!"</span>
+        aviso.color = <span class="str">"red"</span>
+    page.<span class="fn">update</span>()
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 17 — TÓPICO 3: BLINDAGEM VISUAL -->
+        <!-- SLIDE 13 — TÓPICO 3: PRÁTICA — DETETIVE DO CÓDIGO #3 -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">🛡️ Tópico 3 • Flet Avançado — Explicação (3/3)</span>
-                <h2 class="slide-title">Blindagem visual: avisando o usuário em vez de travar</h2>
-                <p class="slide-subtitle">Lembra do <code>try/except</code> da Aula 03? No Flet ele é ainda mais importante: em vez de um erro vermelho no terminal, mostramos um <strong>aviso amigável na tela</strong>.</p>
+                <span class="detective-badge">🕵️ Tópico 3 • Prática: Detetive do Código #3</span>
+                <h2 class="slide-title">Investigação: O Validador de E-mail e Idade</h2>
+                <p class="slide-subtitle">Leia o código abaixo e explique como ele protege o formulário contra erros de digitação do usuário!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <div class="prompt-code" style="font-size:.8rem;line-height:1.65">
-campo_num = ft.<span class="fn">TextField</span>(label=<span class="str">"Digite um número"</span>)
-aviso = ft.<span class="fn">Text</span>(<span class="str">""</span>)
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Código Sob Investigação — caso_03.py</span>
+                        <div class="prompt-code" style="font-size:.78rem;line-height:1.55">
+<span class="kw">email</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"E-mail"</span>, prefix_icon=ft.Icons.EMAIL)
+<span class="kw">idade</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Idade"</span>, prefix_icon=ft.Icons.PERSON)
+<span class="kw">status</span> = ft.<span class="fn">Text</span>(<span class="str">""</span>, weight=<span class="str">"bold"</span>)
 
-<span class="kw">def</span> <span class="fn">calcular</span>(e):
-    <span class="kw">if</span> campo_num.value.<span class="fn">strip</span>() == <span class="str">""</span>:          <span class="cm"># ① campo vazio?</span>
-        aviso.value = <span class="str">"⚠️ Preencha o campo!"</span>
-        aviso.color = <span class="str">"orange"</span>
+<span class="kw">def</span> <span class="fn">cadastrar</span>(e):
+    <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value <span class="kw">or</span> email.value.<span class="fn">strip</span>() == <span class="str">""</span>:
+        status.value = <span class="str">"⚠️ Digite um e-mail válido com @!"</span>
+        status.color = <span class="str">"orange"</span>
     <span class="kw">else</span>:
-        <span class="kw">try</span>:                                     <span class="cm"># ② tenta converter</span>
-            valor = <span class="fn">float</span>(campo_num.value)
-            aviso.value = <span class="str">f"✅ O dobro é {valor * 2}"</span>
-            aviso.color = <span class="str">"green"</span>
-        <span class="kw">except</span> <span class="fn">ValueError</span>:                       <span class="cm"># ③ deu errado?</span>
-            aviso.value = <span class="str">"❌ Digite apenas números!"</span>
-            aviso.color = <span class="str">"red"</span>
-    page.<span class="fn">update</span>()                                <span class="cm"># ④</span>
-</div>
-                        </div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="line-list">
-                            <div class="line-item"><span class="line-num">①</span><div><code>.strip()</code> remove espaços das pontas. Se sobrou <code>""</code>, a pessoa não digitou nada (ou só espaços).</div></div>
-                            <div class="line-item"><span class="line-num">②</span><div>O <code>try</code> <strong>tenta</strong> transformar o texto em número. Se der certo, mostra o resultado em verde.</div></div>
-                            <div class="line-item"><span class="line-num">③</span><div>Se a pessoa digitou <code>"abc"</code>, o <code>float()</code> falha e o Python pula para o <code>except</code>, que mostra o aviso em vermelho. O app <strong>não trava</strong>!</div></div>
-                            <div class="line-item"><span class="line-num">④</span><div>Um único <code>page.update()</code> no final vale para todos os caminhos.</div></div>
-                        </div>
-                        <h4 style="font-size:.8rem;color:#94a3b8;text-transform:uppercase;margin-top:4px">O que o usuário vê em cada caso:</h4>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px;gap:6px;font-size:.78rem">
-                            <div><span style="color:#94a3b8">digitou "" →</span> <span style="color:#fb923c">⚠️ Preencha o campo!</span></div>
-                            <div><span style="color:#94a3b8">digitou "abc" →</span> <span style="color:#f87171">❌ Digite apenas números!</span></div>
-                            <div><span style="color:#94a3b8">digitou "7.5" →</span> <span style="color:#34d399">✅ O dobro é 15.0</span></div>
-                        </div></div>
-                        <p style="font-size:.76rem;color:#94a3b8;margin:0">💡 Use ponto, não vírgula: <code>7.5</code> funciona, <code>7,5</code> cai no <code>except</code>.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 18 — TÓPICO 3: PRÁTICA 3 -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge practice">⚡ Tópico 3 • Prática 3 — Mão na Massa! <span class="time-chip">⏱️ 20 min</span></span>
-                <h2 class="slide-title">Card estilizado + proteção contra campo vazio</h2>
-                <p class="slide-subtitle">Objetivo: um app com tema escuro, um card de título, uma caixa de mensagem e um botão com ícone que mostra aviso <span style="color:#f87171">vermelho</span> se o campo estiver vazio e <span style="color:#34d399">verde</span> se estiver preenchido.</p>
-            </div>
-            <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.06);padding:14px 16px">
-                            <h4 style="color:#34d399;font-size:.95rem">🪜 Passo a passo</h4>
-                            <ol class="practice-steps">
-                                <li>Crie <code>pratica3_estilo.py</code> com o esqueleto.</li>
-                                <li>Configure a página: <code>theme_mode</code> escuro, uma cor em <code>page.bgcolor</code> e janela 420 × 720.</li>
-                                <li>Crie um <code>ft.Container</code> (card) com um <code>ft.Text</code> de título dentro, <code>bgcolor</code>, <code>padding</code> e <code>border_radius</code>.</li>
-                                <li>Crie <code>campo = ft.TextField(label="Sua mensagem")</code> e <code>status = ft.Text("")</code>.</li>
-                                <li>Crie <code>def enviar(e):</code> com um <code>if campo.value.strip() == ""</code> → aviso vermelho; <code>else</code> → <code>f"✅ Recebido: {campo.value}"</code> em verde. Não esqueça do <code>page.update()</code>!</li>
-                                <li>Crie o botão com <code>icon=ft.Icons.SEND</code> e <code>on_click=enviar</code>.</li>
-                                <li>Adicione tudo: <code>page.add(card, campo, botao, status)</code>.</li>
-                            </ol>
-                        </div>
-                        <details class="solution hint">
-                            <summary>💡 Dica — erro <code>AttributeError: ... has no attribute 'Icons'</code>?</summary>
-                            <div class="sol-body lede" style="font-size:.82rem">Seu Flet é uma versão antiga. Atualize com <code>pip install --upgrade flet</code>. (Em versões antigas era <code>ft.icons.SEND</code>, com "i" minúsculo.)</div>
-                        </details>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.85rem;color:#94a3b8;text-transform:uppercase">🎯 Resultado esperado</h4>
-                        <div class="mock-window" style="max-width:340px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Mensageiro</span></div>
-                            <div class="mock-body" style="background:#0f172a">
-                                <div class="mock-card"><div class="mock-text" style="font-weight:800">📨 Mensageiro da Turma</div></div>
-                                <div class="mock-input">Sua mensagem</div>
-                                <div class="mock-btn">➤ Enviar</div>
-                                <div class="mock-text" style="font-size:.8rem;color:#f87171">⚠️ Preencha o campo antes de enviar!</div>
-                            </div>
-                        </div>
-                        <div class="content-box tip-box" style="padding:10px 14px">
-                            <h4 style="font-size:.85rem">✅ Deu certo se...</h4>
-                            <ul class="done-list"><li>☑️ A janela está escura e estreita</li><li>☑️ Clicar com o campo vazio mostra aviso vermelho</li><li>☑️ Clicar com texto mostra "✅ Recebido: ..." em verde</li></ul>
-                        </div>
-                        <details class="solution">
-                            <summary>🔓 Ver solução completa</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.76rem">
-<span class="kw">import</span> flet <span class="kw">as</span> ft
-
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Mensageiro"</span>
-    page.theme_mode = ft.ThemeMode.DARK
-    page.bgcolor = <span class="str">"#0f172a"</span>
-    page.window.width = <span class="num">420</span>
-    page.window.height = <span class="num">720</span>
-
-    card = ft.<span class="fn">Container</span>(
-        content=ft.<span class="fn">Text</span>(<span class="str">"📨 Mensageiro da Turma"</span>, size=<span class="num">22</span>, weight=<span class="str">"bold"</span>),
-        bgcolor=<span class="str">"#1e293b"</span>, padding=<span class="num">16</span>, border_radius=<span class="num">14</span>
-    )
-    campo = ft.<span class="fn">TextField</span>(label=<span class="str">"Sua mensagem"</span>)
-    status = ft.<span class="fn">Text</span>(<span class="str">""</span>)
-
-    <span class="kw">def</span> <span class="fn">enviar</span>(e):
-        <span class="kw">if</span> campo.value.<span class="fn">strip</span>() == <span class="str">""</span>:
-            status.value = <span class="str">"⚠️ Preencha o campo antes de enviar!"</span>
-            status.color = <span class="str">"red"</span>
-        <span class="kw">else</span>:
-            status.value = <span class="str">f"✅ Recebido: {campo.value}"</span>
+        <span class="kw">try</span>:
+            <span class="kw">anos</span> = <span class="fn">int</span>(idade.value)
+            status.value = <span class="str">f"✅ Cadastro concluído ({anos} anos)!"</span>
             status.color = <span class="str">"green"</span>
-        page.<span class="fn">update</span>()
-
-    botao = ft.<span class="fn">ElevatedButton</span>(<span class="str">"Enviar"</span>, icon=ft.Icons.SEND, on_click=enviar)
-    page.<span class="fn">add</span>(card, campo, botao, status)
-
-ft.<span class="fn">app</span>(target=main)
-</div>
-                            </div>
-                        </details>
+        <span class="kw">except</span> <span class="fn">ValueError</span>:
+            status.value = <span class="str">"🚨 A idade precisa ser um número inteiro!"</span>
+            status.color = <span class="str">"red"</span>
+    page.<span class="fn">update</span>()
+                        </div>
+                    </div>
+                    <div class="detective-card">
+                        <h4>🕵️ Missão do Detetive — Explique o Código:</h4>
+                        <ul class="detective-questions">
+                            <li><span class="detective-q-num">Pista 1</span>O que a condição da linha 6 verifica no campo <code>email.value</code> antes de deixar o cadastro continuar?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Se o usuário digitar <code>"aluno@cefet.br"</code> no e-mail e escrever <code>"quinze"</code> por extenso na idade, qual mensagem e qual cor aparecerão no texto <code>status</code>?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Para que serve o parâmetro <code>prefix_icon=...</code> usado nas linhas 1 e 2?</li>
+                        </ul>
+                        <div class="hint-box">
+                            💡 <strong>Dica do Detetive:</strong> O operador <code>not in</code> verifica se um caractere <em>não está dentro</em> do texto, e o bloco <code>except ValueError</code> é acionado quando <code>int(...)</code> tenta converter letras!
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===================== TÓPICO 4 ===================== -->
-
-        <!-- SLIDE 19 — TÓPICO 4: DROPDOWN -->
+        <!-- SLIDE 14 — TÓPICO 4: DROPDOWN E SLIDER DE AVALIAÇÃO (EXPLICAÇÃO 1/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 4 • Seletores Visuais — Explicação (1/3)</span>
-                <h2 class="slide-title">Escolher sem digitar: o menu <code>ft.Dropdown</code></h2>
-                <p class="slide-subtitle">Quando só existem algumas respostas possíveis, não peça para digitar — ofereça um menu. Assim ninguém escreve "trasnporte" errado!</p>
+                <span class="step-badge">🎛️ Tópico 4 • Seletores &amp; Avaliação — Explicação (1/2)</span>
+                <h2 class="slide-title">Menu de Categorias (<code>Dropdown</code>) e Barra de Avaliação (<code>Slider</code>)</h2>
+                <p class="slide-subtitle">Evite erros de digitação oferecendo um menu de opções ou uma barra deslizante de nota de 0 a 10!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="analogy-box">
-                            <span class="tag">🍔 Pense assim: o cardápio da lanchonete</span><br>
-                            Você não inventa o nome do lanche — você <strong>escolhe</strong> um item da lista. O <code>Dropdown</code> é esse cardápio: as <code>options</code> são os itens, e o <code>.value</code> guarda o que foi escolhido.
-                        </div>
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <div class="prompt-code" style="font-size:.8rem;line-height:1.65">
-categoria = ft.<span class="fn">Dropdown</span>(
-    label=<span class="str">"Escolha a categoria"</span>,     <span class="cm"># ①</span>
-    value=<span class="str">"Alimentação"</span>,             <span class="cm"># ②</span>
-    options=[                         <span class="cm"># ③</span>
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <h4 style="color:#00e5ff;margin-bottom:6px">📂 <code>ft.Dropdown</code> → Menu de Opções</h4>
+                        <div class="prompt-code" style="font-size:.8rem;line-height:1.6">
+<span class="kw">categoria</span> = ft.<span class="fn">Dropdown</span>(
+    label=<span class="str">"Escolha a Categoria"</span>,
+    value=<span class="str">"Alimentação"</span>, <span class="cm"># Opção inicial</span>
+    options=[
         ft.dropdown.<span class="fn">Option</span>(<span class="str">"Alimentação"</span>),
         ft.dropdown.<span class="fn">Option</span>(<span class="str">"Transporte"</span>),
         ft.dropdown.<span class="fn">Option</span>(<span class="str">"Lazer"</span>)
     ]
 )
 
-<span class="kw">def</span> <span class="fn">mostrar</span>(e):
-    resultado.value = <span class="str">f"Você escolheu: {categoria.value}"</span>  <span class="cm"># ④</span>
-    page.<span class="fn">update</span>()
-</div>
+<span class="cm"># Lendo a opção escolhida pelo usuário:</span>
+<span class="fn">print</span>(categoria.value) <span class="cm"># → "Alimentação"</span>
                         </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="line-list">
-                            <div class="line-item"><span class="line-num">①</span><div><code>label</code>: o título que aparece em cima do menu.</div></div>
-                            <div class="line-item"><span class="line-num">②</span><div><code>value</code>: a opção que já vem marcada ao abrir o app (opcional, mas evita o menu vazio).</div></div>
-                            <div class="line-item"><span class="line-num">③</span><div><code>options</code>: uma <strong>lista</strong> com as opções. Cada uma é um <code>ft.dropdown.Option("texto")</code>.</div></div>
-                            <div class="line-item"><span class="line-num">④</span><div>Para saber o que foi escolhido: <code>categoria.value</code> — igual ao <code>TextField</code>!</div></div>
+                    <div class="content-box" style="border-color:rgba(167,139,250,.4)">
+                        <h4 style="color:#a78bfa;margin-bottom:6px">⭐ <code>ft.Slider</code> → Barra de Avaliação (Nota 0 a 10)</h4>
+                        <div class="prompt-code" style="font-size:.8rem;line-height:1.6">
+<span class="kw">nota_slider</span> = ft.<span class="fn">Slider</span>(
+    min=<span class="num">0</span>,
+    max=<span class="num">10</span>,
+    divisions=<span class="num">10</span>,
+    value=<span class="num">5</span>,
+    label=<span class="str">"Nota: {value}"</span>
+)
+
+<span class="cm"># Lendo a nota escolhida na barra como inteiro:</span>
+<span class="kw">nota</span> = <span class="fn">int</span>(nota_slider.value)
                         </div>
-                        <div class="mock-window" style="max-width:300px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Menu aberto</span></div>
-                            <div class="mock-body" style="padding:10px;gap:0">
-                                <div class="mock-input filled" style="display:flex;justify-content:space-between">Alimentação <span>▾</span></div>
-                                <div style="background:#1e293b;border-radius:0 0 8px 8px;font-size:.78rem;color:#e2e8f0">
-                                    <div style="padding:6px 10px;background:rgba(56,189,248,.18)">Alimentação</div>
-                                    <div style="padding:6px 10px">Transporte</div>
-                                    <div style="padding:6px 10px">Lazer</div>
-                                </div>
-                            </div>
-                        </div>
-                        <p style="font-size:.78rem;color:#94a3b8;margin:0">💡 Truque: dá para criar as opções a partir de uma lista com <code>for</code>:<br><code>options=[ft.dropdown.Option(c) for c in ["A", "B", "C"]]</code></p>
+                        <p style="font-size:.79rem;color:#cbd5e1;margin-top:8px">
+                            💡 Com o <code>ft.Slider</code>, o usuário avalia arrastando a barra e nunca digita letras no lugar de números!
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 20 — TÓPICO 4: SLIDER, SWITCH, CHECKBOX, ICONBUTTON -->
+        <!-- SLIDE 15 — TÓPICO 4: SWITCH, CHECKBOX E ICONBUTTON (EXPLICAÇÃO 2/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge">📖 Tópico 4 • Seletores Visuais — Explicação (2/3)</span>
-                <h2 class="slide-title"><code>Slider</code>, <code>Switch</code>, <code>Checkbox</code> e <code>IconButton</code></h2>
-                <p class="slide-subtitle">Mais controles para o usuário escolher sem digitar. Repare: <strong>todos guardam a escolha em <code>.value</code></strong>.</p>
+                <span class="step-badge">🎛️ Tópico 4 • Seletores &amp; Avaliação — Explicação (2/2)</span>
+                <h2 class="slide-title">Interruptores e Ações Rápidas: <code>Switch</code>, <code>Checkbox</code> e <code>IconButton</code></h2>
+                <p class="slide-subtitle">Controles perfeitos para opções <code>True / False</code>, reação instantânea com <code>on_change</code> e botões compactos!</p>
             </div>
             <div class="slide-body">
-                <div class="grid-3" style="gap:14px;align-items:start">
-                    <div class="content-box" style="border-color:rgba(167,139,250,.4);padding:12px">
-                        <h4 style="color:#a78bfa;font-size:.88rem">🎚️ <code>ft.Slider</code> — barra de número</h4>
-                        <div class="prompt-code" style="font-size:.74rem">
-nota = ft.<span class="fn">Slider</span>(
-    min=<span class="num">0</span>, max=<span class="num">10</span>,
-    divisions=<span class="num">10</span>,  <span class="cm"># 10 "degraus"</span>
-    value=<span class="num">5</span>,        <span class="cm"># começa no 5</span>
-    label=<span class="str">"{value}"</span>  <span class="cm"># mostra o nº</span>
-)
-<span class="cm"># Ler o valor (vem como 5.0):</span>
-n = <span class="fn">int</span>(nota.value)
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:12px">
-                            <div style="position:relative;height:6px;background:#334155;border-radius:4px"><div style="width:50%;height:6px;background:#38bdf8;border-radius:4px"></div><div style="position:absolute;left:calc(50% - 7px);top:-4px;width:14px;height:14px;border-radius:50%;background:#38bdf8"></div></div>
-                        </div></div>
-                        <p style="font-size:.76rem;margin-top:6px">✅ O usuário <strong>nunca</strong> digita letras no lugar de números — sem precisar de <code>try/except</code>!</p>
-                    </div>
-                    <div class="content-box" style="border-color:rgba(16,185,129,.4);padding:12px">
-                        <h4 style="color:#34d399;font-size:.88rem">🔘 <code>Switch</code> e <code>Checkbox</code> — sim/não</h4>
-                        <div class="prompt-code" style="font-size:.74rem">
-urgente = ft.<span class="fn">Switch</span>(
-    label=<span class="str">"🔥 Urgente"</span>, value=<span class="kw">False</span>)
-feito = ft.<span class="fn">Checkbox</span>(
-    label=<span class="str">"Concluído"</span>, value=<span class="kw">False</span>)
+                <div class="grid-2" style="gap:16px;align-items:start">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <h4 style="color:#34d399;margin-bottom:6px">🔘 <code>ft.Switch</code> e <code>ft.Checkbox</code> (<code>True</code> ou <code>False</code>)</h4>
+                        <div class="prompt-code" style="font-size:.8rem;line-height:1.6">
+<span class="kw">urgente</span> = ft.<span class="fn">Switch</span>(label=<span class="str">"🔥 Prioridade Urgente"</span>, value=<span class="kw">False</span>)
+<span class="kw">anonimo</span> = ft.<span class="fn">Checkbox</span>(label=<span class="str">"Enviar avaliação anônima"</span>, value=<span class="kw">False</span>)
 
-<span class="cm"># .value é True ou False:</span>
-<span class="kw">if</span> urgente.value:
-    msg.value = <span class="str">"🚨 URGENTE!"</span>
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px;gap:6px;font-size:.78rem;color:#e2e8f0">
-                            <div><span style="display:inline-block;width:28px;height:14px;border-radius:10px;background:#38bdf8;vertical-align:middle;position:relative"><span style="position:absolute;right:2px;top:2px;width:10px;height:10px;border-radius:50%;background:#fff"></span></span> 🔥 Urgente</div>
-                            <div>☑️ Concluído</div>
-                        </div></div>
-                        <p style="font-size:.76rem;margin-top:6px">Lembra do <code>bool</code> da Aula 02? É ele! Ligado = <code>True</code>, desligado = <code>False</code>.</p>
+<span class="cm"># O .value deles é sempre um booleano (True ou False)!</span>
+<span class="kw">if</span> urgente.value == <span class="kw">True</span>:
+    texto.value = <span class="str">"🚨 Marcado como URGENTE!"</span>
+                        </div>
                     </div>
-                    <div class="content-box" style="border-color:rgba(0,229,255,.35);padding:12px">
-                        <h4 style="color:#00e5ff;font-size:.88rem">🗑️ <code>IconButton</code> — botão só com ícone</h4>
-                        <div class="prompt-code" style="font-size:.74rem">
-btn_limpar = ft.<span class="fn">IconButton</span>(
+                    <div class="content-box" style="border-color:rgba(0,229,255,.35)">
+                        <h4 style="color:#00e5ff;margin-bottom:6px">🗑️ <code>ft.IconButton</code> e Evento <code>on_change</code></h4>
+                        <div class="prompt-code" style="font-size:.8rem;line-height:1.6">
+<span class="cm"># Botão redondo só com ícone (ótimo para limpar lista):</span>
+<span class="kw">btn_limpar</span> = ft.<span class="fn">IconButton</span>(
     icon=ft.Icons.DELETE_FOREVER,
     icon_color=<span class="str">"red"</span>,
     tooltip=<span class="str">"Limpar tudo"</span>,
     on_click=apagar_lista
 )
-</div>
-                        <div class="mock-window"><div class="mock-body" style="padding:10px"><span style="font-size:1.3rem">🗑️</span></div></div>
-                        <p style="font-size:.76rem;margin-top:6px"><code>tooltip</code> = textinho que aparece quando o mouse passa por cima. Ótimo para lixeira, editar, favoritar...</p>
-                    </div>
-                </div>
-                <div class="content-box accent-box" style="padding:12px 16px">
-                    <h4 style="font-size:.9rem">⚡ <code>on_click</code> × <code>on_change</code> — qual usar?</h4>
-                    <p style="font-size:.82rem;margin:0"><strong><code>on_click</code></strong> → botões (<code>ElevatedButton</code>, <code>IconButton</code>): roda quando <em>clica</em>.<br><strong><code>on_change</code></strong> → <code>Dropdown</code>, <code>Slider</code>, <code>Switch</code>, <code>Checkbox</code>, <code>TextField</code>: roda <em>na hora</em> que o valor muda, sem precisar de botão. Ex.: <code>ft.Slider(min=0, max=10, on_change=atualizar_nota)</code>.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 21 — TÓPICO 4: EXEMPLO ON_CHANGE AO VIVO -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">🔍 Tópico 4 • Seletores Visuais — Explicação (3/3)</span>
-                <h2 class="slide-title">Exemplo completo: avaliação com reação ao vivo (<code>on_change</code>)</h2>
-                <p class="slide-subtitle">Copie e rode! Ao arrastar a barra, o emoji muda <strong>na hora</strong>, sem clicar em botão nenhum.</p>
-            </div>
-            <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                        <span class="engage-label">⌨️ avaliacao.py</span>
-                        <div class="prompt-code" style="font-size:.78rem;line-height:1.6">
-<span class="kw">import</span> flet <span class="kw">as</span> ft
-
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Avalie a Aula"</span>
-    page.theme_mode = ft.ThemeMode.DARK
-
-    reacao = ft.<span class="fn">Text</span>(<span class="str">"😐 Nota 5"</span>, size=<span class="num">30</span>)
-
-    <span class="kw">def</span> <span class="fn">mudou_nota</span>(e):                <span class="cm"># ①</span>
-        n = <span class="fn">int</span>(barra.value)            <span class="cm"># ②</span>
-        <span class="kw">if</span> n >= <span class="num">8</span>:                      <span class="cm"># ③</span>
-            reacao.value = <span class="str">f"🤩 Nota {n}"</span>
-        <span class="kw">elif</span> n >= <span class="num">5</span>:
-            reacao.value = <span class="str">f"😐 Nota {n}"</span>
-        <span class="kw">else</span>:
-            reacao.value = <span class="str">f"😢 Nota {n}"</span>
-        page.<span class="fn">update</span>()
-
-    barra = ft.<span class="fn">Slider</span>(min=<span class="num">0</span>, max=<span class="num">10</span>, divisions=<span class="num">10</span>, value=<span class="num">5</span>,
-                      label=<span class="str">"{value}"</span>, on_change=mudou_nota)  <span class="cm"># ④</span>
-
-    page.<span class="fn">add</span>(ft.<span class="fn">Text</span>(<span class="str">"Quanto você curtiu o Flet?"</span>), barra, reacao)
-
-ft.<span class="fn">app</span>(target=main)
-</div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="line-list">
-                            <div class="line-item"><span class="line-num">①</span><div>Função comum de evento, com o <code>(e)</code>.</div></div>
-                            <div class="line-item"><span class="line-num">②</span><div>Lê a barra. O Slider devolve número com vírgula (<code>7.0</code>), então usamos <code>int()</code> para virar <code>7</code>.</div></div>
-                            <div class="line-item"><span class="line-num">③</span><div>O bom e velho <code>if / elif / else</code> da Aula 02 decide o emoji.</div></div>
-                            <div class="line-item"><span class="line-num">④</span><div><code>on_change=mudou_nota</code>: a função roda <strong>toda vez</strong> que a barra se move. Repare que a função foi criada <em>antes</em> da barra, mas consegue usar <code>barra</code> porque só roda depois, no evento.</div></div>
                         </div>
-                        <div class="mock-window" style="max-width:320px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Avalie a Aula</span></div>
-                            <div class="mock-body">
-                                <div class="mock-text" style="font-size:.8rem">Quanto você curtiu o Flet?</div>
-                                <div style="position:relative;height:6px;background:#334155;border-radius:4px;margin:6px 0"><div style="width:90%;height:6px;background:#38bdf8;border-radius:4px"></div><div style="position:absolute;left:calc(90% - 7px);top:-4px;width:14px;height:14px;border-radius:50%;background:#38bdf8"></div></div>
-                                <div class="mock-text" style="font-size:1.5rem">🤩 Nota 9</div>
-                            </div>
-                        </div>
-                        <p style="font-size:.78rem;color:#94a3b8;margin:0">🧪 <strong>Experimente:</strong> troque o <code>Slider</code> por um <code>Switch</code> com <code>on_change</code> que liga/desliga o modo escuro (<code>page.theme_mode</code>)!</p>
+                        <p style="font-size:.79rem;color:#cbd5e1;margin-top:8px">
+                            💡 Enquanto botões usam <code>on_click</code>, controles como <code>Dropdown</code>, <code>Slider</code> e <code>Switch</code> também aceitam <code>on_change=funcao</code> para reagir na mesma hora!
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 22 — TÓPICO 4: PRÁTICA 4 -->
+        <!-- SLIDE 16 — TÓPICO 4: PRÁTICA — DETETIVE DO CÓDIGO #4 -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge practice">⚡ Tópico 4 • Prática 4 — Mão na Massa! <span class="time-chip">⏱️ 20 min</span></span>
-                <h2 class="slide-title">Formulário Inteligente de Missões 🎯</h2>
-                <p class="slide-subtitle">Objetivo: o usuário digita o nome de uma missão, escolhe a área num menu, marca se é urgente e, ao clicar em <strong>Registrar</strong>, aparece um resumo.</p>
+                <span class="detective-badge">🕵️ Tópico 4 • Prática: Detetive do Código #4</span>
+                <h2 class="slide-title">Investigação: A Tela de Avaliação Instantânea</h2>
+                <p class="slide-subtitle">Descubra como esse código atualiza o resumo de avaliação sem nem precisar de um botão "Enviar"!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.06);padding:14px 16px">
-                            <h4 style="color:#34d399;font-size:.95rem">🪜 Passo a passo</h4>
-                            <ol class="practice-steps">
-                                <li>Crie <code>pratica4_formulario.py</code> com o esqueleto e tema escuro.</li>
-                                <li>Crie <code>missao = ft.TextField(label="Nome da Missão")</code>.</li>
-                                <li>Crie <code>area</code>: um <code>ft.Dropdown</code> com 3 opções: <code>"Escola"</code>, <code>"Saúde"</code> e <code>"Meio Ambiente"</code> (comece com <code>value="Escola"</code>).</li>
-                                <li>Crie <code>urgente = ft.Switch(label="🔥 Urgente?", value=False)</code>.</li>
-                                <li>Crie <code>resumo = ft.Text("", size=18)</code>.</li>
-                                <li>Na função <code>def registrar(e):</code>, use <code>if urgente.value:</code> para montar uma etiqueta ("🚨 URGENTE" ou "✅ Normal") e escreva no resumo: <code>f"[{area.value}] {missao.value} — {etiqueta}"</code>.</li>
-                                <li>Crie o botão Registrar e adicione tudo na página.</li>
-                            </ol>
-                        </div>
-                        <details class="solution hint">
-                            <summary>💡 Dica — como montar a etiqueta?</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.78rem">
-<span class="kw">if</span> urgente.value:
-    etiqueta = <span class="str">"🚨 URGENTE"</span>
-<span class="kw">else</span>:
-    etiqueta = <span class="str">"✅ Normal"</span>
-</div>
-                            </div>
-                        </details>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.85rem;color:#94a3b8;text-transform:uppercase">🎯 Resultado esperado</h4>
-                        <div class="mock-window" style="max-width:360px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Formulário de Missões</span></div>
-                            <div class="mock-body">
-                                <div class="mock-input filled">Coleta seletiva na escola</div>
-                                <div class="mock-input filled" style="display:flex;justify-content:space-between">Meio Ambiente <span>▾</span></div>
-                                <div class="mock-text" style="font-size:.8rem"><span style="display:inline-block;width:28px;height:14px;border-radius:10px;background:#38bdf8;vertical-align:middle;position:relative"><span style="position:absolute;right:2px;top:2px;width:10px;height:10px;border-radius:50%;background:#fff"></span></span> 🔥 Urgente?</div>
-                                <div class="mock-btn">Registrar</div>
-                                <div class="mock-text" style="font-size:.85rem">[Meio Ambiente] Coleta seletiva na escola — 🚨 URGENTE</div>
-                            </div>
-                        </div>
-                        <div class="content-box tip-box" style="padding:10px 14px">
-                            <h4 style="font-size:.85rem">✅ Deu certo se...</h4>
-                            <ul class="done-list"><li>☑️ O menu mostra as 3 áreas</li><li>☑️ O resumo muda conforme a área e o Switch</li></ul>
-                            <p style="font-size:.78rem;margin-top:6px">🏅 <strong>Desafio extra:</strong> se o nome da missão estiver vazio, mostre um aviso vermelho (use o que aprendeu no Tópico 3).</p>
-                        </div>
-                        <details class="solution">
-                            <summary>🔓 Ver solução completa</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.74rem">
-<span class="kw">import</span> flet <span class="kw">as</span> ft
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Código Sob Investigação — caso_04.py</span>
+                        <div class="prompt-code" style="font-size:.78rem;line-height:1.55">
+<span class="kw">setor</span> = ft.<span class="fn">Dropdown</span>(
+    label=<span class="str">"Setor Avaliado"</span>, value=<span class="str">"Cantina"</span>,
+    options=[ft.dropdown.<span class="fn">Option</span>(<span class="str">"Cantina"</span>), ft.dropdown.<span class="fn">Option</span>(<span class="str">"Biblioteca"</span>)]
+)
+<span class="kw">recomenda</span> = ft.<span class="fn">Switch</span>(label=<span class="str">"Recomendo para colegas"</span>, value=<span class="kw">True</span>)
+<span class="kw">nota</span> = ft.<span class="fn">Slider</span>(min=<span class="num">0</span>, max=<span class="num">10</span>, divisions=<span class="num">10</span>, value=<span class="num">8</span>)
+<span class="kw">painel</span> = ft.<span class="fn">Text</span>(<span class="str">"Mova a barra para avaliar..."</span>, size=<span class="num">18</span>)
 
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Formulário de Missões"</span>
-    page.theme_mode = ft.ThemeMode.DARK
-
-    missao = ft.<span class="fn">TextField</span>(label=<span class="str">"Nome da Missão"</span>)
-    area = ft.<span class="fn">Dropdown</span>(
-        label=<span class="str">"Área"</span>, value=<span class="str">"Escola"</span>,
-        options=[
-            ft.dropdown.<span class="fn">Option</span>(<span class="str">"Escola"</span>),
-            ft.dropdown.<span class="fn">Option</span>(<span class="str">"Saúde"</span>),
-            ft.dropdown.<span class="fn">Option</span>(<span class="str">"Meio Ambiente"</span>)
-        ]
-    )
-    urgente = ft.<span class="fn">Switch</span>(label=<span class="str">"🔥 Urgente?"</span>, value=<span class="kw">False</span>)
-    resumo = ft.<span class="fn">Text</span>(<span class="str">""</span>, size=<span class="num">18</span>)
-
-    <span class="kw">def</span> <span class="fn">registrar</span>(e):
-        <span class="kw">if</span> urgente.value:
-            etiqueta = <span class="str">"🚨 URGENTE"</span>
-        <span class="kw">else</span>:
-            etiqueta = <span class="str">"✅ Normal"</span>
-        resumo.value = <span class="str">f"[{area.value}] {missao.value} — {etiqueta}"</span>
-        page.<span class="fn">update</span>()
-
-    page.<span class="fn">add</span>(missao, area, urgente,
-             ft.<span class="fn">ElevatedButton</span>(<span class="str">"Registrar"</span>, on_click=registrar),
-             resumo)
-
-ft.<span class="fn">app</span>(target=main)
-</div>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===================== TÓPICO 5 ===================== -->
-
-        <!-- SLIDE 23 — TÓPICO 5: LISTAS DINÂMICAS -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge fire">🔥 Tópico 5 • App Completo — Explicação (1/2)</span>
-                <h2 class="slide-title">Listas que crescem na tela: <code>.controls.append()</code> e <code>.controls.clear()</code></h2>
-                <p class="slide-subtitle">Até agora, a tela tinha sempre os mesmos controles. Agora vamos <strong>criar controles novos a cada clique</strong> — como uma lista de tarefas que vai aumentando.</p>
-            </div>
-            <div class="slide-body">
-                <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="analogy-box">
-                            <span class="tag">📋 Pense assim: o caderno e o quadro</span><br>
-                            A lista <code>dados = []</code> é o <strong>caderno</strong>: guarda as informações (o Python usa para contar, somar...). A <code>ft.Column()</code> é o <strong>quadro da sala</strong>: é o que as pessoas <strong>veem</strong>. A cada clique, anotamos no caderno (<code>dados.append</code>) <strong>e</strong> escrevemos no quadro (<code>lista_visual.controls.append</code>).
-                        </div>
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <div class="prompt-code" style="font-size:.78rem;line-height:1.6">
-dados = []                                   <span class="cm"># ① caderno</span>
-campo = ft.<span class="fn">TextField</span>(label=<span class="str">"Novo item..."</span>)
-lista_visual = ft.<span class="fn">Column</span>()                  <span class="cm"># ② quadro vazio</span>
-
-<span class="kw">def</span> <span class="fn">adicionar</span>(e):
-    <span class="kw">if</span> campo.value.<span class="fn">strip</span>() != <span class="str">""</span>:
-        dados.<span class="fn">append</span>(campo.value)            <span class="cm"># ③</span>
-        lista_visual.controls.<span class="fn">append</span>(         <span class="cm"># ④</span>
-            ft.<span class="fn">Text</span>(<span class="str">f"✅ {campo.value} (Total: {len(dados)})"</span>)
-        )
-        campo.value = <span class="str">""</span>                       <span class="cm"># ⑤</span>
-        page.<span class="fn">update</span>()
-
-<span class="kw">def</span> <span class="fn">limpar_tudo</span>(e):
-    dados.<span class="fn">clear</span>()                             <span class="cm"># ⑥</span>
-    lista_visual.controls.<span class="fn">clear</span>()
+<span class="kw">def</span> <span class="fn">atualizar_avaliacao</span>(e):
+    <span class="kw">n</span> = <span class="fn">int</span>(nota.value)
+    <span class="kw">status</span> = <span class="str">"👍 Recomenda"</span> <span class="kw">if</span> recomenda.value <span class="kw">else</span> <span class="str">"👎 Não recomenda"</span>
+    painel.value = <span class="str">f"[{setor.value}] Nota: {n}/10 — {status}"</span>
     page.<span class="fn">update</span>()
 
-page.<span class="fn">add</span>(campo,
-         ft.<span class="fn">Row</span>([ft.<span class="fn">ElevatedButton</span>(<span class="str">"Adicionar"</span>, on_click=adicionar),
-                 ft.<span class="fn">IconButton</span>(icon=ft.Icons.DELETE, on_click=limpar_tudo)]),
-         lista_visual)
-</div>
+nota.on_change = atualizar_avaliacao
+recomenda.on_change = atualizar_avaliacao
                         </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="line-list">
-                            <div class="line-item"><span class="line-num">①</span><div>Lista Python comum (Aula 03). Guarda os dados "por trás".</div></div>
-                            <div class="line-item"><span class="line-num">②</span><div>Uma <code>Column</code> <strong>sem nada dentro</strong>. Ela já está na tela, mas vazia.</div></div>
-                            <div class="line-item"><span class="line-num">③</span><div>Anota no caderno (lista Python).</div></div>
-                            <div class="line-item"><span class="line-num">④</span><div><strong>O pulo do gato:</strong> toda <code>Column</code>/<code>Row</code> tem uma lista interna chamada <code>.controls</code>. Dar <code>append</code> nela = um controle novo aparece na tela!</div></div>
-                            <div class="line-item"><span class="line-num">⑤</span><div>Esvazia a caixa de texto para a próxima digitação (detalhe que deixa o app mais agradável).</div></div>
-                            <div class="line-item"><span class="line-num">⑥</span><div><code>.clear()</code> apaga tudo: do caderno <strong>e</strong> do quadro.</div></div>
-                        </div>
-                        <div class="mock-window" style="max-width:320px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Depois de 3 cliques</span></div>
-                            <div class="mock-body" style="gap:6px">
-                                <div class="mock-input">Novo item...</div>
-                                <div class="mock-row" style="align-items:center"><div class="mock-btn">Adicionar</div><span>🗑️</span></div>
-                                <div class="mock-text" style="font-size:.8rem">✅ Estudar Flet (Total: 1)</div>
-                                <div class="mock-text" style="font-size:.8rem">✅ Fazer a prática (Total: 2)</div>
-                                <div class="mock-text" style="font-size:.8rem">✅ Enviar a tarefa (Total: 3)</div>
-                            </div>
+                    <div class="detective-card">
+                        <h4>🕵️ Missão do Detetive — Explique o Código:</h4>
+                        <ul class="detective-questions">
+                            <li><span class="detective-q-num">Pista 1</span>Por que a função <code>atualizar_avaliacao</code> é executada automaticamente assim que o usuário arrasta o <code>Slider</code> ou mexe no <code>Switch</code>?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Qual frase exata aparecerá em <code>painel.value</code> se o usuário deixar o setor padrão, desligar o <code>Switch</code> e arrastar o <code>Slider</code> para <code>4</code>?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Se o usuário trocar apenas o <code>Dropdown</code> de <code>"Cantina"</code> para <code>"Biblioteca"</code>, o texto atualiza na mesma hora ou só quando mexer na barra/switch? Por quê?</li>
+                        </ul>
+                        <div class="hint-box">
+                            💡 <strong>Dica do Detetive:</strong> Olhe as duas últimas linhas do código (linhas 15 e 16) e veja quais controles receberam o evento <code>.on_change</code>!
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 24 — TÓPICO 5: NAVIGATIONBAR -->
+        <!-- SLIDE 17 — TÓPICO 5: NAVEGAÇÃO MULTI-TELAS E LISTAS DINÂMICAS (EXPLICAÇÃO 1/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge fire">🔥 Tópico 5 • App Completo — Explicação (2/2)</span>
-                <h2 class="slide-title">Várias telas no mesmo app com <code>ft.NavigationBar</code></h2>
-                <p class="slide-subtitle">Aquela barra de abas embaixo, igual a do Instagram ou WhatsApp. O segredo: <strong>todas as telas existem ao mesmo tempo, mas só uma fica visível</strong>.</p>
+                <span class="step-badge" style="background:rgba(245,158,11,.16);border-color:#f59e0b;color:#fcd34d">🔥 Tópico 5 • Estrutura de Projeto Final — Explicação (1/2)</span>
+                <h2 class="slide-title">Abas com <code>NavigationBar</code> e Listas com <code>.controls.append()</code></h2>
+                <p class="slide-subtitle">Os 2 poderes finais para um app completo: alternar entre telas (<code>.visible</code>) e adicionar itens na lista visual!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="analogy-box">
-                            <span class="tag">📺 Pense assim: canais de TV</span><br>
-                            Todos os canais estão sendo transmitidos, mas a TV <strong>mostra só um</strong>. Trocar de aba = trocar de canal: escondemos uma tela (<code>visible = False</code>) e mostramos outra (<code>visible = True</code>). Vantagem: o que foi digitado em uma aba <strong>não se perde</strong> ao trocar!
-                        </div>
-                        <div class="content-box" style="background:rgba(0,0,0,.45);padding:14px">
-                            <div class="prompt-code" style="font-size:.76rem;line-height:1.58">
-<span class="kw">import</span> flet <span class="kw">as</span> ft
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <h4 style="color:#00e5ff;margin-bottom:6px">🧭 Alternando Abas com <code>NavigationBar</code></h4>
+                        <div class="prompt-code" style="font-size:.77rem;line-height:1.54">
+<span class="kw">tela_cadastro</span> = ft.<span class="fn">Column</span>([...], visible=<span class="kw">True</span>)
+<span class="kw">tela_historico</span> = ft.<span class="fn">Column</span>([...], visible=<span class="kw">False</span>)
 
-<span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"App com Abas"</span>
+<span class="kw">def</span> <span class="fn">mudar_aba</span>(e):
+    <span class="kw">idx</span> = e.control.selected_index
+    tela_cadastro.visible  = (idx == <span class="num">0</span>)
+    tela_historico.visible = (idx == <span class="num">1</span>)
+    page.<span class="fn">update</span>()
 
-    tela_inicio = ft.<span class="fn">Column</span>([ft.<span class="fn">Text</span>(<span class="str">"🏠 Aba Início"</span>, size=<span class="num">24</span>)], visible=<span class="kw">True</span>)   <span class="cm"># ①</span>
-    tela_sobre  = ft.<span class="fn">Column</span>([ft.<span class="fn">Text</span>(<span class="str">"ℹ️ Sobre a Dupla"</span>, size=<span class="num">24</span>)], visible=<span class="kw">False</span>)
-
-    <span class="kw">def</span> <span class="fn">mudar_aba</span>(e):
-        idx = e.control.selected_index          <span class="cm"># ②</span>
-        tela_inicio.visible = (idx == <span class="num">0</span>)        <span class="cm"># ③</span>
-        tela_sobre.visible  = (idx == <span class="num">1</span>)
-        page.<span class="fn">update</span>()
-
-    page.navigation_bar = ft.<span class="fn">NavigationBar</span>(  <span class="cm"># ④</span>
-        on_change=mudar_aba,
-        destinations=[
-            ft.<span class="fn">NavigationBarDestination</span>(icon=ft.Icons.HOME, label=<span class="str">"Início"</span>),
-            ft.<span class="fn">NavigationBarDestination</span>(icon=ft.Icons.INFO, label=<span class="str">"Sobre"</span>)
-        ]
-    )
-    page.<span class="fn">add</span>(tela_inicio, tela_sobre)          <span class="cm"># ⑤</span>
-
-ft.<span class="fn">app</span>(target=main)
-</div>
+page.navigation_bar = ft.<span class="fn">NavigationBar</span>(
+    on_change=mudar_aba,
+    destinations=[
+        ft.<span class="fn">NavigationBarDestination</span>(icon=ft.Icons.ADD_BOX, label=<span class="str">"Avaliar"</span>),
+        ft.<span class="fn">NavigationBarDestination</span>(icon=ft.Icons.LIST_ALT, label=<span class="str">"Histórico"</span>)
+    ]
+)
                         </div>
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="line-list">
-                            <div class="line-item"><span class="line-num">①</span><div>Cada tela é uma <code>Column</code>. A primeira começa <strong>visível</strong> (<code>True</code>), a outra <strong>escondida</strong> (<code>False</code>).</div></div>
-                            <div class="line-item"><span class="line-num">②</span><div>Aqui finalmente usamos o <code>e</code>! <code>e.control</code> é quem disparou o evento (a barra) e <code>selected_index</code> é o número da aba clicada. <strong>Começa no 0</strong>, igual às posições de lista!</div></div>
-                            <div class="line-item"><span class="line-num">③</span><div><code>(idx == 0)</code> vira <code>True</code> ou <code>False</code>. Se clicou na aba 0, o Início aparece; senão, some.</div></div>
-                            <div class="line-item"><span class="line-num">④</span><div>A barra não vai no <code>page.add</code>: ela tem um lugar próprio, <code>page.navigation_bar</code>, e fica sempre fixa embaixo.</div></div>
-                            <div class="line-item"><span class="line-num">⑤</span><div>As duas telas são adicionadas — mas só a visível aparece.</div></div>
+                    <div class="content-box" style="border-color:rgba(16,185,129,.4)">
+                        <h4 style="color:#34d399;margin-bottom:6px">📋 Adicionando e Limpando Cards na Tela</h4>
+                        <div class="prompt-code" style="font-size:.77rem;line-height:1.54">
+<span class="kw">avaliacoes</span> = [] <span class="cm"># Lista Python (guarda os dicionários)</span>
+<span class="kw">lista_visual</span> = ft.<span class="fn">Column</span>() <span class="cm"># Coluna na tela</span>
+
+<span class="cm"># Adicionando um novo item visual na tela:</span>
+lista_visual.controls.<span class="fn">append</span>(
+    ft.<span class="fn">Text</span>(<span class="str">f"⭐ {email.value} deu nota {int(nota.value)}"</span>)
+)
+
+<span class="cm"># Apagando todos os itens da tela de uma vez:</span>
+lista_visual.controls.<span class="fn">clear</span>()
+page.<span class="fn">update</span>()
                         </div>
-                        <div class="grid-2" style="gap:10px">
-                            <div class="mock-window">
-                                <div class="mock-body" style="min-height:60px"><div class="mock-text">🏠 Aba Início</div></div>
-                                <div class="mock-nav"><span class="on">🏠 Início</span><span>ℹ️ Sobre</span></div>
-                            </div>
-                            <div class="mock-window">
-                                <div class="mock-body" style="min-height:60px"><div class="mock-text">ℹ️ Sobre a Dupla</div></div>
-                                <div class="mock-nav"><span>🏠 Início</span><span class="on">ℹ️ Sobre</span></div>
-                            </div>
-                        </div>
-                        <p style="font-size:.78rem;color:#94a3b8;margin:0">➕ Quer uma 3ª aba? Crie <code>tela_3</code> com <code>visible=False</code>, adicione mais um <code>NavigationBarDestination</code> e a linha <code>tela_3.visible = (idx == 2)</code>.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 25 — TÓPICO 5: PRÁTICA FINAL INTEGRADORA -->
+        <!-- SLIDE 18 — TÓPICO 5: EXEMPLO COMPLETO DE PROJETO FINAL (EXPLICAÇÃO 2/2) -->
         <section class="slide">
             <div class="slide-header">
-                <span class="step-badge practice">🏆 Tópico 5 • Prática Final Integradora — Protótipo do App! <span class="time-chip">⏱️ 30 min</span></span>
-                <h2 class="slide-title">Desafio Mestre: "Controle Inteligente" com menu, validação e lista</h2>
-                <p class="slide-subtitle">Objetivo: juntar <strong>tudo</strong> da aula num app só. O usuário descreve um item, escolhe o tipo, digita um valor e o item entra numa lista na tela — com proteção contra erros.</p>
+                <span class="step-badge" style="background:rgba(245,158,11,.16);border-color:#f59e0b;color:#fcd34d">🏆 Tópico 5 • Exemplo Completo de Projeto Final — Explicação (2/2)</span>
+                <h2 class="slide-title">Arquitetura Completa: App de Feedback &amp; Avaliação</h2>
+                <p class="slide-subtitle">Veja como E-mail, Categoria (<code>Dropdown</code>), Avaliação (<code>Slider</code>), Blindagem e Lista funcionam juntos!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:16px;align-items:start">
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <div class="content-box" style="border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.05);padding:14px 16px">
-                            <h4 style="color:#00e5ff;font-size:.95rem">🎯 Checklist do seu app</h4>
-                            <ol class="practice-steps">
-                                <li><strong>Janela:</strong> <code>page.title</code>, <code>ThemeMode.DARK</code> e <code>page.scroll = ft.ScrollMode.AUTO</code>.</li>
-                                <li><strong>Entradas:</strong> um <code>TextField</code> "Descrição", um <code>Dropdown</code> "Tipo" (Meta / Gasto) e um <code>TextField</code> "Valor".</li>
-                                <li><strong>Avisos:</strong> um <code>ft.Text("")</code> chamado <code>aviso</code>.</li>
-                                <li><strong>Lista:</strong> <code>historico = ft.Column()</code> vazia.</li>
-                                <li><strong>Função <code>salvar(e)</code>:</strong> se a descrição estiver vazia → aviso vermelho. Senão, <code>try</code>: converta o valor com <code>float()</code> e dê <code>historico.controls.append(ft.Text(...))</code>; <code>except ValueError</code>: aviso vermelho "Digite um número válido!".</li>
-                                <li><strong>Botão</strong> "Adicionar" com ícone ligado a <code>salvar</code>.</li>
-                            </ol>
-                        </div>
-                        <details class="solution hint">
-                            <summary>💡 Dica — por onde começar?</summary>
-                            <div class="sol-body lede" style="font-size:.82rem">Faça <strong>em partes</strong> e rode a cada parte: 1) só a janela e os campos aparecendo; 2) o botão mostrando qualquer texto no <code>aviso</code>; 3) a validação; 4) a lista. Programadores profissionais trabalham assim — passinho por passinho!</div>
-                        </details>
-                        <div class="content-box tip-box" style="padding:10px 14px">
-                            <h4 style="font-size:.85rem">🏅 Desafios extras (para quem quer ir além)</h4>
-                            <ul class="done-list">
-                                <li>⭐ Mostre cada item dentro de um <strong>card</strong> (<code>ft.Container</code>) em vez de um <code>Text</code> simples.</li>
-                                <li>⭐⭐ Mostre o <strong>total</strong> somado de todos os valores (guarde os números numa lista e use <code>sum()</code>).</li>
-                                <li>⭐⭐⭐ Adicione um <code>IconButton</code> de lixeira que limpa a lista.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:10px">
-                        <h4 style="font-size:.85rem;color:#94a3b8;text-transform:uppercase">🎯 Resultado esperado</h4>
-                        <div class="mock-window" style="max-width:360px">
-                            <div class="mock-titlebar"><i></i><i></i><i></i><span>Controle Inteligente</span></div>
-                            <div class="mock-body" style="background:#0f172a;gap:7px">
-                                <div class="mock-input filled">Lanche da escola</div>
-                                <div class="mock-input filled" style="display:flex;justify-content:space-between">Gasto <span>▾</span></div>
-                                <div class="mock-input filled">12.50</div>
-                                <div class="mock-btn">➕ Adicionar</div>
-                                <div class="mock-text" style="font-size:.78rem;color:#34d399">✅ Salvo com sucesso!</div>
-                                <div class="mock-text" style="font-size:.8rem">📌 [Meta] Economizar: 50.0</div>
-                                <div class="mock-text" style="font-size:.8rem">📌 [Gasto] Lanche da escola: 12.5</div>
-                            </div>
-                        </div>
-                        <details class="solution">
-                            <summary>🔓 Ver solução completa (versão base)</summary>
-                            <div class="sol-body">
-                                <div class="prompt-code" style="font-size:.72rem;line-height:1.5">
+                    <div class="content-box" style="background:rgba(0,0,0,.48);padding:12px 14px">
+                        <span class="engage-label" style="margin-bottom:4px">⌨️ projeto_final_exemplo.py</span>
+                        <div class="prompt-code" style="font-size:.73rem;line-height:1.48;padding:10px 12px">
 <span class="kw">import</span> flet <span class="kw">as</span> ft
 
 <span class="kw">def</span> <span class="fn">main</span>(page: ft.Page):
-    page.title = <span class="str">"Controle Inteligente"</span>
+    page.title = <span class="str">"Conecta Escola — Feedback"</span>
     page.theme_mode = ft.ThemeMode.DARK
+    page.window.width = <span class="num">430</span>
     page.scroll = ft.ScrollMode.AUTO
 
-    nome = ft.<span class="fn">TextField</span>(label=<span class="str">"Descrição"</span>)
-    cat = ft.<span class="fn">Dropdown</span>(label=<span class="str">"Tipo"</span>, value=<span class="str">"Meta"</span>,
-                      options=[ft.dropdown.<span class="fn">Option</span>(<span class="str">"Meta"</span>),
-                               ft.dropdown.<span class="fn">Option</span>(<span class="str">"Gasto"</span>)])
-    valor = ft.<span class="fn">TextField</span>(label=<span class="str">"Valor numérico"</span>)
-    aviso = ft.<span class="fn">Text</span>(<span class="str">""</span>)
-    historico = ft.<span class="fn">Column</span>()
+    <span class="kw">banco_dados</span> = []
+    <span class="kw">email</span> = ft.<span class="fn">TextField</span>(label=<span class="str">"Seu E-mail"</span>, prefix_icon=ft.Icons.EMAIL)
+    <span class="kw">area</span> = ft.<span class="fn">Dropdown</span>(label=<span class="str">"Área"</span>, value=<span class="str">"Ensino"</span>, options=[
+        ft.dropdown.<span class="fn">Option</span>(<span class="str">"Ensino"</span>), ft.dropdown.<span class="fn">Option</span>(<span class="str">"Estrutura"</span>)])
+    <span class="kw">nota</span> = ft.<span class="fn">Slider</span>(min=<span class="num">0</span>, max=<span class="num">10</span>, divisions=<span class="num">10</span>, value=<span class="num">8</span>, label=<span class="str">"Nota: {value}"</span>)
+    <span class="kw">urgente</span> = ft.<span class="fn">Switch</span>(label=<span class="str">"🔥 Demanda Urgente?"</span>, value=<span class="kw">False</span>)
+    <span class="kw">aviso</span> = ft.<span class="fn">Text</span>(<span class="str">""</span>, weight=<span class="str">"bold"</span>)
+    <span class="kw">historico</span> = ft.<span class="fn">Column</span>()
 
-    <span class="kw">def</span> <span class="fn">salvar</span>(e):
-        <span class="kw">if</span> nome.value.<span class="fn">strip</span>() == <span class="str">""</span>:
-            aviso.value = <span class="str">"⚠️ Escreva uma descrição!"</span>
+    <span class="kw">def</span> <span class="fn">salvar_avaliacao</span>(e):
+        <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value:
+            aviso.value = <span class="str">"⚠️ Informe um e-mail válido com @!"</span>
             aviso.color = <span class="str">"red"</span>
         <span class="kw">else</span>:
-            <span class="kw">try</span>:
-                v = <span class="fn">float</span>(valor.value)
-                historico.controls.<span class="fn">append</span>(
-                    ft.<span class="fn">Text</span>(<span class="str">f"📌 [{cat.value}] {nome.value}: {v}"</span>))
-                aviso.value = <span class="str">"✅ Salvo com sucesso!"</span>
-                aviso.color = <span class="str">"green"</span>
-                nome.value = <span class="str">""</span>
-                valor.value = <span class="str">""</span>
-            <span class="kw">except</span> <span class="fn">ValueError</span>:
-                aviso.value = <span class="str">"⚠️ Digite um número válido!"</span>
-                aviso.color = <span class="str">"red"</span>
+            <span class="kw">registro</span> = {<span class="str">"email"</span>: email.value, <span class="str">"area"</span>: area.value, <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)}
+            banco_dados.<span class="fn">append</span>(registro)
+            <span class="kw">tag</span> = <span class="str">"🚨"</span> <span class="kw">if</span> urgente.value <span class="kw">else</span> <span class="str">"✅"</span>
+            historico.controls.<span class="fn">append</span>(ft.<span class="fn">Text</span>(
+                <span class="str">f"{tag} [{registro['area']}] {registro['email']} — Nota {registro['nota']}/10"</span>))
+            aviso.value = <span class="str">f"🎉 Salvo! Total de avaliações: {len(banco_dados)}"</span>
+            aviso.color = <span class="str">"green"</span>
+            email.value = <span class="str">""</span>
         page.<span class="fn">update</span>()
 
-    page.<span class="fn">add</span>(nome, cat, valor,
-             ft.<span class="fn">ElevatedButton</span>(<span class="str">"Adicionar"</span>, icon=ft.Icons.ADD, on_click=salvar),
-             aviso, historico)
+    page.<span class="fn">add</span>(ft.<span class="fn">Text</span>(<span class="str">"🌟 Central de Avaliação"</span>, size=<span class="num">22</span>, weight=<span class="str">"bold"</span>),
+             email, area, ft.<span class="fn">Text</span>(<span class="str">"Sua Nota (0 a 10):"</span>), nota, urgente,
+             ft.<span class="fn">ElevatedButton</span>(<span class="str">"Enviar Avaliação"</span>, icon=ft.Icons.SEND, on_click=salvar_avaliacao),
+             aviso, ft.<span class="fn">Text</span>(<span class="str">"📋 Histórico:"</span>, weight=<span class="str">"bold"</span>), historico)
 
 ft.<span class="fn">app</span>(target=main)
-</div>
-                            </div>
-                        </details>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                        <div class="summary-item">
+                            <span class="summary-check">✉️</span>
+                            <div class="summary-text"><strong>1. Entrada Identificada e Blindada</strong>O campo <code>email</code> exige <code>"@"</code> antes de aceitar o envio, exibindo feedback colorido em <code>aviso</code>.</div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">🎛️</span>
+                            <div class="summary-text"><strong>2. Seletores e Nota de Avaliação</strong>Combina <code>Dropdown</code> (setor), <code>Slider</code> (nota 0 a 10) e <code>Switch</code> (prioridade) sem risco de erro numérico.</div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">🗂️</span>
+                            <div class="summary-text"><strong>3. Lista de Dicionários + Lista Visual</strong>Guarda cada cadastro em <code>banco_dados</code> (Aula 04) e adiciona na tela com <code>historico.controls.append(...)</code>!</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 26 — TESTE DE ESTRESSE -->
+        <!-- SLIDE 19 — TÓPICO 5: PRÁTICA FINAL — DETETIVE DO CÓDIGO #5 -->
+        <section class="slide">
+            <div class="slide-header">
+                <span class="detective-badge">🕵️ Tópico 5 • Prática Final: Detetive do Código #5</span>
+                <h2 class="slide-title">Investigação Mestre: Desvendando o Projeto Completo</h2>
+                <p class="slide-subtitle">Olhe novamente o código do Projeto Final (ou analise o trecho principal abaixo) e responda aos 4 desafios!</p>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2" style="gap:16px;align-items:start">
+                    <div class="content-box" style="background:rgba(0,0,0,.45)">
+                        <span class="engage-label" style="margin-bottom:6px">🔎 Trecho Central do Projeto Final — caso_05.py</span>
+                        <div class="prompt-code" style="font-size:.77rem;line-height:1.55">
+<span class="kw">def</span> <span class="fn">salvar_avaliacao</span>(e):
+    <span class="kw">if</span> <span class="str">"@"</span> <span class="kw">not in</span> email.value:
+        aviso.value = <span class="str">"⚠️ Informe um e-mail válido com @!"</span>
+        aviso.color = <span class="str">"red"</span>
+    <span class="kw">else</span>:
+        <span class="kw">registro</span> = {
+            <span class="str">"email"</span>: email.value,
+            <span class="str">"area"</span>: area.value,
+            <span class="str">"nota"</span>: <span class="fn">int</span>(nota.value)
+        }
+        banco_dados.<span class="fn">append</span>(registro)
+        <span class="kw">tag</span> = <span class="str">"🚨"</span> <span class="kw">if</span> urgente.value <span class="kw">else</span> <span class="str">"✅"</span>
+        historico.controls.<span class="fn">append</span>(
+            ft.<span class="fn">Text</span>(<span class="str">f"{tag} [{registro['area']}] {registro['email']} — Nota {registro['nota']}/10"</span>)
+        )
+        aviso.value = <span class="str">f"🎉 Salvo! Total de avaliações: {len(banco_dados)}"</span>
+        aviso.color = <span class="str">"green"</span>
+        email.value = <span class="str">""</span>
+    page.<span class="fn">update</span>()
+                        </div>
+                    </div>
+                    <div class="detective-card">
+                        <h4>🕵️ Missão Mestre do Detetive — Explique o Código:</h4>
+                        <ul class="detective-questions">
+                            <li><span class="detective-q-num">Pista 1</span>Qual é a diferença entre o que é guardado em <code>banco_dados.append(...)</code> (linha 11) e o que é guardado em <code>historico.controls.append(...)</code> (linha 13)?</li>
+                            <li><span class="detective-q-num">Pista 2</span>Como o código descobre quantas avaliações já foram cadastradas no total para mostrar na linha 16?</li>
+                            <li><span class="detective-q-num">Pista 3</span>Por que a linha 18 faz <code>email.value = ""</code> logo depois de salvar uma avaliação válida?</li>
+                            <li><span class="detective-q-num">Pista 4</span>Se você quisesse criar um botão de lixeira (<code>IconButton</code>) para zerar tudo, quais <strong>duas listas</strong> você precisaria limpar com <code>.clear()</code>?</li>
+                        </ul>
+                        <div class="hint-box">
+                            💡 <strong>Dica do Detetive:</strong> Uma lista guarda dados puros do Python (dicionários) na memória, enquanto a outra guarda componentes visuais (<code>ft.Text</code>) dentro da <code>ft.Column</code> da tela!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 20 — TESTE DE ESTRESSE NO FLET -->
         <section class="slide">
             <div class="slide-header">
                 <span class="step-badge">🔨 Operação Destruição na Interface</span>
-                <h2 class="slide-title">Teste de estresse: tente "quebrar" o seu próprio app!</h2>
-                <p class="slide-subtitle">Bons programadores testam o app como se fossem um usuário bagunceiro. Faça os 4 testes abaixo no app da Prática Final e marque o que passou.</p>
+                <h2 class="slide-title">Teste de Estresse Visual no Flet</h2>
+                <p class="slide-subtitle">Os 4 problemas clássicos de interface gráfica e como deixar seu aplicativo blindado!</p>
             </div>
             <div class="slide-body">
                 <table class="stress-table">
                     <thead>
-                        <tr><th>Teste</th><th>O que fazer no app</th><th>O que acontece sem proteção?</th><th>Como blindar?</th></tr>
+                        <tr><th>Teste na Janela</th><th>O que fazer no App</th><th>O que acontece sem proteção?</th><th>Como deixar blindado?</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>1. 🫥 Clique vazio</td><td>Clicar no botão sem digitar nada</td><td>Cadastra linha em branco ou dá <code>ValueError</code></td><td>Testar <code>if campo.value.strip() == "":</code></td></tr>
-                        <tr><td>2. 🔤 Letras no número</td><td>Digitar <code>"abc"</code> no campo de valor</td><td>Erro vermelho no terminal e nada acontece na tela</td><td><code>try / except ValueError</code> ou trocar por <code>ft.Slider</code></td></tr>
-                        <tr><td>3. 🧊 Tela congelada</td><td>Clicar e a tela não mudar</td><td>Esqueceu de atualizar a página</td><td>Chamar <code>page.update()</code> no final da função</td></tr>
-                        <tr><td>4. ✂️ Lista cortada</td><td>Adicionar 15 itens seguidos</td><td>Os últimos somem embaixo da janela</td><td><code>page.scroll = ft.ScrollMode.AUTO</code> no início</td></tr>
+                        <tr><td>1. Clique Vazio / E-mail Inválido</td><td>Clicar no botão sem digitar ou sem colocar <code>@</code> no e-mail</td><td>Cadastra linha em branco ou dado inválido</td><td>Testar <code>if campo.value.strip() == ""</code> ou <code>"@" not in email.value</code></td></tr>
+                        <tr><td>2. Letras em Número</td><td>Digitar <code>"abc"</code> num campo de preço ou idade</td><td>Erro vermelho no terminal (<code>ValueError</code>)</td><td>Usar <code>try / except ValueError</code> ou um <code>ft.Slider</code>!</td></tr>
+                        <tr><td>3. Tela Congelada</td><td>Mudar <code>texto.value</code> e nada acontecer na janela</td><td>Esqueceu de atualizar a página</td><td>Chamar <code>page.update()</code> no final da função!</td></tr>
+                        <tr><td>4. Lista Cortada</td><td>Adicionar 15 itens e os últimos sumirem embaixo da janela</td><td>A página não tem barra de rolagem ativa</td><td>Ativar <code>page.scroll = ft.ScrollMode.AUTO</code> no início!</td></tr>
                     </tbody>
                 </table>
-                <div class="content-box tip-box" style="padding:12px 16px">
-                    <p style="font-size:.84rem;margin:0">🏆 <strong>Passou nos 4 testes?</strong> Parabéns, seu app está blindado! Guarde esse arquivo: ele é a base do <strong>projeto final</strong> que vamos polir na Aula 06.</p>
-                </div>
             </div>
         </section>
 
-        <!-- SLIDE 27 — TRAVEI, E AGORA? -->
-        <section class="slide">
-            <div class="slide-header">
-                <span class="step-badge">🆘 Guia de Socorro</span>
-                <h2 class="slide-title">Travei, e agora? Os erros mais comuns e como resolver</h2>
-                <p class="slide-subtitle">Quando der erro, olhe a <strong>última linha</strong> da mensagem vermelha no terminal e procure aqui.</p>
-            </div>
-            <div class="slide-body">
-                <table class="stress-table">
-                    <thead><tr><th>Mensagem / Sintoma</th><th>O que significa</th><th>Como resolver</th></tr></thead>
-                    <tbody>
-                        <tr><td><code>ModuleNotFoundError: No module named 'flet'</code></td><td>O Flet não está instalado</td><td><code>pip install flet</code> (slide 4)</td></tr>
-                        <tr><td><code>AttributeError: module 'flet' has no attribute 'Text'</code></td><td>Seu arquivo se chama <code>flet.py</code></td><td>Renomeie o arquivo (ex.: <code>meu_app.py</code>)</td></tr>
-                        <tr><td><code>NameError: name 'campo' is not defined</code></td><td>Usou uma variável antes de criar, ou escreveu o nome diferente</td><td>Confira maiúsculas/minúsculas e se a variável está dentro da <code>main</code></td></tr>
-                        <tr><td><code>TypeError: ... takes 0 positional arguments but 1 was given</code></td><td>Faltou o <code>(e)</code> na função do botão</td><td><code>def minha_funcao(e):</code></td></tr>
-                        <tr><td><code>IndentationError</code></td><td>Recuo (espaços no começo da linha) errado</td><td>Tudo do app fica com 4 espaços dentro da <code>main</code>; <code>ft.app(...)</code> sem recuo</td></tr>
-                        <tr><td>Clico e nada acontece (sem erro)</td><td>Faltou <code>page.update()</code> ou o <code>on_click</code></td><td>Veja o slide 11 (pegadinhas)</td></tr>
-                        <tr><td>Janela abre e fecha na hora</td><td>Erro logo no início</td><td>Leia a mensagem no terminal do VS Code</td></tr>
-                    </tbody>
-                </table>
-                <div class="content-box accent-box" style="padding:12px 16px">
-                    <h4 style="font-size:.9rem">🤖 Como pedir ajuda ao Chat IA (copie e complete):</h4>
-                    <div class="prompt-code" style="font-size:.8rem">Estou aprendendo Flet em Python. Meu código é este: [cole o código]. Quando eu [o que você fez], aparece este erro: [cole a última linha do erro]. Me explique o que significa e me dê uma dica para corrigir, sem me dar a resposta pronta.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 28 — SÍNTESE -->
+        <!-- SLIDE 21 — SÍNTESE DO DIA: RESUMÃO DA AULA 05 -->
         <section class="slide">
             <div class="slide-header">
                 <span class="slide-step">SÍNTESE DO DIA</span>
-                <h2 class="slide-title">Tudo o que você aprendeu na Aula 05!</h2>
-                <p class="slide-subtitle">Salve todos os seus arquivos (<kbd>Ctrl</kbd> + <kbd>S</kbd>) na pasta <code>aula05</code>. Eles vão ajudar muito no projeto final!</p>
+                <h2 class="slide-title">Tudo que Dominamos na Aula 05!</h2>
+                <p class="slide-subtitle">Guarde os códigos e suas anotações do Detetive do Código para usar no projeto da sua dupla!</p>
             </div>
             <div class="slide-body">
                 <div class="grid-2" style="gap:14px">
                     <div style="display:flex;flex-direction:column;gap:8px">
-                        <div class="summary-item"><span class="summary-check">🪟</span><div class="summary-text"><strong>Esqueleto + ft.Text, ft.TextField e ft.ElevatedButton</strong><code>import flet as ft</code> → <code>def main(page)</code> → <code>page.add(...)</code> → <code>ft.app(target=main)</code>. O conteúdo de cada controle fica em <code>.value</code>.</div></div>
-                        <div class="summary-item"><span class="summary-check">🔄</span><div class="summary-text"><strong>Eventos: on_click + page.update()</strong>Clique → função <code>def acao(e)</code> → muda <code>.value</code> → <code>page.update()</code>. Sem parênteses no <code>on_click</code>!</div></div>
-                        <div class="summary-item"><span class="summary-check">📐</span><div class="summary-text"><strong>Column (vertical) e Row (horizontal)</strong>Caixas organizadoras que recebem uma lista de controles.</div></div>
-                        <div class="summary-item"><span class="summary-check">🎨</span><div class="summary-text"><strong>Temas, ícones, Container e blindagem</strong><code>ThemeMode.DARK</code>, <code>ft.Icons</code>, cards com borda e avisos coloridos com <code>if</code> e <code>try/except</code>.</div></div>
-                        <div class="summary-item"><span class="summary-check">🎛️</span><div class="summary-text"><strong>Dropdown, Slider, Switch, Checkbox, IconButton</strong>Escolhas sem digitar; <code>on_change</code> reage na hora.</div></div>
-                        <div class="summary-item"><span class="summary-check">🧭</span><div class="summary-text"><strong>.controls.append() / .clear() e NavigationBar</strong>Listas que crescem na tela e abas com <code>visible = True / False</code>.</div></div>
+                        <div class="summary-item"><span class="summary-check">🪟</span><div class="summary-text"><strong>pip install flet + Text, TextField e ElevatedButton</strong>Instalação do Flet, janela <code>main(page)</code>, leitura e alteração de dados com <code>.value</code></div></div>
+                        <div class="summary-item"><span class="summary-check">🔄</span><div class="summary-text"><strong>on_click, page.update(), Column e Row</strong>Conecta botões às funções <code>def(e)</code> e organiza layouts verticais e horizontais</div></div>
+                        <div class="summary-item"><span class="summary-check">🎛️</span><div class="summary-text"><strong>E-mail com Ícone, Container, Dropdown, Slider e Switch</strong>Validação de e-mail, cards estilizados e barra de avaliação de 0 a 10 com <code>on_change</code></div></div>
+                        <div class="summary-item"><span class="summary-check">🧭</span><div class="summary-text"><strong>ft.NavigationBar + .controls.append() / .clear()</strong>Navegação multi-telas e histórico visual conectado com lista de dicionários!</div></div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:12px">
-                        <div class="content-box accent-box" style="padding:14px">
-                            <h4 style="font-size:.88rem">📋 Checklist antes de fechar a aula</h4>
-                            <ul class="done-list">
-                                <li>☐ Fiz o quiz de aquecimento</li>
-                                <li>☐ Fiz as Práticas 1, 2, 3 e 4</li>
-                                <li>☐ Fiz a Prática Final e o teste de estresse</li>
-                                <li>☐ Respondi a Tarefa de Casa (próximo slide)</li>
-                                <li>☐ Anotei minhas dúvidas para levar na Aula 06</li>
-                            </ul>
-                        </div>
                         <div class="content-box tip-box" style="padding:14px">
-                            <h4 style="font-size:.86rem;margin-bottom:6px">🚀 Próxima aula (Aula 06 — 02/12)</h4>
-                            <p style="font-size:.8rem;color:#cbd5e1;line-height:1.5"><strong>Sprint Final, Integração IA (<code>GEMINI.md</code>), Testes Cruzados &amp; Ensaio do Pitch</strong> — últimos ajustes antes da Grande Feira de Soluções de 09/12! Traga suas dúvidas desta aula: começaremos tirando todas elas.</p>
+                            <h4 style="font-size:.86rem;margin-bottom:6px">🚀 Próxima Aula (Aula 06 — 02/12):</h4>
+                            <p style="font-size:.8rem;color:#cbd5e1;line-height:1.5"><strong>Sprint Final, Integração IA (<code>GEMINI.md</code>), Testes Cruzados &amp; Ensaio do Pitch</strong> — Últimos ajustes antes da Grande Feira de Soluções de 09/12!</p>
+                        </div>
+                        <div class="content-box accent-box" style="padding:14px">
+                            <h4 style="font-size:.86rem;margin-bottom:6px">🏠 Tarefa de Casa no Próximo Slide!</h4>
+                            <p style="font-size:.8rem;color:#cbd5e1;line-height:1.5">5 questões rápidas sobre Flet + envio do código visual da sua interface no Classroom!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 29 — TAREFA DE CASA -->
+        <!-- SLIDE 22 — CAPA / TRAVA ANTI-SPOILER DA TAREFA DE CASA DA AULA 05 -->
         <section class="slide">
             <div class="slide-header">
                 <span class="slide-step">🏠 ATIVIDADE PARA CASA • PROTEÇÃO ANTI-SPOILER</span>
                 <h2 class="slide-title">Tarefa de Casa — Aula 05</h2>
-                <p class="slide-subtitle">Hora de mostrar o que você aprendeu! As questões ficam protegidas até você clicar no botão.</p>
+                <p class="slide-subtitle">As questões estão protegidas nesta tela para não dar spoiler durante a aula!</p>
             </div>
-            <div class="slide-body centered">
+            <div class="slide-body">
                 <div class="hw-gate-card">
                     <div class="hw-gate-icon">🔒📱</div>
                     <span class="tr-badge-cyan">5 QUESTÕES DE MÚLTIPLA ESCOLHA + 1 PRÁTICA DE INTERFACE</span>
@@ -1708,7 +1004,7 @@ ft.<span class="fn">app</span>(target=main)
                         </a>
                     </div>
                     <p style="font-size:0.76rem;color:#64748b;margin-top:4px;">
-                        💡 Dica: na parte prática, você pode enviar o código da Prática Final (slide 25)!
+                        💡 As questões só aparecem ao clicar no botão acima.
                     </p>
                 </div>
             </div>
@@ -1718,7 +1014,7 @@ ft.<span class="fn">app</span>(target=main)
 
     <!-- Bottom Navigation -->
     <footer class="bottom-nav">
-        <div class="slide-counter" id="slideCounter">1 / 29</div>
+        <div class="slide-counter" id="slideCounter">1 / 22</div>
         <div class="nav-buttons">
             <button class="nav-btn" id="prevBtn">← Anterior <span class="key-hint">←</span></button>
             <button class="nav-btn primary" id="nextBtn">Próximo → <span class="key-hint">→</span></button>
@@ -1728,36 +1024,5 @@ ft.<span class="fn">app</span>(target=main)
     <script src="classroom-engine.js"></script>
     <script src="beecrowd-arena.js"></script>
     <script src="slides-engine.js"></script>
-    <script>
-        // Botão "📋 Copiar" em cada bloco de código (ajuda quem estuda em casa)
-        (function () {
-            document.querySelectorAll('.presentation-stage .prompt-code').forEach(function (block) {
-                var wrap = document.createElement('div');
-                wrap.className = 'copy-wrap';
-                block.parentNode.insertBefore(wrap, block);
-                wrap.appendChild(block);
-                var btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'copy-btn';
-                btn.textContent = '📋 Copiar';
-                btn.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    var txt = block.textContent.replace(/\r/g, '').replace(/^\s*\n/, '').replace(/\s+$/, '');
-                    var done = function () { btn.textContent = '✓ Copiado!'; setTimeout(function () { btn.textContent = '📋 Copiar'; }, 1800); };
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(txt).then(done).catch(function () { fallback(txt); done(); });
-                    } else { fallback(txt); done(); }
-                });
-                wrap.appendChild(btn);
-            });
-            function fallback(txt) {
-                var ta = document.createElement('textarea');
-                ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
-                document.body.appendChild(ta); ta.select();
-                try { document.execCommand('copy'); } catch (err) {}
-                document.body.removeChild(ta);
-            }
-        })();
-    </script>
 </body>
 </html>
